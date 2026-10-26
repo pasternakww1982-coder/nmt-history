@@ -146,6 +146,17 @@ figure.pic figcaption{font-size:12.5px;color:var(--muted)}
 .sw{width:16px;height:16px;border-radius:4px;display:inline-block}
 .foot{font-size:12.5px;color:var(--muted);max-width:75ch}
 
+/* results collection */
+.stud{display:grid;gap:12px}
+.fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px}
+@media (max-width:520px){.fields{grid-template-columns:minmax(0,1fr)}}
+.fields label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.fields input{font:16px var(--f-body);color:var(--ink);background:var(--surface2);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px;width:100%}
+.fields input:focus{outline:none;border-color:var(--accent)}
+.stud .hint{margin:0;font-size:13.5px;color:var(--muted)} .stud .hint.err{color:var(--bad);font-weight:600}
+.sent{border-radius:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sent.ok{background:var(--ok-soft);border-color:transparent;color:var(--ok);font-weight:600}
+.sent.bad{background:var(--bad-soft);border-color:transparent;color:var(--bad)}
 /* ---------- touch mode (phones, small screens) ---------- */
 body.touch .bar .in{padding-block:8px;gap:0}
 body.touch .bar .top{flex-wrap:nowrap;gap:10px}
@@ -221,11 +232,15 @@ const IMG = {"coin.jpg": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wB
 const SCALE = {"9": 100, "10": 105, "11": 110, "12": 115, "13": 120, "14": 125, "15": 130, "16": 132, "17": 134, "18": 136, "19": 138, "20": 140, "21": 141, "22": 142, "23": 143, "24": 144, "25": 145, "26": 146, "27": 147, "28": 148, "29": 149, "30": 150, "31": 151, "32": 152, "33": 154, "34": 156, "35": 158, "36": 160, "37": 163, "38": 166, "39": 168, "40": 169, "41": 170, "42": 172, "43": 173, "44": 175, "45": 177, "46": 179, "47": 181, "48": 183, "49": 185, "50": 188, "51": 191, "52": 194, "53": 197, "54": 200};
 const LET = ['А','Б','В','Г','Д'];
 const DURATION = 60*60*1000;
+const RESULTS_URL = 'https://script.google.com/macros/s/AKfycbw6cRcfHMgeHGCq8gocEug86OeOzWbIdJ3FWSIa5t_ITf-vj3EF-X50HIuquxL0mYi1eg/exec';   // адреса вебзастосунку Google Apps Script; порожньо — без збору
+const TEST_ID = 'nmt1340';
+const COLLECT = /^https:\/\/script\.google\.com\//.test(RESULTS_URL);
 const KEY = 'nmt1340-gh1';
 const TYPE_LABEL = {single:'Завдання з вибором однієї правильної відповіді', match:'Завдання на встановлення відповідності', seq:'Завдання на встановлення правильної послідовності', three:'Завдання з вибором трьох правильних відповідей із семи'};
 
 let S = load() || fresh();
-function fresh(){ return {phase:'intro', cur:0, ans:{}, start:null, end:null, filter:'all'}; }
+function fresh(st){ st = st||null; return {phase:'intro', cur:0, ans:{}, start:null, end:null, filter:'all', student:st, attempt:null, sent:null}; }
+function newAttempt(){ return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8); }
 function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && s.ans ? s : null; }catch(e){ return null; } }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
@@ -283,13 +298,21 @@ function renderIntro(){
       <li>Коли час вийде, тест завершиться автоматично. Відповіді зберігаються в цьому браузері, тож випадкове закриття сторінки не зітре прогрес.</li>
       <li>Після завершення ви побачите бали, переведення в шкалу 100–200 і розбір кожного завдання з поясненнями.</li>
     </ul>
+    ${COLLECT ? `<div class="panel stud"><div class="eyebrow">Хто пише тест</div>
+      <div class="fields"><label>Прізвище та ім’я<input id="sname" type="text" autocomplete="name" maxlength="80" value="${esc(S.student?S.student.name:'')}" ${resume?'disabled':''}></label>
+      <label>Клас<input id="sclass" type="text" maxlength="20" placeholder="напр., 11-А" value="${esc(S.student?S.student.cls:'')}" ${resume?'disabled':''}></label></div>
+      <p class="hint" id="shint">Після завершення результат автоматично надійде вчителеві: ім’я, клас, бали й відповіді.</p></div>` : ''}
     <div class="actions">
       ${resume ? `<button class="btn primary" id="go">Продовжити тест</button><button class="btn" id="restart">Почати заново</button>`
                : `<button class="btn primary" id="go">Почати тест</button>`}
     </div>
   </div>`;
-  document.getElementById('go').onclick = () => { if(!S.start){ S.start = Date.now(); } S.phase='test'; save(); render(); };
-  const r = document.getElementById('restart'); if(r) r.onclick = () => { S = fresh(); S.start = Date.now(); S.phase='test'; save(); render(); };
+  const takeStudent = () => { if(!COLLECT) return true; if(S.start && S.phase==='test' && S.student) return true;
+    const n=document.getElementById('sname').value.trim(), c=document.getElementById('sclass').value.trim();
+    if(n.length<3 || !c){ const h=document.getElementById('shint'); h.textContent='Впишіть прізвище, ім’я та клас, щоб учитель отримав ваш результат.'; h.classList.add('err'); (n.length<3?document.getElementById('sname'):document.getElementById('sclass')).focus(); return false; }
+    S.student={name:n, cls:c}; return true; };
+  document.getElementById('go').onclick = () => { if(!takeStudent()) return; if(!S.start){ S.start = Date.now(); S.attempt=newAttempt(); } S.phase='test'; save(); render(); };
+  const r = document.getElementById('restart'); if(r) r.onclick = () => { S = fresh(S.student); S.phase='intro'; save(); render(); };
 }
 
 /* ---------- test ---------- */
@@ -397,7 +420,31 @@ function confirmFinish(){
   ov.querySelector('#yes').onclick=()=>{ov.remove(); finish();};
   ov.querySelector('#yes').focus();
 }
-function finish(){ clearInterval(tick); S.phase='done'; S.end=Date.now(); save(); render(); window.scrollTo(0,0); }
+function finish(){ clearInterval(tick); S.phase='done'; S.end=Date.now(); if(COLLECT){ S.sent='pending'; } save(); render(); window.scrollTo(0,0); if(COLLECT) send(); }
+let sending=false;
+async function send(){
+  if(!COLLECT || sending || S.sent==='ok' || S.phase!=='done') return;
+  sending=true; S.sent='pending'; save(); showSent();
+  const payload = {test:TEST_ID, attempt:S.attempt||newAttempt(), name:S.student?S.student.name:'', cls:S.student?S.student.cls:'', start:S.start, end:S.end, answers:S.ans};
+  if(!S.attempt){ S.attempt=payload.attempt; save(); }
+  for(const wait of [0,2500,6000,12000]){
+    if(wait) await new Promise(r=>setTimeout(r,wait));
+    try{
+      const r = await fetch(RESULTS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),redirect:'follow'});
+      const j = await r.json();
+      if(j && j.ok){ S.sent='ok'; save(); sending=false; showSent(); return; }
+    }catch(e){}
+  }
+  S.sent='fail'; save(); sending=false; showSent();
+}
+function sentHTML(){
+  if(!COLLECT) return '';
+  const who = S.student ? `${esc(S.student.name)}, ${esc(S.student.cls)}` : '';
+  if(S.sent==='ok') return `<div class="sent ok">✓ Результат надіслано вчителеві${who?' · '+who:''}.</div>`;
+  if(S.sent==='fail') return `<div class="sent bad">Не вдалося надіслати результат. Перевірте інтернет і натисніть «Надіслати ще раз». Відповіді збережено на цьому пристрої. <button class="btn sm" id="resend">Надіслати ще раз</button></div>`;
+  return `<div class="sent">Надсилаємо результат учителеві…</div>`;
+}
+function showSent(){ const b=document.getElementById('sentbox'); if(!b) return; b.innerHTML=sentHTML(); const rs=document.getElementById('resend'); if(rs) rs.onclick=()=>send(); }
 
 function bindZoom(){
   app.querySelectorAll('img.zoom').forEach(img=>{
@@ -548,6 +595,7 @@ function renderDone(){
       <div><div class="rate">${r ? r : '—'}</div><div class="eyebrow" style="margin-top:8px">${r ? 'за шкалою 100–200' : 'поріг не подолано (менше 9 балів)'}</div></div>
       ${used!=null?`<div><div class="rate">${fmt(used)}</div><div class="eyebrow" style="margin-top:8px">витрачено часу</div></div>`:''}
     </div>
+    <div id="sentbox">${sentHTML()}</div>
     <p class="foot" style="margin:0">Переведення — за таблицею НМТ-2026 з історії України. Таблиця на 2027 рік може відрізнятися, тож бал за шкалою 100–200 орієнтовний.</p>
     <div class="blocks">${blocks}</div>
     <div class="actions"><div class="filter"><button class="btn ${f==='all'?'on':''}" data-f="all">Усі завдання</button><button class="btn ${f==='err'?'on':''}" data-f="err">Лише з помилками</button></div>
@@ -565,7 +613,8 @@ function renderDone(){
     <p class="foot">Уривки джерел подано в перекладі та скороченні або в переказі; зображення — з Wikimedia Commons (автори й ліцензії вказано під кожним), карти — власні, межі на них схематичні.</p>
   </div>`;
   app.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{S.filter=b.dataset.f; save(); renderDone();});
-  document.getElementById('again').onclick=()=>{ S=fresh(); save(); render(); window.scrollTo(0,0); };
+  document.getElementById('again').onclick=()=>{ S=fresh(S.student); save(); render(); window.scrollTo(0,0); };
+  const rs=document.getElementById('resend'); if(rs) rs.onclick=()=>send();
   bindZoom();
   app.querySelectorAll('.q img.zoom').forEach(img=>{ if(isTouch()) img.onclick=()=>openLB(img.src,img.alt); });
 }
@@ -578,6 +627,7 @@ function render(){
   return renderIntro();
 }
 render();
+if(COLLECT && S.phase==='done' && S.sent && S.sent!=='ok') send();
 </script>
 
 </html>
