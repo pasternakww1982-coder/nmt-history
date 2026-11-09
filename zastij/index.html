@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/png;base64,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">
+<title>Тест</title>
+<link rel="stylesheet" href="katex/katex.min.css">
+<style>
+
+/* Layout: exam booklet — sticky answer-sheet bar on top, one task per "page", review as a marked-up booklet */
+:root{
+  --bg:#f3f2ef; --surface:#ffffff; --surface2:#f8f6f2; --ink:#1e1b18; --muted:#6c645c; --line:#ddd7cf;
+  --accent:#c4581a; --accent-ink:#ffffff; --accent-soft:#f6e3d6;
+  --ok:#2f7d4f; --ok-soft:#dcefe3; --bad:#b3362c; --bad-soft:#f6dedb; --part:#a7741b; --part-soft:#f4ead3;
+  --quote:#f6efe6;
+  --f-display:"Alegreya",Georgia,"Times New Roman",serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161616; --surface:#222020; --surface2:#1c1b1a; --ink:#f2f0ed; --muted:#a59d94; --line:#3a3633;
+  --accent:#e97132; --accent-ink:#161616; --accent-soft:#3c2618;
+  --ok:#5fbf86; --ok-soft:#1d3427; --bad:#ef7a6e; --bad-soft:#3d1f1c; --part:#e2b354; --part-soft:#3a2f17;
+  --quote:#2a2421; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#161616; --surface:#222020; --surface2:#1c1b1a; --ink:#f2f0ed; --muted:#a59d94; --line:#3a3633;
+  --accent:#e97132; --accent-ink:#161616; --accent-soft:#3c2618;
+  --ok:#5fbf86; --ok-soft:#1d3427; --bad:#ef7a6e; --bad-soft:#3d1f1c; --part:#e2b354; --part-soft:#3a2f17;
+  --quote:#2a2421; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);margin:0;padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+button{font:inherit;color:inherit}
+button:focus-visible,.cell:focus-visible,img.zoom:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 18px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn:disabled{opacity:.45;cursor:default}
+.eyebrow{font:600 12px/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* intro */
+.intro{display:grid;gap:22px}
+.intro h1{font-size:clamp(30px,5vw,44px);line-height:1.1}
+.intro .lead{color:var(--muted);max-width:62ch;margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px}
+.facts div{display:flex;flex-direction:column;gap:4px}
+.facts b{font:600 26px/1 var(--f-mono)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.tbl-wrap{overflow-x:auto}
+table.struct{border-collapse:collapse;width:100%;font-size:15px}
+table.struct th,table.struct td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.struct th{font-weight:600;color:var(--muted);font-size:13px}
+table.struct td:first-child{white-space:nowrap;font-family:var(--f-mono)}
+.rules{margin:0;padding-left:20px;display:grid;gap:6px;max-width:68ch}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+
+/* test bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .in{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:grid;gap:10px}
+.bar .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.timer{font:600 20px/1 var(--f-mono);font-variant-numeric:tabular-nums}
+.timer.low{color:var(--bad)}
+.count{color:var(--muted);font-size:14px}
+.bar .top .btn{margin-left:auto;padding:8px 14px}
+.nav{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:5px}
+@media (max-width:620px){.nav{grid-template-columns:repeat(10,minmax(0,1fr))}}
+.nav button{border:1px solid var(--line);background:var(--surface2);border-radius:6px;padding:5px 0;font:500 13px/1.2 var(--f-mono);cursor:pointer}
+.nav button.done{background:var(--accent-soft);border-color:var(--accent-soft)}
+.nav button.cur{outline:2px solid var(--accent);outline-offset:1px;font-weight:600}
+.nav .grp{grid-column:1/-1;display:none}
+
+/* question */
+.q{display:grid;gap:16px;margin-top:20px}
+.qhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.qnum{font:700 30px/1 var(--f-display);color:var(--accent)}
+.qtype{font-size:13px;color:var(--muted)}
+.src{background:var(--quote);border-radius:8px;padding:16px 18px;font:500 18px/1.55 var(--f-display);margin:0}
+.src figcaption{font:400 13px/1.4 var(--f-body);color:var(--muted);margin-top:10px}
+.src blockquote{margin:0}
+figure.pic{margin:0;display:grid;gap:6px;justify-items:start}
+figure.pic img{max-width:100%;max-height:680px;border-radius:6px;border:1px solid var(--line);cursor:zoom-in;background:#fff}
+figure.pic figcaption{font-size:12.5px;color:var(--muted)}
+.stem{font-size:18px;font-weight:500;max-width:70ch}
+.opts{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.opts li{display:grid;grid-template-columns:2.2em minmax(0,1fr);gap:4px;align-items:start}
+.opts li .L{font:600 16px/1.55 var(--f-mono);color:var(--accent)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:18px}
+.cols.wide-left{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+@media (max-width:620px){.cols,.cols.wide-left{grid-template-columns:minmax(0,1fr)}}
+
+
+
+/* overlay */
+.ov{position:fixed;inset:0;background:rgba(10,8,6,.62);z-index:40;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.dialog{background:var(--surface);border-radius:12px;padding:22px;max-width:440px;display:grid;gap:14px}
+.lightbox img{max-width:96vw;max-height:90vh;border-radius:6px;background:#fff}
+.lightbox{cursor:zoom-out}
+
+/* results */
+.res{display:grid;gap:22px}
+.score{display:flex;flex-wrap:wrap;gap:16px 40px;align-items:flex-end}
+.score .big{font:700 64px/1 var(--f-display)}
+.score .big small{font-size:26px;color:var(--muted)}
+.score .rate{font:600 34px/1 var(--f-mono)}
+.blocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:620px){.blocks{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.blk{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:6px}
+.blk b{font:600 20px/1 var(--f-mono)}
+.meter{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent)}
+.filter{display:flex;gap:8px;flex-wrap:wrap}
+.filter .btn.on{border-color:var(--accent);background:var(--accent-soft)}
+.rv{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:12px}
+.rv.full{border-left-color:var(--ok)} .rv.zero{border-left-color:var(--bad)} .rv.part{border-left-color:var(--part)}
+.rv .head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pill{font:600 12.5px/1 var(--f-body);padding:5px 9px;border-radius:999px}
+.pill.full{background:var(--ok-soft);color:var(--ok)} .pill.zero{background:var(--bad-soft);color:var(--bad)} .pill.part{background:var(--part-soft);color:var(--part)}
+.topic{font-size:13px;color:var(--muted)}
+.expl{background:var(--surface2);border-radius:8px;padding:12px 14px;max-width:75ch}
+.expl b{font-family:var(--f-body)}
+.igrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.igrid figure{margin:0;position:relative;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:8px;display:grid;place-items:center}
+.igrid img{max-width:100%;max-height:300px;border-radius:4px;cursor:zoom-in}
+.igrid .L{position:absolute;top:8px;left:8px;background:var(--accent);color:var(--accent-ink);font:600 15px/1 var(--f-mono);padding:6px 9px;border-radius:6px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.sw{width:16px;height:16px;border-radius:4px;display:inline-block}
+.foot{font-size:12.5px;color:var(--muted);max-width:75ch}
+
+/* results collection */
+.stud{display:grid;gap:12px}
+.fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:12px}
+@media (max-width:520px){.fields{grid-template-columns:minmax(0,1fr)}}
+.fields label{display:grid;gap:6px;font-size:14px;color:var(--muted)}
+.fields input{font:16px var(--f-body);color:var(--ink);background:var(--surface2);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;min-height:44px;width:100%}
+.fields input:focus{outline:none;border-color:var(--accent)}
+.stud .hint{margin:0;font-size:13.5px;color:var(--muted)} .stud .hint.err{color:var(--bad);font-weight:600}
+.sent{border-radius:10px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);font-size:15px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.sent.ok{background:var(--ok-soft);border-color:transparent;color:var(--ok);font-weight:600}
+.sent.bad{background:var(--bad-soft);border-color:transparent;color:var(--bad)}
+/* ---------- touch mode (phones, small screens) ---------- */
+.bar .in{padding-block:8px;gap:0}
+.bar .top{flex-wrap:nowrap;gap:10px}
+.bar .top .btn{margin-left:0;padding:8px 12px;font-size:14px;min-height:40px}
+.bar .top .sp{flex:1}
+.nav{display:none}
+.wrap{padding-block:12px 110px}
+.q{margin-top:6px;gap:14px}
+.src{font-size:17px;padding:14px}
+.stem{font-size:17px}
+.tch{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:6px;align-items:center;text-align:left;width:100%;min-height:52px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;font-size:16px;line-height:1.4}
+.opt .L{font:600 16px/1 var(--f-mono);color:var(--accent);display:grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--accent-soft)}
+.opt.on{border-color:var(--accent);background:var(--accent-soft)}
+.opt.on .L{background:var(--accent);color:var(--accent-ink)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)} .opt.right .L{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)} .opt.wrong .L{background:var(--bad);color:#fff}
+.opt.key{border-color:var(--ok);border-style:dashed}
+.opt:disabled{cursor:default;color:inherit}
+.opt:disabled,.card:disabled,.chip:disabled{opacity:1;-webkit-text-fill-color:currentColor}
+.counter{font-size:14px;color:var(--muted)} .counter.flash{color:var(--bad);font-weight:600}
+.refs{display:grid;gap:6px;margin:0;padding:12px 14px;list-style:none;background:var(--surface2);border-radius:10px}
+.refs li{display:grid;grid-template-columns:1.8em minmax(0,1fr);gap:4px}
+.refs .L{font:600 15px/1.5 var(--f-mono);color:var(--accent)}
+.mrow{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:10px}
+.mrow .who{display:grid;grid-template-columns:1.8em minmax(0,1fr);gap:4px;font-weight:500}
+.mrow .who .L{font:600 16px/1.4 var(--f-mono);color:var(--accent)}
+.chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.chip{min-height:46px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface2);font:600 17px/1 var(--f-mono);cursor:pointer;color:var(--ink)}
+.chip.used{opacity:.45}
+.chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);opacity:1}
+.chip.right{background:var(--ok);border-color:var(--ok);color:#fff;opacity:1}
+.chip.wrong{background:var(--bad);border-color:var(--bad);color:#fff;opacity:1}
+.chip.key{box-shadow:inset 0 0 0 3px var(--ok);opacity:1}
+.chip:disabled{cursor:default}
+.echo{font-size:14px;color:var(--muted);min-height:1.2em}
+.echo b{color:var(--ink);font-family:var(--f-mono)}
+.echo.bad b{color:var(--bad)}
+.card{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center;text-align:left;width:100%;min-height:56px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;font-size:16px;line-height:1.4}
+.card .num{width:40px;height:40px;border-radius:50%;border:2px dashed var(--line);display:grid;place-items:center;font:700 18px/1 var(--f-mono);color:var(--muted)}
+.card.on{border-color:var(--accent)} .card.on .num{border:0;background:var(--accent);color:var(--accent-ink)}
+.card .lab{font:600 14px var(--f-mono);color:var(--accent);margin-right:6px}
+.card img{max-height:150px;max-width:100%;border-radius:6px;display:block}
+.card:disabled{cursor:default;color:inherit}
+.order{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;font-size:15px}
+.order .mono{font-size:17px;font-weight:600}
+.btn.sm{padding:8px 14px;font-size:14px;min-height:40px}
+.showpic{justify-self:start}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-top:8px;padding-bottom:calc(8px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bottom .in{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.bottom .btn{min-height:48px;font-size:16px}
+.bottom .pos{font:600 15px/1 var(--f-mono);color:var(--muted);text-align:center}
+.drawer{background:var(--surface);border-radius:14px;padding:18px;width:min(520px,100%);display:grid;gap:14px;max-height:90vh;overflow:auto}
+.drawer .navg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.drawer .navg button{min-height:46px;border:1px solid var(--line);background:var(--surface2);border-radius:8px;font:600 16px/1 var(--f-mono);cursor:pointer;color:var(--ink)}
+.drawer .navg button.done{background:var(--accent-soft);border-color:var(--accent-soft)}
+.drawer .navg button.cur{outline:2px solid var(--accent);outline-offset:1px}
+.drawer .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.lb2{position:fixed;inset:0;z-index:45;background:rgba(10,8,6,.9);display:flex;flex-direction:column}
+.lb2 .tools{display:flex;gap:8px;justify-content:flex-end;padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.lb2 .tools button{min-height:44px;min-width:44px;border-radius:8px;border:0;background:#2b2724;color:#f2f0ed;font:600 16px var(--f-body);padding:0 12px;cursor:pointer}
+.lb2 .sc{flex:1;overflow:auto;touch-action:pan-x pan-y pinch-zoom;-webkit-overflow-scrolling:touch}
+.lb2 img{display:block;margin:auto;background:#fff;border-radius:4px;max-width:none}
+.tmode{font-size:13px;color:var(--muted)}
+.tmode button{border:0;background:none;color:var(--accent);text-decoration:underline;cursor:pointer;padding:4px;font-size:13px}
+@media (prefers-reduced-motion:no-preference){.q{animation:in .18s ease-out}@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+/* ---- v2: вкладки предметів, текст до завдань, числова відповідь, очікування старту ---- */
+.tabs{display:flex;gap:6px;flex:1;min-width:0}
+.tab{flex:1;min-width:0;border:1.5px solid var(--line);background:var(--surface2);border-radius:9px;padding:5px 7px;cursor:pointer;display:grid;gap:2px;text-align:left;line-height:1.15;min-height:44px}
+.tab b{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab span{font:500 12px/1 var(--f-mono);color:var(--muted)}
+.tab.on{border-color:var(--accent);background:var(--accent-soft)}
+.tab.on span{color:var(--ink)}
+.fsbtn-in{width:40px;min-height:40px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);font:18px/1 system-ui,sans-serif;cursor:pointer;color:var(--muted)}
+.passage{background:var(--quote);border-radius:10px;padding:10px 14px}
+.passage summary{cursor:pointer;font-weight:600;color:var(--muted);font-size:14px;padding:4px 0}
+.passage p{margin:8px 0;font:500 16.5px/1.55 var(--f-display)}
+.stem p{margin:0 0 8px}
+.numbox{display:grid;gap:8px;background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px}
+.numbox label{font-size:14px;color:var(--muted)}
+.numbox input{font:600 22px/1.2 var(--f-mono);color:var(--ink);background:var(--surface2);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;width:100%;max-width:280px}
+.numbox input:focus{outline:none;border-color:var(--accent)}
+.numbox.right{border-color:var(--ok);background:var(--ok-soft)} .numbox.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.numbox .val{font:600 22px/1.2 var(--f-mono)}
+.varpick{display:flex;gap:10px;flex-wrap:wrap}
+.varpick button{flex:1 1 140px;min-height:52px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface2);cursor:pointer;font-weight:600;font-size:16px;padding:8px 12px;text-align:left;display:grid;gap:2px}
+.varpick button small{font-weight:400;font-size:12.5px;color:var(--muted)}
+.varpick button.on{border-color:var(--accent);background:var(--accent-soft)}
+.varpick button:disabled{cursor:default}
+.wait{display:grid;gap:18px;justify-items:start;padding-top:24px}
+.wait .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+.subj{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.subj .card2{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:6px}
+.subj .big2{font:700 52px/1 var(--f-display)}
+.subj .big2 small{font-size:20px;color:var(--muted)}
+.subj .fail{font:600 20px/1.2 var(--f-body);color:var(--bad)}
+.ptitle{font:700 22px/1.2 var(--f-display);margin-top:8px}
+.expl .katex,.stem .katex,.opt .katex{font-size:1.08em}
+.katex-display{overflow-x:auto;overflow-y:hidden}
+.drawer h4{margin:4px 0 0;font-size:15px}
+.qhead .qpart{font-size:13px;font-weight:600;color:var(--accent)}
+
+.bar .top:has(.tabs){gap:7px}
+.bar .top:has(.tabs) .timer{font-size:18px}
+.bar .top:has(.tabs) .btn{padding:8px 10px}
+.bar .top:has(.tabs) .fsbtn-in{width:36px}
+.instr{margin:0 0 6px;color:var(--muted);font-size:14px}
+mark.gap{background:var(--accent-soft);color:inherit;border-radius:4px;padding:0 3px;font-weight:700}
+.brand{display:flex;align-items:center;gap:12px;margin:0 0 16px}
+.brand img{width:52px;height:auto;flex:none}
+.brand span{font-weight:600;font-size:15px;line-height:1.25;color:var(--muted,#666)}
+.wait .brand{justify-content:center}
+@media print{.brand img{width:44px}}
+.tch.groups{display:grid;gap:18px}
+.grp{display:grid;gap:8px}
+.grp .gq{font-weight:600;line-height:1.35;margin-bottom:2px}
+/* ---- 2.12: «бланк як на НМТ» для широких екранів ---- */
+body.blank .wrap, body.blank .bar .in{max-width:1040px}
+body.blank .wrap{padding-block:20px 48px}
+body.blank .bar .in{padding-block:10px;gap:10px}
+body.blank .bar .top .btn{margin-left:auto}
+body.blank .bar .top:has(.tabs) .btn{margin-left:0}
+body.blank .nav{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:6px}
+body.blank .nav button{min-height:30px;color:var(--ink)}
+body.blank .q{margin-top:14px;gap:16px}
+body.blank .stem{font-size:18px}
+body.blank .opts li{font-size:17px}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px;display:grid;gap:8px;justify-items:start}
+.sh-note{font-size:14px;color:var(--muted)}
+table.grid{border-collapse:separate;border-spacing:6px}
+table.grid th{font:600 15px/1 var(--f-mono);color:var(--muted);padding:2px 0;text-align:center;min-width:44px}
+table.grid th.rh{min-width:26px;text-align:right;padding-right:6px}
+table.grid td{padding:0}
+.cell{width:46px;height:46px;border-radius:7px;border:1.5px solid var(--line);background:var(--surface2);cursor:pointer;display:grid;place-items:center;padding:0}
+.cell:hover{border-color:var(--accent)}
+.cell.on{background:var(--accent);border-color:var(--accent)}
+.cell.on::after{content:"✕";font:700 22px/1 var(--f-body);color:var(--accent-ink)}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
+.navrow .btn{min-height:48px;font-size:16px;padding:10px 22px}
+.navrow .pos{color:var(--muted);font-weight:600}
+.q .tmode{margin-top:2px}
+@media (max-width:620px){body.blank .nav{grid-template-columns:repeat(10,minmax(0,1fr))} .cell{width:42px;height:42px} table.grid th{min-width:40px}}
+body.blank .igrid{grid-template-columns:repeat(4,minmax(0,1fr))} body.blank .igrid img{max-height:240px}
+
+/* повідомлення «Учитель подовжив час» */
+.toast{position:fixed;left:50%;top:calc(12px + env(safe-area-inset-top));transform:translate(-50%,-150%);z-index:60;background:#1f6f43;color:#fff;font-weight:600;font-size:15px;padding:10px 16px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.25);transition:transform .3s;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+
+</style>
+</head>
+<body class="touch">
+<div id="app"></div>
+<script>
+/* Онлайн-версія: запити до сервера йдуть у Google Apps Script (там ключі й таблиця результатів). */
+window.NMT_API = "https://script.google.com/macros/s/AKfycbx_7I8jxM6p_q-UL1PhxPfMy9bVM_GtIqY_wQGxiEpu4qh3jt7jApopzeFWHDT2NQQ5/exec";
+(function(){
+  var of = window.fetch.bind(window), R = /^\/(start|hb|result|review|event)$/;
+  window.fetch = function(u, o){
+    if(typeof u === 'string' && R.test(u)){
+      var b = {}; try{ b = JSON.parse((o && o.body) || '{}'); }catch(e){}
+      b.op = u.slice(1);
+      var o2 = {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(b), cache:'no-store', redirect:'follow'};
+      if(o && o.signal) o2.signal = o.signal;
+      return of(window.NMT_API, o2);
+    }
+    return of(u, o);
+  };
+})();
+</script>
+<script>
+const SET = {"id": "11kl-zastij", "kind": "test", "order": 15, "name": "11 клас · доба «застою» (1965–1985) · тематичний тест (Тест 1 і Тест 2)", "eyebrow": "Історія України · 11 клас · тематичний тест у форматі НМТ", "title": "Україна в період загострення кризи радянської системи (1965–1985 рр.)", "lead": "Узагальнення теми: політичний курс Л. Брежнєва, П. Шелест і В. Щербицький, економіка «застою», повсякденне життя, номенклатура, дисидентський рух, культура. Сорок завдань у форматі НМТ; бали нараховуються за правилами НМТ.", "duration": 45, "startMode": "self", "grade12": true, "noScale": true, "facts": [["40", "завдань"], ["45", "хвилин"], ["68", "балів максимум"]], "structure": [{"title": "", "rows": [["1–28", "Вибір однієї правильної відповіді з чотирьох", "0 або 1"], ["29–32", "Встановлення відповідності («логічні пари»), один варіант зайвий", "0–4, по 1 за кожну пару"], ["33–36", "Встановлення правильної послідовності", "3 — усе правильно; 2 — правильні перша й остання; 1 — правильна перша або остання"], ["37–40", "Вибір трьох правильних відповідей із семи", "0–3, по 1 за кожну правильну"]]}], "rules": ["Тест (1 чи 2) вам скаже вчитель.", "Фото, карикатури й плакати збільшуються, якщо на них натиснути.", "Коли час вийде, тест завершиться автоматично. Відповіді зберігаються в цьому браузері, тож випадкове закриття сторінки не зітре прогрес.", "Після завершення ви одразу побачите бали, відсоток і оцінку. Правильні відповіді відкриє вчитель, коли всі здадуть, — на цій самій сторінці, у цьому самому браузері.", "Пишіть самостійно: вихід зі сторінки, перемикання на інші вікна й програми фіксуються й надходять учителеві.", "Потрібен інтернет лише на початку й наприкінці; якщо зв’язок зникне посеред тесту — пишіть далі, результат надішлеться, щойно інтернет з’явиться."], "footnote": "Частину завдань узято з тестів ЗНО/НМТ минулих років; уривки джерел подано в скороченні.", "variants": [{"id": "v1", "name": "Тест 1", "note": "", "parts": [{"id": "hist", "title": "Історія України", "short": "Іст", "tab": "Історія України", "max": 68, "tasks": [{"n": 1, "type": "single", "max": 1, "stem": "«Кожний, хто живе на Радянській Україні, любить її, з гордістю говорить: “моя Україна”, “наша Україна”. І це цілком природно і закономірно. Тут ми народилися, виросли як громадяни, будівники комунізму...» – це уривок із книги", "opts": ["Петра Шелеста.", "В'ячеслава Чорновола.", "Володимира Щербицького.", "Миколи Руденка."]}, {"n": 2, "type": "single", "max": 1, "stem": "Укажіть особливість політичного курсу СРСР після приходу до влади Л. Брежнєва.", "opts": ["продовження політики десталінізації", "періодичне оновлення складу партійних органів", "посилення консервативних тенденцій в політичному житті", "подальша лібералізація усіх сфер життя"]}, {"n": 3, "type": "single", "max": 1, "stem": "Розвиток якої галузі промисловості Української РСР у 1950-1980-х рр. пов’язаний з іменем конструктора О. К. Антонова?", "opts": ["автомобілебудівної", "авіабудівної", "суднобудівної", "верстатобудівної"]}, {"n": 4, "type": "single", "max": 1, "stem": "Що було одним із проявів політико-ідеологічної кризи радянської моделі розвитку України в 1970 – на початку 1980-х рр.?", "opts": ["поява концепції «розвиненого соціалізму» внаслідок усвідомлення нереальності побудови комунізму", "піднесення профспілкового руху та зростання активності громадських неурядових організацій", "утвердження принципів плюралізму на хвилі поширення в суспільстві настроїв невдоволення та протесту", "розмежування на всіх рівнях владних повноважень між Комуністичною партією України та радами народних депутатів"]}, {"n": 5, "type": "single", "max": 1, "stem": "«Ліквідувати Українську Раду народного господарства. Визнати за необхідне ліквідувати Ради народного господарства економічних районів УРСР» – це рішення засвідчило", "opts": ["реалізацію державного суверенітету республіки.", "скорочення масштабів сталінських репресій.", "поглиблення політики «перебудови».", "згортання хрущовських реформ."]}, {"n": 6, "type": "single", "max": 1, "stem": "Укажіть особливість розвитку економіки УРСР у середині 1960-х – на початку 1980-х рр.", "opts": ["відновлення вертикальної системи управління", "переважний розвиток соціальної сфери села", "створення раднаргоспів", "недостатнє фінансування аграрного сектору"]}, {"n": 7, "type": "single", "max": 1, "stem": "Спроби економічних реформ у другій половині 1960-х рр. передбачали", "opts": ["дозвіл на індивідуальну підприємницьку діяльність.", "впровадження семирічного плану розвитку народного господарства.", "ліквідацію монополії держави у сфері зовнішніх торговельних зв’язків.", "розширення господарської самостійності підприємств."]}, {"n": 8, "type": "single", "max": 1, "stem": "Яку особливість економічного розвитку УРСР в 1970-ті – на початку 1980-х рр. підтверджено даними, наведеними в уривку документа: «У республіці, на яку припадало 2,6 % території СРСР, було побудовано майже 40 % атомних енергоблоків, продукувалося близько 40 % усієї радянської сталі, 34 % вугілля, 51 % чавуну. …частка промисловості, що працювала на споживчий ринок, становила 29 %, тоді як у розвинених країнах цей показник сягав 50-60 % і більше»?", "opts": ["деформованість структури економіки", "зниження матеріало- та енергомісткості виробництва", "зростання конкурентоспроможності продукції", "посилення економічної самостійності"]}, {"n": 9, "type": "single", "max": 1, "stem": "Що було характерним для України в період 70-х – на початку 80-х рр. ХХ ст.? 1. Започаткування автомобілебудування (заводи в Кременчуці, Запоріжжі, Львові) 2. Обмеження господарської діяльності на присадибних ділянках селян 3. Панування колгоспно-радгоспної системи в сільському господарстві 4. Невідповідність грошової маси виробництву споживчих товарів 5. Поява в побуті перших зразків нової техніки: телевізорів, магнітофонів, пральних машин", "opts": ["1, 3", "2, 5", "3, 4", "4, 5"]}, {"n": 10, "type": "single", "max": 1, "stem": "Яке явище радянської дійсності другої половини 1960-х – 1980-х рр. відображено на карикатурі?", "opts": ["систематичні перевірки громадян співробітниками міліції", "розкрадання державного майна на робочих місцях", "стрімке зростання цін на товари широкого вжитку", "поглиблення технологічної відсталості легкої промисловості"], "img": "z1_10.png"}, {"n": 11, "type": "single", "max": 1, "stem": "На яке явище в житті радянських людей у період «застою» вказує карикатура?", "opts": ["низький рівень соціального захисту населення", "хронічний дефіцит товарів широкого вжитку", "політичну активність старшого покоління", "дитячу безпритульність"], "img": "z1_11.png"}, {"n": 12, "type": "single", "max": 1, "stem": "Яке явище радянської дійсності 1970-1980-х рр. відображено на карикатурі?", "opts": ["незадовільні умови праці співробітників закладів торгівлі", "низький рівень культури обслуговування у сфері торгівлі", "падіння в суспільстві престижу торговельних професій", "дефіцит товарів широкого вжитку в торговельних мережах"], "img": "z1_12.png"}, {"n": 13, "type": "single", "max": 1, "stem": "На якій проблемі радянської дійсності 1970-1980-х рр. фокусує увагу зображена карикатура? Напис на карикатурі: «– Молоді люди! Походили б для тренування з моєю заявою... – Що ти, бабцю! Ми більше п’ятдесяти кілометрів не ходимо!»", "opts": ["соціальній незахищеності людей похилого віку", "непопулярності легкоатлетичного спорту", "погіршенні стану здоров’я молодого покоління", "бюрократизмі державного управлінського апарату"], "img": "z1_13.png"}, {"n": 14, "type": "single", "max": 1, "stem": "Яке визначення відповідає поняттю «номенклатура»?", "opts": ["система управління, за якої частина функцій центральної влади переходить до місцевих органів самоврядування", "система, за якої функціонують і ведуть боротьбу за владу партії різної політичної орієнтації", "політика розміщення промислових об’єктів без урахування наявної сировинної бази, трудових ресурсів тощо", "узагальнююча назва посадовців різних рівнів, що є ланками командно-адміністративної системи"]}, {"n": 15, "type": "single", "max": 1, "stem": "«Самвидав» – це один із методів боротьби дисидентів у СРСР й УРСР, що полягав у", "opts": ["друкуванні в державних засобах масової інформації критичних матеріалів.", "поширенні серед населення української національної символіки.", "неофіційному виготовленні та розповсюдженні літературних і публіцистичних творів.", "написанні листів-протестів до вищого партійно-радянського керівництва."]}, {"n": 16, "type": "single", "max": 1, "stem": "Особливість дисидентського руху в Україні в 1970-1980-х рр. полягала в тому, що рух", "opts": ["зосереджувався на захисті лише соціальних прав людини, залишаючи поза увагою проблеми захисту релігійних свобод.", "був орієнтований на розв’язання гострих економічних проблем, перебуваючи під контролем незалежних профспілок.", "не набув широкої підтримки серед населення через жорстокість репресивних заходів влади та апатію в суспільстві.", "не викликав занепокоєння партійного керівництва та спецслужб, оскільки влада не вбачала в ньому загрози існуючому режиму."]}, {"n": 17, "type": "single", "max": 1, "stem": "Із якою подією пов'язані діячі, зображені на фото?", "opts": ["заснуванням Української робітничо-селянської спілки", "акцією протесту в кінотеатрі «Україна» проти арештів дисидентів", "створенням Української Гельсінської групи", "повстанням політичних в'язнів у Норільському концтаборі"], "img": "z1_17.png"}, {"n": 18, "type": "single", "max": 1, "stem": "«…[організація] ставить за мету: 1) Сприяти ознайомленню широких кіл української громадськості з Декларацією Прав Людини. 2) …активно сприяти виконанню гуманітарних статей Заключного Акта Наради з питань безпеки i співпраці в Європі. 3) Домагатися, щоб на всіх міжнародних нарадах… Україна як суверенна європейська держава i член ООН була представлена окремою делегацією. 4) З метою вільного обміну інформацією та ідеями домагатися акредитування на Україні представників зарубіжної преси…» Яка організація ставила перед собою таку мету?", "opts": ["Українська Гельсінська група", "Українська робітничо-селянська спілка", "Український національний фронт", "Українська головна визвольна рада"]}, {"n": 19, "type": "single", "max": 1, "stem": "Факти з життя якого українського суспільно-політичного діяча подано нижче? «Юрист, правозахисник, один із засновників Української робітничо-селянської спілки. Арештований за «антирадянську агітацію та пропаганду» й засуджений до страти, згодом заміненої п’ятнадцятирічним ув’язненням. Автор книги «Сповідь у камері смертників». Нагороджений медаллю імені Святого Володимира «Борцям за волю України». Герой України.", "opts": ["Л. Лук’яненка", "І. Дзюби", "В. Чорновола", "Є. Сверстюка"]}, {"n": 20, "type": "single", "max": 1, "stem": "Про кого з громадських діячів ідеться у спогадах сучасника: «...за своїм покликанням і з ласки Божої – поет. Він поет не тільки непересічний, а рідкісний своїм талантом і культурою. Доля призначила йому в житті ще й роль політв'язня...»?", "opts": ["С. Параджанова", "П. Загребельного", "В. Стуса", "В. Чорновола"]}, {"n": 21, "type": "single", "max": 1, "stem": "У яких твердженнях ідеться про Василя Стуса? 1. Був заарештований за гострі публіцистичні публікації й відкриті виступи на захист української інтелігенції й, зокрема, за безпрецедентну працю «Інтернаціоналізм чи русифікація?». 2. Його арешт у січні 1972 р. й засудження спричинені літературною діяльністю, зверненнями до вищих партійних інстанцій з протестом проти порушень прав людини. 3. Був членом-засновником Української Громадської Групи сприяння виконанню Гельсінських угод, засуджений за антирадянську агітацію та пропаганду. 4. Організатор, редактор і видавець підпільного журналу «Український вісник», у якому друкував матеріали самвидаву, хроніку українського національного спротиву. 5. Помер у карцері в таборі для політв’язнів уночі 4 вересня 1985 р., відбуваючи друге ув’язнення.", "opts": ["1, 2", "2, 3", "2, 5", "4, 5"]}, {"n": 22, "type": "single", "max": 1, "stem": "Укажіть рядок з іменами дисидентів, яких було ув’язнено 1972-1973 рр. під час другої хвилі арештів.", "opts": ["Іван Світличний, В’ячеслав Чорновіл, Валерій Марченко", "Микола Руденко, Олекса Тихий, Іван Кандиба", "Степан Хмара, Михайло Горинь, Левко Лук’яненко", "Левко Лук’яненко, Іван Кандиба, Степан Вірун"]}, {"n": 23, "type": "single", "max": 1, "stem": "У яких твердженнях ідеться про В’ячеслава Чорновола? 1. Відбув 15-річне ув’язнення за головування в Українській робітничо-селянській спілці (УРСС). 2. Редактор «самвидавського» журналу «Український вісник». 3. Засуджений до 14 років таборів та заслання за написання творів «Мойсей», «Хроніка опору», «Репортаж із заповідника ім. Берії». 4. Відіграв важливу роль у розбудові незалежної України, лідер «Народного руху» (1992-1999 рр.). 5. За «антирадянську агітацію і пропаганду» вкотре був ув’язнений у 1980 р.; в’язні називали його «Табірним генералом».", "opts": ["1, 3", "2, 3", "1, 4, 5", "2, 4, 5"]}, {"n": 24, "type": "single", "max": 1, "stem": "Особливість розвитку освіти України середини 1960 – початку 1980-х рр. – це", "opts": ["поява навчальних закладів нового типу – гімназій, ліцеїв, колегіумів.", "переорієнтація профтехосвіти на підготовку фахівців сфери обслуговування, бізнесу.", "завершення переходу до обов’язкової загальної середньої освіти.", "збільшення кількості шкіл з українською мовою викладання."]}, {"n": 25, "type": "single", "max": 1, "stem": "«Цей славнозвісний і водночас “багатостраждальний” твір мало не скинув з п’єдесталу вже визнаного класика соціалістичного реалізму. Центральний образ роману – пам’ятка козацької минувшини… Основна увага в ньому приділена викриттю негативних явищ радянської дійсності, таких як бюрократія, кар’єризм, безправ’я селян, чиновницьке недбальство, зневажливе ставлення до довкілля й пам’яток історії та культури...» Хто є автором твору, про який ідеться в уривку з документа?", "opts": ["О. Гончар", "В. Стус", "О. Довженко", "В. Чорновіл"]}, {"n": 26, "type": "single", "max": 1, "stem": "«Цей славнозвісний і водночас “багатостраждальний” твір мало не скинув з п’єдесталу вже визнаного класика соціалістичного реалізму. Центральний образ роману – пам’ятка козацької минувшини… Основна увага в ньому приділена викриттю негативних явищ радянської дійсності, таких як бюрократія, кар’єризм, безправ’я селян, чиновницьке недбальство, зневажливе ставлення до довкілля й пам’яток історії та культури...» Укажіть фото, на якому зображено пам’ятку, що стала «центральним образом роману».", "opts": ["А", "Б", "В", "Г"], "img": "z1_26.png"}, {"n": 27, "type": "single", "max": 1, "stem": "На фото зображено", "opts": ["Є. Сверстюка, філософа, письменника, дисидента, автора збірки «Блудні сини України».", "С. Параджанова, кінорежисера, автора фільмів «Тіні забутих предків», «Колір гранату».", "В. Стуса, поета, автора збірок «Круговерть», «Зимові дерева»; члена Української Гельсінської групи.", "М. Руденка, письменника, автора збірки поезій «Всесвіт у тобі»; керівника Української Гельсінської групи."], "img": "z1_27.png"}, {"n": 28, "type": "single", "max": 1, "stem": "Яке поняття є зайвим в логічному ланцюжку: «Українська робітничо-селянська спілка – \"Український вісник\" – Конституція розвиненого соціалізму – Українська гельсінська група»?", "opts": ["\"Український вісник\"", "Українська гельсінська група", "Конституція розвиненого соціалізму", "Українська робітничо-селянська спілка"]}, {"n": 29, "type": "match", "max": 4, "stem": "Установіть відповідність між подією (явищем) і діячем.", "left": ["Утворення Української Гельсінської групи", "Вихід журналу «Український вісник»", "Боротьба за права кримсько-татарського народу", "Формування українського поетичного кіно"], "right": ["М. Джемілєв", "О. Гончар", "В. Чорновіл", "М. Руденко", "І. Миколайчук"]}, {"n": 30, "type": "match", "max": 4, "stem": "Установіть відповідність між подією та роком.", "left": ["обрання на посаду першого секретаря ЦК КПУ В. Щербицького", "перша хвиля арештів дисидентів в Українській РСР", "утворення Української Гельсінської групи", "поява першого випуску «самвидавчого» журналу «Український вісник»"], "right": ["1965 р.", "1970 р.", "1972 р.", "1976 р.", "1978 р."]}, {"n": 31, "type": "match", "max": 4, "stem": "Установіть відповідність між уривком (1–4) та діячем (А – Д), якого він стосується.", "left": ["Чернігівський обласний суд у м. Городні (де жив брат Віктор, а Хрипівка з батьками лишень за два кілометри) визнав мене за особливо небезпечного рецидивіста і засудив до десяти років ув'язнення та п'яти років заслання. 20.10.1978 року мене привезли до тої ж самої Сосновки Мордовської АРСР, в якій 17 років тому почав був своє в'язенське життя. Тільки тоді була то велика зона, а тепер через дорогу від неї маленька в'язниця", "От і радіємо з денаціоналізації народів, з «успіхів» русифікації, із того, що, мовляв, понад десять мільйонів неросіян у Союзі, за останнім переписом, назвали «рідною» російську мову і зреклися своєї мови. І ставимо це в заслугу «великому и могучему русскому языку», забуваючи, що тургенєвський гімн рідній мові породжений прямо протилежним настроєм, що Тургенєв нікого не хотів русифікувати", "\"Ідея створення Руху виникла спонтанно, вона йшла знизу. Прийшов час \"розвалу імперії\", так званої перебудови. Він закликав низи до дії, а серед інтелігенції, колишніх політв'язнів, політичних діячів виявилися люди, які вирішили очолити цей рух. Я пригадую, як у вересні ми вивели на вулиці Львова 200-250 тис. осіб. Це була природна потреба різко змінити ситуацію, яка на цей момент склалася в країні: ішло розвалювання комуністичної системи, дуже активізувалися народні маси, і це треба було оформити\".", "Належачи до групи \"шістдесятників\", брала активну участь в українському правозахисному русі. Брала участь у акціях протесту проти розправ над українськими правозахисниками. Певним захистом було те, що вона у групі митців виконувала монументальні художні роботи у Донецьку та Краснодоні, які вважались важливими та мали ідеологічний ухил. Зокрема, панно у меморіальному комплексі \"Молода гвардія\"."], "right": ["В. Чорновіл", "Л. Лук'яненко", "А. Горська", "І. Дзюба", "Т. Яблонська"]}, {"n": 32, "type": "match", "max": 4, "stem": "Установіть відповідність між візуальним джерелом (1–4) і поняттям (А – Д).", "left": ["Зображення 1", "Зображення 2", "Зображення 3", "Зображення 4"], "right": ["самвидав", "тамвидав", "дефіцит", "номенклатура", "хрущовка"], "img": "z1_32.png"}, {"n": 33, "type": "seq", "max": 3, "stem": "Установіть послідовність подій.", "items": ["Початок господарської реформи О. Косигіна", "Введення радянських військ до Афганістану", "Ухвалення Конституції СРСР «розвиненого соціалізму»", "Усунення М. Хрущова з посади першого секретаря ЦК КПРС"]}, {"n": 34, "type": "seq", "max": 3, "stem": "Установіть послідовність подій в економічному житті УРСР.", "items": ["Початок будівництва Чорнобильської АЕС", "Ліквідація раднаргоспів і відновлення галузевих міністерств", "Ухвалення Продовольчої програми СРСР", "Ухвалення Конституції УРСР «розвиненого соціалізму»"]}, {"n": 35, "type": "seq", "max": 3, "stem": "Установіть послідовність подій культурного життя України.", "items": ["Вихід друком роману О. Гончара «Собор»", "Загибель композитора В. Івасюка", "Прем’єра фільму С. Параджанова «Тіні забутих предків»", "Вихід на екрани музичного фільму «Червона рута» з піснями В. Івасюка"]}, {"n": 36, "type": "seq", "max": 3, "stem": "Розгляньте зображення. Установіть хронологічну послідовність подій і явищ, які вони ілюструють.", "items": ["Зображення А", "Зображення Б", "Зображення В", "Зображення Г"], "img": "z1_36.png"}, {"n": 37, "type": "three", "max": 3, "stem": "Укажіть особливості суспільних відносин у другій половині 1960-х – середині 1980-х рр.", "opts": ["високі темпи зростання кількості жителів міст", "спад зростання кількості інтелігенції", "зменшення народжуваності", "збільшення народжуваності серед населення села", "зміни в етнічному складі населення і зменшення частки українців", "зменшення кількісного складу номенклатурно-бюрократичного апарату", "зменшення частки росіян в загальній структурі населення"]}, {"n": 38, "type": "three", "max": 3, "stem": "Які з наведених явищ є характерними для СРСР в період загострення кризи радянської системи?", "opts": ["До кінця четвертої п'ятирічки питома вага вироблених в Україні найважливіших видів продукції промисловості в загальносоюзному обсязі становила: чавуну – 47,8%, сталі – 30,6%, прокату – 33,2%, залізної руди – 53%. Республіка знову стала однією з провідних індустріальних країн Європи. Водночас значно відстає легка промисловість (79%) і сільське господарство (91 %).", "привілейована правляча верства, еліта або \"політичний клас\", відносно закрита соціальна каста \"соціалістичного\" суспільства – в країнах, що еволюційно знаходяться на перехідному етапі від традиційного до індустріального суспільства, коли відсутнє громадянське суспільство та нерозвинена політична традиція та культура.", "Найчастіше хабар вимагали при перевірці підприємств податковою службою, пожежною службою та під час операцій з ПДВ. Крім цього, опитувані скаржилися на примус до дачі хабара чи оплату без квитанції зайвих послуг під час взаємодії не лише з податковою, але й з міністерством внутрішніх справ.", "політичний термін, що позначає політику максимальної відкритості у діяльності державних установ і свободи інформації, у вузькому сенсі – основний компонент політики перебудови, що полягав в істотному ослабленні цензури і знятті існуючих у радянському суспільстві численних інформаційних бар'єрів.", "Основний закон СРСР на юридичному рівні закріплював однопартійну політичну систему, охарактеризував чинний етап розвитку радянського суспільства як закономірний етап на шляху до комунізму", "сукупність дій та умов, спрямованих на зміцнення російської національно-політичної переваги в країнах, що входять до складу Росії, чи перебувають в сфері її впливу, за допомогою переходу чи переведення осіб неросійської національності на російську мову й російську культуру та їхньої подальшої асиміляції.", "економіка, організована на основі саморегуляції, при якій координація дій учасників здійснюється державою, а саме законодавчою та судовою владою безпосередньо, а виконавчою тільки опосередковано, шляхом запровадження різних податків, зборів, пільг тощо; тільки рішення самих покупців, постачальників товарів і послуг визначають структуру розподілу."]}, {"n": 39, "type": "three", "max": 3, "stem": "Що було характерним для соціальних процесів та рівня життя населення України від середини 1960-х – початку 1980-х рр.", "opts": ["ефективне, раціональне використання людських ресурсів та інтелектуального потенціалу", "хронічний дефіцит на споживчому ринку різноманітних товарів", "зближення оплати праці робітників та інженерно-технічних працівників", "динаміка вікового складу змінювалася за лінією омолодження населення України", "міграційні процеси, основний напрямок яких – переселення із сіл у міста", "подолано відставання від країн Заходу за рівнем споживання на душу населення", "відсутність системи соціального забезпечення (пенсії, інвалідність) колгоспників"]}, {"n": 40, "type": "three", "max": 3, "stem": "Що характеризує період, коли Компартію України очолював В. Щербицький (1972–1989 рр.)?", "opts": ["ліквідація галузевих міністерств і створення раднаргоспів", "беззастережне виконання вказівок союзного центру", "запровадження багатопартійності", "обстоювання перед Москвою розширення господарських прав республіки", "посилення русифікації в освіті, науці та видавничій справі", "децентралізація управління промисловістю", "ідеологічні «чистки» в науці й культурі, які проводив секретар ЦК КПУ з ідеології В. Маланчук"]}]}]}, {"id": "v2", "name": "Тест 2", "note": "", "parts": [{"id": "hist", "title": "Історія України", "short": "Іст", "tab": "Історія України", "max": 68, "tasks": [{"n": 1, "type": "single", "max": 1, "stem": "У яких твердженнях ідеться про Петра Шелеста? 1. Був нагороджений чотирма зірками Героя Радянського Союзу та Героя Соціалістичної праці, а також сімома орденами Леніна. 2. Став першим секретарем ЦК Компартії України в 1972 р. 3. Сприяв деякою мірою українізації закладів освіти, радіо і телебачення республіки. 4. Наприкінці кар’єри розкритикований на політбюро ЦК КПРС за «недоліки у справі інтернаціонального виховання трудящих і примиренське ставлення до проявів націоналізму». 5. Автор книги «Інтернаціоналізм чи русифікація».", "opts": ["1, 3", "2, 4", "3, 4", "3, 5"]}, {"n": 2, "type": "single", "max": 1, "stem": "Наведене фото може слугувати для ілюстрації СРСР в", "opts": ["1945-1953 рр.", "1953-1964 рр.", "1965-1982 рр.", "1985-1991 рр."], "img": "z2_02.png"}, {"n": 3, "type": "single", "max": 1, "stem": "Прочитайте характеристику діяча та вкажіть його прізвище. «Очолював Компартію України сімнадцять років — довше за будь-кого з попередників. Публічно виступав лише російською, беззастережно підтримував курс Москви на «злиття націй», а відстоювання економічних інтересів республіки вважав проявом «місництва». Залишався на чолі республіканської парторганізації й у перші роки «перебудови»».", "opts": ["М. Підгорний", "П. Шелест", "В. Щербицький", "О. Кириченко"]}, {"n": 4, "type": "single", "max": 1, "stem": "Які явища були характерні для суспільного розвитку України в 1970 – на початку 1980-х років? 1. Домінування подвійної моралі, що виправдовувала незаконні способи задоволення особистих потреб. 2. Різке наростання товарного дефіциту, продовження урбанізаційних процесів 3. Різке прискорення темпів зростання реальних доходів населення.", "opts": ["1, 3", "1, 2", "2, 3", "1, 2, 3"]}, {"n": 5, "type": "single", "max": 1, "stem": "Ліквідація раднаргоспів у другій половині 1960-х рр. призвела до", "opts": ["ліквідації директивного планування.", "утворення вільних економічних зон.", "розширення господарських прав республік.", "посилення централізованості планування."]}, {"n": 6, "type": "single", "max": 1, "stem": "Прочитайте уривок із книги М. Горбачова «Життя і реформи» та виконайте завдання. «Реформа була для свого часу досить сміливою, перш за все в плані розширення самостійності підприємств і товарно-грошових відносин між ними. Добре пам’ятаю, яке пожвавлення вона викликала в суспільстві, які породила надії, надавши позитивний вплив на розвиток економіки у восьмій п’ятирічці, мабуть, найбільш успішній у післявоєнні роки». Описана реформа проводилася під керівництвом", "opts": ["М. Хрущова.", "О. Косигіна.", "М. Підгорного.", "П. Шелеста."]}, {"n": 7, "type": "single", "max": 1, "stem": "Стан народного господарства УРСР у 1970-1980-х рр. характеризувався", "opts": ["стрімким зростанням обсягів сільськогосподарського виробництва.", "пріоритетним розвитком підприємств легкої та харчової промисловості.", "переходом до інтенсивних методів господарювання.", "падінням темпів промислового виробництва."]}, {"n": 8, "type": "single", "max": 1, "stem": "Що було однією з особливостей економічного розвитку УРСР в 1970 – на початку 1980-х рр.?", "opts": ["прогресуючий занепад у рамках загальносоюзної економіки", "зниження матеріало- та енергомісткості виробництва", "посилення процесів децентралізації управління промисловістю", "зростання конкурентоспроможності продукції"]}, {"n": 9, "type": "single", "max": 1, "stem": "Укажіть особливості економічного розвитку УРСР у 70-х – на початку 80-х рр. ХХ ст. 1. Збереження ролі однієї з найважливіших паливно-енергетичних, металургійних та машинобудівних баз країни 2. Істотне зменшення капіталовкладень у сільське господарство республіки 3. Поліпшення умов праці в колгоспах, культурно-побутового обслуговування селян, стимулювання продуктивності праці 4. Інтенсифікація сільськогосподарського виробництва дала змогу експортувати зернові до Канади та США 5. Нарощування виробництва забезпечувалося залученням додаткових обсягів сировини, робочої сили, створенням поряд з існуючими нових потужностей 6. Продовження орієнтації важкої промисловості на першочергове обслуговування підприємств ВПК", "opts": ["1, 3, 4", "2, 4, 6", "3, 4, 5", "1, 5, 6"]}, {"n": 10, "type": "single", "max": 1, "stem": "Укажіть характерні риси соціально-економічної ситуації в УРСР у 70-х – першій половині 80-х рр. 20 ст. 1. Активне залучення іноземних інвестицій у підприємства ВПК 2. Впровадження досягнень НТР, зокрема мікропроцесорних технологій, у виробництво товарів народного споживання 3. Нестача окремих видів продовольства та дефіцит товарів повсякденного попиту 4. Мілітаризація промисловості 5. Швидке зростання реальних доходів населення", "opts": ["1, 2", "1, 4", "3, 4", "4, 5"]}, {"n": 11, "type": "single", "max": 1, "stem": "Встановіть, яке визначення найкраще описує наведену фотографію", "opts": ["надмірне, проти потреб товарообігу, збільшення кількості паперових грошей з наступним їх швидким знеціненням, яке проявляється зростанням загального рівня цін та зниженням купівельної спроможності грошей.", "радянське ідеологічне поняття, яке було вигадано та запроваджено з метою прикрити провал історичної програмної цілі монопольно правлячої в СРСР КПРС – «побудови матеріально-технічної бази комунізму в СРСР».", "в державному праві прийняття електоратом (виборцями) рішення з конституційних, законодавчих чи інших внутрішньо- чи зовнішньополітичних питань.", "Перевищення попиту над пропозицією; засвідчує про розбіжність між попитом та пропозицією та відсутність рівноважної ціни, є типовим явищем в умовах планової економіки"], "img": "z2_11.png"}, {"n": 12, "type": "single", "max": 1, "stem": "Яке явище радянської дійсності другої половини 1960-х – 1980-х рр. відображено на карикатурі?", "opts": ["бюрократизацію", "дефіцит", "корупцію", "плюралізм"], "img": "z2_12.png"}, {"n": 13, "type": "single", "max": 1, "stem": "На якій проблемі радянської дійсності 1970-1980-х рр. акцентує увагу зображена карикатура? Напис на карикатурі: «Сьогодні у нашому тресті розшукуються: [підписи під фотографіями] пішла до хімчистки; пішов на об'єкт; відійшов покурити; пішла до іншого відділу».", "opts": ["розгулі організованої злочинності", "посиленні репресій проти інакомислячих", "низькому рівні трудової дисципліни", "зростанні безробіття"], "img": "z2_13.png"}, {"n": 14, "type": "single", "max": 1, "stem": "\"Спеціальне обслуговування в медичних установах, можливості для відпочинку на державних дачах і всесоюзних курортах, забезпечення дефіцитними товарами, окремі санаторії та будинки відпочинку\", – привілеї, властиві в радянській Україні", "opts": ["непманам.", "\"шістдесятникам\".", "номенклатурі.", "дисидентам."]}, {"n": 15, "type": "single", "max": 1, "stem": "Обов'язковість носіння дітьми та молоддю УРСР зображених значків свідчить про", "opts": ["ідеологізацію суспільного життя.", "рівні фізичної підготовки.", "етапи формування нової соціальної групи.", "заходи естетичного виховання."], "img": "z2_15.png"}, {"n": 16, "type": "single", "max": 1, "stem": "Прочитайте уривок з інтерв’ю колишнього голови КДБ УРСР М. Голушки: «У карних кодексах… було передбачено відповідальність за антирадянську агітацію та пропаганду, наклепи на існуючий лад (ст. 62, 187 КК УРСР), застосування яких асоціюється із переслідуванням за інакомислення». Відповідні статті Кримінального кодексу використовувалися владою для боротьби з", "opts": ["дисидентством.", "номенклатурою.", "«лисенківщиною».", "багатопартійністю."]}, {"n": 17, "type": "single", "max": 1, "stem": "Розгляньте фото палітурок видань і виконайте завдання. Ці візуальні джерела доречно використати для створення презентації", "opts": ["«Ідеологізація культурного життя в Україні».", "«Українські письменники-шістдесятники».", "«Засоби масової інформації Радянської України».", "«Дисидентський рух в Україні»."], "img": "z2_17.png"}, {"n": 18, "type": "single", "max": 1, "stem": "Укажіть одну з ознак дисидентського руху в Україні в другій половині 1960 – першій половині 1980-х рр.?", "opts": ["координація масових антиурядових акцій з московськими групами", "поширення руху лише в західних областях України", "мирний, ненасильницький характер боротьби", "домінування релігійної течії, її підтримка православною церквою"]}, {"n": 19, "type": "single", "max": 1, "stem": "Що стало наслідком підписання СРСР угоди, уривок з якої процитовано: «...Держави-учасниці поважатимуть права людини та основні свободи, включаючи свободу думки, совісті, релігії та переконань, для всіх, незалежно від раси, статі, мови та релігії...»?", "opts": ["початок «косигінської реформи»", "створення Української Гельсінської групи", "зародження Народного руху України", "завершення «хрущовської відлиги»"]}, {"n": 20, "type": "single", "max": 1, "stem": "Прочитайте уривок зі спогадів режисера Ю. Іллєнка та дайте відповідь на запитання. «Увечері 4 вересня 1965 року у кінотеатрі «Україна» зібралася вся еліта Києва. Фільм був розкручений... тому його й використали організатори акції протесту. ...Із зали піднімається _____ з букетом. Говорить теплі слова, вручає квіти, раптом повертається і звертається до зали: «Почалися арешти, повторюється 37-й рік...» ...Вскакує _____ і кричить українською крізь гул запущеної чекістами сирени: «Хто проти тиранії – встаньте!» Прізвища яких громадських діячів пропущено в уривку?", "opts": ["Л. Лук’яненко, В. Чорновіл", "В. Чорновіл, М. Руденко", "І. Дзюба, В. Стус", "В. Стус, Л. Лук’яненко"]}, {"n": 21, "type": "single", "max": 1, "stem": "«…[організація] ставить за мету: 1) Сприяти ознайомленню широких кіл української громадськості з Декларацією Прав Людини. 2) …активно сприяти виконанню гуманітарних статей Заключного Акта Наради з питань безпеки i співпраці в Європі. 3) Домагатися, щоб на всіх міжнародних нарадах… Україна як суверенна європейська держава i член ООН була представлена окремою делегацією…» Хто з діячів, зображених на фото, був членом цієї організації?", "opts": ["А", "Б", "В", "Г"], "img": "z2_21.png"}, {"n": 22, "type": "single", "max": 1, "stem": "Укажіть портрет правозахисника, засновника Української робітничо-селянської спілки, автора книги «Сповідь у камері смертників».", "opts": ["А", "Б", "В", "Г"], "img": "z2_22.png"}, {"n": 23, "type": "single", "max": 1, "stem": "Якому з наведених на фото історичних діячів належить така характеристика: «Український поет, правозахисник, член Української Гельсінської групи. Засуджений за «антирадянську агітацію і пропаганду», помер у таборі для політв’язнів. Автор поетичної збірки «Дорога болю», лауреат Державної премії ім. Т. Шевченка (посмертно)».", "opts": ["А", "Б", "В", "Г"], "img": "z2_23.png"}, {"n": 24, "type": "single", "max": 1, "stem": "Проголошення керівництвом СРСР курсу на «зближення та злиття націй у “нову історичну спільноту – радянський народ”...» призвело до", "opts": ["посилення процесу русифікації та скорочення сфери вживання української мови.", "зростання в суспільстві інтересу до надбань української культури.", "скасування цензури на літературні твори мовами національних меншин.", "збільшення в школах кількості навчальних годин з історії України."]}, {"n": 25, "type": "single", "max": 1, "stem": "Хто з наведених шістдесятників в подальшому пов'язав свою діяльність з дисидентським рухом? 1. Дмитро Павличко 2. Валентин Мороз 3. Ліна Костенко 4. Василь Стус 5. Іван Світличний 6. Іван Драч", "opts": ["1, 2, 3", "2, 4, 5", "3, 4, 6", "1, 3, 6"]}, {"n": 26, "type": "single", "max": 1, "stem": "Якого твору О. Гончара стосуються цитовані нижче звинувачення? «...товариш Гончар, зрілий майстер художнього слова, автор відомих творів «Прапороносці», «Людина і зброя», в своєму новому романі... як в кривому дзеркалі змалював працю, побут та духовний світ металургів і колгоспників Подніпров’я, провівши ворожий водорозділ між керівниками та масами».", "opts": ["«Берег любові»", "«Тронка»", "«Собор»", "«Таврія»"]}, {"n": 27, "type": "single", "max": 1, "stem": "У яких уривках ідеться про особливості економічного розвитку УРСР у 70-х – на початку 80-х рр. ХХ ст.? 1. «Так, у межиріччі Дніпра, Десни та Прип'яті було споруджено Чорнобильську АЕС. В цілому, в УРСР було розміщено 40% атомних потужностей країни». 2. «На території України було створено 11 економічних адміністративних районів, а в межах всього СРСР – 102 3. Одночасно ліквідувалося 10 союзних і 15 союзно-республіканських міністерств. Зокрема, в Україні було ліквідовано 11 промислових і будівельних міністерств, а два міністерства перетворені з союзно-республіканських на республіканські».", "opts": ["1, 2, 3", "1", "2", "3"]}, {"n": 28, "type": "single", "max": 1, "stem": "Яка риса притаманна розвитку української культури в середині 1960 — на початку 1980-х рр.?", "opts": ["розширення сфери вживання української мови", "розквіт нових жанрів літератури та мистецтва", "духовне розкріпачення письменників і митців", "панування методу соціалістичного реалізму"]}, {"n": 29, "type": "match", "max": 4, "stem": "Установіть відповідність між роком (1–4) та уривком джерела (А – Д), що стосується подій цього року.", "left": ["1956 рік", "1965 рік", "1972 рік", "1976 рік"], "right": ["Про призначеного на посаду першого секретаря ЦК КПУ можна було сказати, що він був виразником москвофільства, можна так сказати. Він вважав, що в Україні потрібно проводити курс Москви. Він ніколи не виступав із критикою, не наголошував на тому, що слід виборювати для України паритетні умови постачання з союзної скарбниці товарів, ресурсів і так далі.", "І я почав діяти. Спочатку сам. А у вересні Микола Руденко запропонував створити українську правозахисну організацію.. Я пристав на пропозицію, побачивши в ній сміливий і політичне вельми прозорливий крок…. Таким чином, усього нас стало 10 осіб: Бердник, Григоренко, Кандиба, я, Матусевич, Маринович, Мешко, Руденко, Строката, Тихий.", "Перед новим радянським керівництвом для подолання кризового стану економіки було два можливих шляхи: радикальні реформи (тобто такі, що стосуються основ соціалістичного ладу, його характерних принципів) та часткові реформи (які не стосувалися основ соціалістичного ладу і спрямовувалися на пом'якшення економічної кризи, але не були здатні подолати її в цілому). В підсумку радянське керівництво обрало другий шлях, що в підсумку і визначило їхній крах.", "Установлено, що з 139 членів та кандидатів у члени Центрального Комітету партії, обраних на XVII з'їзді партії, було заарештовано та розстріляно (головним чином у 1937-1938 рр.) 98 чоловік, тобто 70 відсотків. Це відбулося внаслідок зловживань владою з боку Сталіна, який почав застосовувати масовий терор проти кадрів партії.", "В новоствореній організації об'єдналися люди різних політичних переконань – від ліберальних комуністів до тих, хто сповідував ідеї інтегрального націоналізму. Але домінували в ній настрої національної демократії. Опівдні в будинку культури Київського політехнічного інституту відкрилися Установчі збори Народного Руху України за перебудову."]}, {"n": 30, "type": "match", "max": 4, "stem": "Установіть відповідність між афішею фільму чи нотами пісні (1–4) та митцем (А – Д), чиє ім’я з ними пов’язане.", "left": ["Зображення 1", "Зображення 2", "Зображення 3", "Зображення 4"], "right": ["І. Миколайчук (як режисер)", "Л. Биков", "С. Параджанов", "Ю. Іллєнко", "В. Івасюк"], "img": "z2_30.png"}, {"n": 31, "type": "match", "max": 4, "stem": "Установіть відповідність між діячем (1–4) та фактами його біографії (А – Д).", "left": ["Іван Світличний", "Петро Григоренко", "Євген Сверстюк", "Алла Горська"], "right": ["У 1959, 1960, 1961, 1965, 1972 роках його звільняли з роботи за політичними мотивами. Переслідуваний протягом років за участь у \"Самвидаві\" у січні 1972 року засуджений за статтею 62 ч. I КК УРСР за виготовлення і розповсюдження документів \"самвидаву\" до семи років таборів", "український письменник, філософ, громадський діяч, засновник Української Гельсінської Групи. Герой України.", "український літературознавець, мовознавець, літературний критик, поет, перекладач. Репресований радянською владою в 1965 і 1972 рр. Після другого терміну ув'язнення – інвалід, так і не зміг повернутись до активної діяльності", "радянський військовий, правозахисник; виступав на захист кримських татар та інших депортованих народів. За легальну правозахисну діяльність розжалуваний у рядові і позбавлений усіх державних відзнак. Неодноразово перебував у радянських тюрмах, таборах і \"психушках\", згодом депортований до США.", "художниця, одна з лідерок київських шістдесятників; підписала лист-протест проти закритих політичних процесів 1965–1966 рр.; загинула 1970 р. за нез’ясованих обставин"]}, {"n": 32, "type": "match", "max": 4, "stem": "Установіть відповідність між діячем (1–4) та фактами його біографії (А – Д).", "left": ["В. Симоненко", "М. Руденко", "В. Стус", "В. Чорновіл"], "right": ["автор «самвидавських» праць «Репортаж із заповідника імені Берії», «Серед снігів», «Хроніка опору»", "автор «самвидавської» збірки «Лихо з розуму», журналу «Український вісник», член Української Гельсінської групи", "автор збірок «Круговерть», «Зимові дерева», «Веселий цвинтар», член Української Гельсінської групи", "автор поезій «Всесвіт у тобі», «Оновлення», один із засновників і керівник Української Гельсінської групи", "автор збірок «Лебеді материнства», «Земне тяжіння», «самвидавської» сатири «Некролог кукурудзяному качанові», «Злодій», «Суд»"]}, {"n": 33, "type": "seq", "max": 3, "stem": "Установіть послідовність подій українського опозиційного руху.", "items": ["мітинг протесту проти арештів інтелігенції у кінотеатрі «Україна» в Києві", "арешт Л. Лук'яненка та інших членів Української робітничо-селянської спілки", "початок випуску «самвидавського» журналу «Український вісник» у Львові", "утворення в Києві правозахисної організації Українська Гельсінська група"]}, {"n": 34, "type": "seq", "max": 3, "stem": "Установіть послідовність подій в історії дисидентського руху.", "items": ["Арешти І. Світличного, Є. Сверстюка, В. Чорновола («великий погром»)", "Поява праці І. Дзюби «Інтернаціоналізм чи русифікація?»", "Загибель В. Стуса в таборі для політв’язнів", "Підписання в Гельсінкі Заключного акта Наради з безпеки і співробітництва в Європі"]}, {"n": 35, "type": "seq", "max": 3, "stem": "Установіть послідовність подій.", "items": ["Ухвалення Конституції УРСР «розвиненого соціалізму»", "Обрання Ю. Андропова генеральним секретарем ЦК КПРС", "Вихід книжки П. Шелеста «Україно наша Радянська»", "Обрання П. Шелеста першим секретарем ЦК КПУ"]}, {"n": 36, "type": "seq", "max": 3, "stem": "Установіть послідовність подій.", "items": ["Літні Олімпійські ігри в Москві (частина футбольних матчів — у Києві)", "Введення військ країн Варшавського договору до Чехословаччини", "Введення радянських військ до Афганістану", "Усунення М. Хрущова від влади й прихід до керівництва СРСР Л. Брежнєва"]}, {"n": 37, "type": "three", "max": 3, "stem": "Укажіть особливості економічного розвитку України в 1970-1980-х рр.", "opts": ["високі темпи розвитку електроенергетики", "переважання виробництва засобів праці над виробництвом предметів споживання", "широке впровадження механізації та автоматизації виробництва", "відповідальне ставлення влади до природного середовища України", "будівництво нових великих підприємств, комплексів", "висока якість виробленої продукції", "широке запровадження інноваційних та енергозберігаючих технологій"]}, {"n": 38, "type": "three", "max": 3, "stem": "Що було характерним для періоду середини 1960-х – початку 1980-х рр. в історії України?", "opts": ["демократизація радянської системи, запровадження гласності", "надання права союзним республікам на власну внутрішню політику", "проведення утисків та репресій щодо інакодумців", "юридичне оформлення монополії КПРС на владу", "реалізація ідеї злиття націй і народностей СРСР в «нову історичну спільноту – радянський народ»", "відмова від директивного планування й силового управління економікою, впровадження ринкового регулювання", "активне залучення іноземних інвестицій у підприємства ВПК"]}, {"n": 39, "type": "three", "max": 3, "stem": "Укажіть твердження, які характеризують розвиток науки та культури за доби «застою».", "opts": ["Офіційна популяризація наукових досліджень М. Грушевського та його історичної школи.", "Вихід на екрани художніх фільмів нового напрямку в українському кінематографі – «поетичного кіно».", "Збереження національного колориту та використання української мови в більшості театральних вистав та кінофільмів.", "Провідна тема образотворчого мистецтва – героїзм народу у війні та в роки відбудови, звеличення праці колгоспників і будівельників.", "Критика творів українських письменників, написаних відповідно до принципів соцреалізму.", "Популярність національних колективів: народного хору ім. Г. Верьовки, хорової капели «Думка», ансамблю народного танцю ім. П. Вірського.", "Заборона займатись науковими дослідженнями в галузі генетики та кібернетики."]}, {"n": 40, "type": "three", "max": 3, "stem": "Які події відбулися в період, що його називають добою «застою»?", "opts": ["аварія на Чорнобильській АЕС", "ухвалення Конституції СРСР «розвиненого соціалізму»", "ухвалення Декларації про державний суверенітет України", "утворення раднаргоспів замість галузевих міністерств", "усунення П. Шелеста з посади першого секретаря ЦК КПУ", "засудження «культу особи» Й. Сталіна на ХХ з’їзді КПРС", "створення Української Гельсінської групи"]}]}]}]};
+document.title = SET.title;
+/* ---------- спостереження (engine/mon.js) ---------- */
+window.MONCFG = {
+  key: 'nmt2-' + SET.id + '-mon',
+  active: () => !!(S && S.phase==='test' && S.attempt),
+  who: () => ({test:SET.id, attempt:S.attempt, name:S.name, cls:S.cls}),
+  beat: () => { const p = curPart(), t = p.tasks[S.cur[p.id]||0]; return {cur:(MULTI?p.short+' ':'')+(t?t.n:''), answered:doneAll(), total:totalAll()}; },
+  onBeat: j => { if(j && j.remain!=null) syncDeadline(j.remain); },
+  fsSlot: 'fsslot'
+};
+</script>
+<script src="mon.js"></script>
+<script>
+/* ---------- Офлайн-тестер: сторінка учня (дані набору вставляє сервер) ---------- */
+const LET = (SET.letters || 'АБВГД').split('');
+function letOf(t){ return t && t.letters ? t.letters.split('') : LET; }   // у спільному наборі англійська має латинські букви
+const KEY = 'nmt2-' + SET.id;
+const TYPE_LABEL = {single:'Вибір однієї правильної відповіді', match:'Встановлення відповідності', seq:'Встановлення правильної послідовності', three:'Вибір трьох правильних відповідей із семи', groups:'Вибір однієї відповіді в кожній із трьох груп', num:'Відкрита форма: запишіть число'};
+const BRAND_IMG = 'data:image/png;base64,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';
+const BRAND_NAME = 'Ліцей біотехнологій № 177';
+function brandHTML(){ return `<div class="brand"><img src="${BRAND_IMG}" alt=""><span>${BRAND_NAME}</span></div>`; }
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const app = document.getElementById('app');
+const VAR = id => SET.variants.find(v => v.id===id) || null;
+const MULTI = SET.variants[0].parts.length > 1;
+
+let S = load() || fresh();
+function fresh(){ return {phase:'intro', name:'', cls:'', variant: SET.variants.length===1 ? SET.variants[0].id : null, attempt:null,
+  ans:{}, cur:{}, part:null, deadline:null, start:null, end:null, sent:null, result:null, keys:null, filter:'all'}; }
+function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && s.ans ? s : null; }catch(e){ return null; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+const newAttempt = () => Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,8);
+const parts = () => (VAR(S.variant) || SET.variants[0]).parts;
+const partOf = id => parts().find(p => p.id===id);
+const curPart = () => partOf(S.part) || parts()[0];
+const ansOf = (pid, n) => (S.ans[pid] || {})[n];
+function setAns(pid, n, v){
+  S.ans[pid] = S.ans[pid] || {};
+  if(v==null || (Array.isArray(v) && (!v.length || v.every(x=>x==null))) || v==='') delete S.ans[pid][n]; else S.ans[pid][n] = v;
+  save();
+}
+function answered(t, a){
+  if(a==null) return false;
+  if(t.type==='single') return true;
+  if(t.type==='num') return String(a).trim()!=='';
+  if(t.type==='three') return a.length>0;
+  return a.some(x=>x!=null);
+}
+const units = t => t.rowNums ? t.rowNums.length : 1;
+const doneUnits = (t, a) => t.rowNums ? (Array.isArray(a) ? a.filter(x=>x!=null).length : 0) : (answered(t, a) ? 1 : 0);
+const label = t => t.label || String(t.n);
+const lastNum = p => { const t = p.tasks[p.tasks.length-1]; return t.rowNums ? t.rowNums[t.rowNums.length-1] : t.n; };
+const unitsIn = p => p.tasks.reduce((s,t)=>s+units(t),0);
+const doneIn = p => p.tasks.reduce((s,t)=>s+doneUnits(t, ansOf(p.id, t.n)),0);
+const doneAll = () => parts().reduce((s,p)=>s+doneIn(p),0);
+const totalAll = () => parts().reduce((s,p)=>s+unitsIn(p),0);
+
+/* ---------- зв’язок із сервером ---------- */
+async function post(url, payload, waits){
+  for(const wait of (waits||[0,2500,6000,12000])){
+    if(wait) await new Promise(r=>setTimeout(r,wait));
+    try{ const r = await fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),cache:'no-store'});
+         const j = await r.json(); if(j && typeof j.ok !== 'undefined') return j; }catch(e){}
+  }
+  return null;
+}
+const who = () => ({test:SET.id, attempt:S.attempt, name:S.name, cls:S.cls, variant:S.variant});
+
+function syncDeadline(remain){
+  const d = Date.now() + remain;
+  if(!S.deadline || Math.abs(S.deadline - d) > 3000){
+    const add = S.deadline ? d - S.deadline : 0;
+    S.deadline = d; save();
+    if(S.phase==='test' && Math.abs(add) >= 50000) toast(add > 0 ? `Учитель подовжив час: +${Math.round(add/60000)} хв` : `Учитель змінив час: ${Math.round(add/60000)} хв`);
+  }
+}
+function toast(msg){
+  let el = document.getElementById('toast');
+  if(!el){ el = document.createElement('div'); el.id = 'toast'; el.className = 'toast'; document.body.appendChild(el); }
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 6000);
+}
+const left = () => S.deadline ? Math.max(0, S.deadline - Date.now()) : SET.duration*60000;
+function fmt(ms){ const s=Math.ceil(ms/1000), h=Math.floor(s/3600), m=Math.floor(s%3600/60), x=String(s%60).padStart(2,'0');
+  return h ? `${h}:${String(m).padStart(2,'0')}:${x}` : `${String(m).padStart(2,'0')}:${x}`; }
+
+/* ---------- вступ ---------- */
+// Спільний набір (напр., другий блок НМТ): варіант називає вчитель, предмет на вибір учень обирає сам. id варіанта = «v1-eng».
+function chooseHTML(resume){
+  const C = SET.choose, dis = resume ? 'disabled' : '';
+  return `<div class="eyebrow" style="margin-top:4px">Варіант — за вказівкою вчителя</div>
+    <div class="varpick">${C.variants.map(v=>`<button type="button" data-cv="${v.id}" class="${S.cv===v.id?'on':''}" ${dis}>${esc(v.name)}</button>`).join('')}</div>
+    <div class="eyebrow" style="margin-top:4px">${esc(C.label||'Предмет на вибір')}</div>
+    <div class="varpick">${C.electives.map(e=>`<button type="button" data-ce="${e.id}" class="${S.ce===e.id?'on':''}" ${dis}>${esc(e.name)}</button>`).join('')}</div>`;
+}
+function renderIntro(){
+  const resume = S.phase==='test' || S.phase==='wait';
+  const vs = SET.variants;
+  app.innerHTML = `<div class="wrap intro">${brandHTML()}
+    <div class="eyebrow">${esc(SET.eyebrow)}</div>
+    <h1>${esc(SET.title)}</h1>
+    <p class="lead">${esc(SET.lead)}</p>
+    <div class="facts">${(SET.facts||[]).map(f=>`<div><b>${esc(f[0])}</b><span class="eyebrow">${esc(f[1])}</span></div>`).join('')}</div>
+    ${(SET.structure||[]).map(st=>`<div class="panel tbl-wrap">${st.title?`<div class="eyebrow" style="margin-bottom:8px">${esc(st.title)}</div>`:''}
+      <table class="struct"><tr><th>Завдання</th><th>Форма</th><th>Бали</th></tr>${st.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</table></div>`).join('')}
+    <ul class="rules">${(SET.rules||[]).map(r=>`<li>${esc(r)}</li>`).join('')}
+      <li>Під час роботи фіксуються вихід зі сторінки, інше вікно й розділений екран — учитель це бачить.</li></ul>
+    <div class="panel stud"><div class="eyebrow">Хто пише</div>
+      <div class="fields"><label>Прізвище та ім’я<input id="sname" type="text" autocomplete="name" maxlength="80" value="${esc(S.name)}" ${resume?'disabled':''}></label>
+      <label>Клас<input id="sclass" type="text" maxlength="20" placeholder="напр., 11-А" value="${esc(S.cls)}" ${resume?'disabled':''}></label></div>
+      ${SET.choose ? chooseHTML(resume) : vs.length>1 ? `<div class="eyebrow" style="margin-top:4px">${SET.variantLabel||'Варіант'} — за вказівкою вчителя</div>
+      <div class="varpick">${vs.map(v=>`<button type="button" data-v="${v.id}" class="${S.variant===v.id?'on':''}" ${resume?'disabled':''}>${esc(v.name)}${v.note?`<small>${esc(v.note)}</small>`:''}</button>`).join('')}</div>` : ''}
+      <p class="hint" id="shint">Результат автоматично надійде вчителеві: ім’я, клас, бали й відповіді. Потрібне підключення до інтернету.</p></div>
+    <div class="actions"><button class="btn primary" id="go">${resume?'Продовжити':'Почати'}</button></div>
+  </div>`;
+  app.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { S.variant = b.dataset.v; save(); app.querySelectorAll('[data-v]').forEach(x=>x.classList.toggle('on', x===b)); });
+  app.querySelectorAll('[data-cv],[data-ce]').forEach(b => b.onclick = () => {
+    if(b.dataset.cv) S.cv = b.dataset.cv; else S.ce = b.dataset.ce;
+    S.variant = S.cv && S.ce ? `${S.cv}-${S.ce}` : null; save();
+    app.querySelectorAll('[data-cv]').forEach(x=>x.classList.toggle('on', x.dataset.cv===S.cv));
+    app.querySelectorAll('[data-ce]').forEach(x=>x.classList.toggle('on', x.dataset.ce===S.ce)); });
+  const hint = (m) => { const h=document.getElementById('shint'); h.textContent=m; h.classList.add('err'); };
+  document.getElementById('go').onclick = async () => {
+    if(!resume){
+      const n=document.getElementById('sname').value.trim(), c=document.getElementById('sclass').value.trim();
+      if(n.length<3 || !c){ hint('Впишіть прізвище, ім’я та клас, щоб учитель отримав ваш результат.'); (n.length<3?document.getElementById('sname'):document.getElementById('sclass')).focus(); return; }
+      if(SET.choose && !S.cv){ hint('Виберіть варіант, який назвав учитель.'); return; }
+      if(SET.choose && !S.ce){ hint('Виберіть предмет на вибір.'); return; }
+      if(!S.variant){ hint('Виберіть варіант, який назвав учитель.'); return; }
+      S.name=n; S.cls=c;
+    }
+    if(monCanFs()) monFsReq();   // повний екран — лише в момент дотику, поки браузер це дозволяє
+    const b=document.getElementById('go'); b.disabled=true; b.textContent='Зачекайте…';
+    if(!S.attempt){ S.attempt = newAttempt(); save(); }
+    const j = await post('/start', who(), [0,2000,5000]);
+    b.disabled=false; b.textContent = resume?'Продовжити':'Почати';
+    if(!j){ hint('Немає зв’язку із сервером. Перевірте інтернет і спробуйте ще раз.'); return; }
+    if(j.closed){ S.attempt=null; save(); hint('Зараз почати не можна: учитель закрив прийом.'); return; }
+    if(j.already){ S.attempt=null; save(); hint('Ви вже здали цю роботу. Якщо це помилка, скажіть учителю — він може дозволити повторну спробу.'); return; }
+    if(!j.ok){ S.attempt=null; save(); hint('Сервер не прийняв запит (' + (j.error||'помилка') + '). Повідомте вчителя.'); return; }
+    applyStart(j);
+  };
+}
+function applyStart(j){
+  if(j.variant && VAR(j.variant)) S.variant = j.variant;
+  if(j.done){ S.phase='done'; save(); render(); return; }
+  if(j.wait){ S.phase='wait'; save(); render(); return; }
+  syncDeadline(j.remain);
+  if(!S.start) S.start = Date.now();
+  if(!S.part) S.part = parts()[0].id;
+  S.phase='test'; save(); monGo(); render();
+}
+
+/* ---------- очікування старту ---------- */
+let waitT = null;
+function renderWait(){
+  const v = VAR(S.variant);
+  app.innerHTML = `<div class="wrap wait">${brandHTML()}<div class="dot"></div>
+    <h1 style="font-size:clamp(28px,6vw,40px)">Очікуйте старту</h1>
+    <p class="lead" style="margin:0">Час (${SET.duration} хв) запуститься для всіх одночасно, коли вчитель натисне «Почати». Сторінка відкриється сама — не закривайте її.</p>
+    <div class="panel" style="display:grid;gap:6px"><div><b>${esc(S.name)}</b>, ${esc(S.cls)}</div>${SET.variants.length>1?`<div>${esc(v?v.name:'')}${v&&v.note?` <span class="topic">· ${esc(v.note)}</span>`:''}</div>`:''}</div>
+    <div class="actions"><button class="btn" id="fsw">На весь екран</button><button class="btn" id="chg">Змінити дані</button></div>
+    <p class="hint" id="whint" style="color:var(--muted);font-size:14px"></p></div>`;
+  document.getElementById('fsw').onclick = () => monFsReq();
+  document.getElementById('chg').onclick = () => { clearTimeout(waitT); S.phase='intro'; S.attempt=null; save(); render(); };
+  pollStart();
+}
+async function pollStart(){
+  clearTimeout(waitT);
+  const j = await post('/start', who(), [0]);
+  if(S.phase!=='wait') return;
+  const h = document.getElementById('whint');
+  if(j && j.ok && !j.wait){ applyStart(j); return; }
+  if(h) h.textContent = j ? '' : 'Немає зв’язку із сервером — перевірте інтернет.';
+  waitT = setTimeout(pollStart, 2500);
+}
+
+/* ---------- режим: «бланк як на НМТ» (широкий екран) або «режим для телефона» ---------- */
+const MODE_KEY = 'nmt2-ui-mode';
+function storedMode(){ try{ return localStorage.getItem(MODE_KEY); }catch(e){ return null; } }
+function blankMode(){ const m = storedMode(); if(m==='blank') return true; if(m==='phone') return false; return window.innerWidth >= 900; }
+function setMode(m){ try{ localStorage.setItem(MODE_KEY, m); }catch(e){} }
+let lastBlank = null, rzT = null;
+window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => {
+  if(S.phase==='test' && !storedMode() && blankMode()!==lastBlank && !document.querySelector('.ov,.lb2')) renderTest(); }, 250); });
+function cellsRow(cols, mk){ return cols.map((c,ci)=>`<td>${mk(ci)}</td>`).join(''); }
+function sheetHTML(note, cols, rows, mk){
+  return `<div class="sheet"><div class="sh-note">${note}</div><table class="grid"><tr>${rows?'<th></th>':''}${cols.map(c=>`<th>${c}</th>`).join('')}</tr>
+    ${(rows||[null]).map((r,ri)=>`<tr>${r!=null?`<th class="rh">${r}</th>`:''}${cellsRow(cols, ci=>mk(ri,ci))}</tr>`).join('')}</table></div>`;
+}
+const cell = (on, attrs, aria) => `<button class="cell ${on?'on':''}" ${attrs} aria-label="${aria}" aria-pressed="${on?'true':'false'}"></button>`;
+function blankBody(t, a){
+  const LET = letOf(t);
+  const list = (labs, items) => `<ol class="opts">${items.map((o,i)=>`<li><span class="L">${labs[i]}</span><span>${o}</span></li>`).join('')}</ol>`;
+  if(t.type==='single'){
+    const L = LET.slice(0, t.opts.length);
+    return list(L, t.opts) + sheetHTML('Позначте одну відповідь.', L, null, (r,c)=>cell(a===c, `data-a="${c}"`, LET[c]));
+  }
+  if(t.type==='three'){
+    const arr=a||[], N=t.opts.map((_,i)=>i+1);
+    return list(N, t.opts) + sheetHTML('Позначте три відповіді.', N, null, (r,c)=>cell(arr.includes(c+1), `data-k="${c+1}"`, c+1))
+      + `<div class="counter" id="cnt">Обрано ${arr.length} з 3</div>`;
+  }
+  if(t.type==='match'){
+    const rows=t.left.length, arr=a||Array(rows).fill(null), L=LET.slice(0,t.right.length);
+    const rl = r => t.rowNums ? t.rowNums[r] : r+1;
+    let h = '';
+    if(t.leftimgs) h += `<div class="igrid">${t.leftimgs.map((f,i)=>`<figure><span class="L">${i+1}</span><img class="zoom" tabindex="0" src="img/${f}" alt="Зображення ${i+1}"></figure>`).join('')}</div>${t.itemcap?`<div class="topic">${t.itemcap}</div>`:''}`;
+    else if(!t.left.every(o=>/^\s*\d+\s*$/.test(o))) h += list(t.left.map((_,r)=>rl(r)), t.left);
+    const bare = t.right.every((o,i)=>o.trim()===`Територія ${LET[i]}`);
+    if(!bare) h += list(L, t.right);
+    if(t.srcnote) h += `<div class="topic">${t.srcnote}</div>`;
+    return h + sheetHTML('У кожному рядку позначте одну букву.', L, t.left.map((_,r)=>rl(r)), (r,c)=>cell(arr[r]===c, `data-r="${r}" data-c="${c}"`, `${rl(r)} — ${LET[c]}`));
+  }
+  if(t.type==='seq'){
+    const arr=a||[null,null,null,null], L=LET.slice(0,4);
+    let h = '';
+    if(t.itemimgs) h += `<div class="igrid">${t.itemimgs.map((f,i)=>`<figure><span class="L">${LET[i]}</span><img class="zoom" tabindex="0" src="img/${f}" alt="Зображення ${LET[i]}"></figure>`).join('')}</div>${t.itemcap?`<div class="topic">${t.itemcap}</div>`:''}`;
+    else h += list(L, t.items) + (t.itemcap?`<div class="topic">${t.itemcap}</div>`:'');
+    return h + sheetHTML('У рядку 1 позначте найдавніше, у рядку 4 — найпізніше.', L, [1,2,3,4], (r,c)=>cell(arr[r]===c, `data-q="${r}" data-c="${c}"`, `${r+1} — ${LET[c]}`));
+  }
+  return null;
+}
+
+/* ---------- завдання ---------- */
+function picHTML(t){
+  if(!t.img) return '';
+  return `<figure class="pic"><img class="zoom" tabindex="0" src="img/${t.img}" alt="Рисунок до завдання ${t.n}">${t.imgcap?`<figcaption>${t.imgcap}</figcaption>`:''}</figure>`;
+}
+function srcHTML(t){ return t.src ? `<figure class="src"><blockquote>${t.src}</blockquote>${t.srccap?`<figcaption>${t.srccap}</figcaption>`:''}</figure>` : ''; }
+function passageHTML(t, rev){ if(!t.passage) return ''; const p = t.passage.split(`(${t.n}) ___`).join(`<mark class="gap">(${t.n}) ___</mark>`); return `<details class="passage" ${rev?'':'open'}><summary>Текст до завдань</summary>${p}</details>`; }
+const tState = (rev, sel, isKey) => !rev ? (sel?'on':'') : (sel&&isKey ? 'right' : sel ? 'wrong' : isKey ? 'key' : '');
+function normNum(s){ return String(s==null?'':s).trim().replace(/\s+/g,'').replace(/[−–—]/g,'-').replace(',', '.'); }
+function short(s){ const d=document.createElement('div'); d.innerHTML=s; s=d.textContent; return s.length>70 ? s.slice(0,68).replace(/\s+\S*$/,'')+'…' : s; }
+function taskHTML(t, a, rev, blank){
+  const LET = letOf(t);
+  const dis = rev ? ' disabled' : '';
+  let h = passageHTML(t, rev) + srcHTML(t) + picHTML(t) + `<div class="stem">${t.stem}</div>`;
+  if(blank && !rev){ const b = blankBody(t, a); if(b!=null) return h + b; }
+  if(t.type==='single'){
+    h += `<div class="tch">${t.opts.map((o,i)=>`<button class="opt ${tState(rev,a===i,t.ans===i)}" data-a="${i}"${dis}><span class="L">${LET[i]}</span><span>${o}</span></button>`).join('')}</div>`;
+  }
+  if(t.type==='three'){
+    const arr=a||[];
+    h += `<div class="tch">${t.opts.map((o,i)=>`<button class="opt ${tState(rev,arr.includes(i+1),rev&&t.ans.includes(i+1))}" data-k="${i+1}"${dis}><span class="L">${i+1}</span><span>${o}</span></button>`).join('')}</div>`;
+    if(!rev) h += `<div class="counter" id="cnt">Обрано ${arr.length} з 3</div>`;
+  }
+  if(t.type==='groups'){
+    const arr=a||t.groups.map(()=>null);
+    h += `<div class="tch groups">${t.groups.map((g,gi)=>{ const v=arr[gi], k=rev?t.ans[gi]:null;
+      return `<div class="grp"><div class="gq">${g.q}</div>${g.opts.map((o,oi)=>`<button class="opt ${tState(rev,v===oi,k===oi)}" data-g="${gi}" data-o="${oi}"${dis}><span class="L">${oi+1}</span><span>${o}</span></button>`).join('')}</div>`; }).join('')}</div>`;
+  }
+  if(t.type==='match'){
+    const rows=t.left.length, arr=a||Array(rows).fill(null);
+    if(t.leftimgs) h += `<div class="igrid">${t.leftimgs.map((f,i)=>`<figure><span class="L">${i+1}</span><img class="zoom" tabindex="0" src="img/${f}" alt="Зображення ${i+1}"></figure>`).join('')}</div>${t.itemcap?`<div class="topic">${t.itemcap}</div>`:''}`;
+    const bare = t.right.every((o,i)=>o.trim()===`Територія ${LET[i]}`);
+    if(!bare) h += `<ol class="refs">${t.right.map((o,i)=>`<li><span class="L">${LET[i]}</span><span>${o}</span></li>`).join('')}</ol>`;
+    if(t.srcnote) h += `<div class="topic">${t.srcnote}</div>`;
+    h += `<div class="tch">${t.left.map((o,r)=>{
+      const v=arr[r], k=rev?t.ans[r]:null;
+      const echo = v==null ? (rev?'<span>Без відповіді</span>':'Оберіть букву') : bare ? `→ територія <b>${LET[v]}</b>` : `→ <b>${LET[v]}</b> — ${esc(short(t.right[v]))}`;
+      const keyEcho = rev && v!==k ? `<div class="echo">Правильно: <b>${LET[k]}</b>${bare?'':' — '+esc(short(t.right[k]))}</div>` : '';
+      const rl = t.rowNums ? t.rowNums[r] : r+1;
+      return `<div class="mrow"><div class="who"><span class="L">${rl}</span><span>${o}</span></div>
+        <div class="chips" style="grid-template-columns:repeat(${t.right.length},minmax(0,1fr))">${t.right.map((_,c)=>{ const sel=v===c; const used=!rev && !sel && arr.includes(c);
+          return `<button class="chip ${tState(rev,sel,k===c)} ${used?'used':''}" data-r="${r}" data-c="${c}" aria-label="${rl} — ${LET[c]}"${dis}>${LET[c]}</button>`; }).join('')}</div>
+        <div class="echo ${rev&&v!==k?'bad':''}">${echo}</div>${keyEcho}</div>`; }).join('')}</div>`;
+  }
+  if(t.type==='seq'){
+    const arr=a||[null,null,null,null];
+    const lab = c => t.itemimgs ? `<span><span class="lab">${LET[c]}.</span>Зображення ${LET[c]}</span>` : `<span><span class="lab">${LET[c]}.</span>${t.items[c]}</span>`;
+    if(t.itemimgs) h += `<div class="igrid">${t.itemimgs.map((f,i)=>`<figure><span class="L">${LET[i]}</span><img class="zoom" tabindex="0" src="img/${f}" alt="Зображення ${LET[i]}"></figure>`).join('')}</div>`;
+    h += `<div class="tch">${[0,1,2,3].map(c=>{ const pos=arr.indexOf(c); return `<button class="card ${pos>=0?'on':''}" data-s="${c}"${dis}><span class="num">${pos>=0?pos+1:''}</span>${lab(c)}</button>`; }).join('')}</div>`;
+    if(t.itemcap) h += `<div class="topic">${t.itemcap}</div>`;
+    const ord = arr.map(v=>v==null?'…':LET[v]).join(' → ');
+    h += rev ? `<div class="order"><span>Ваш порядок: <span class="mono">${ord}</span></span><span>Правильний: <span class="mono">${t.ans.map(v=>LET[v]).join(' → ')}</span></span></div>`
+             : `<div class="order"><span>Ваш порядок: <span class="mono">${ord}</span></span><button class="btn sm" id="reset" ${arr.some(x=>x!=null)?'':'disabled'}>Скинути</button></div>
+                <div class="counter">Торкайтеся подій від найдавнішої до найпізнішої. Повторний дотик знімає номер.</div>`;
+  }
+  if(t.type==='num'){
+    if(rev){
+      const ok = a!=null && a!=='' && Math.abs(parseFloat(normNum(a)) - t.ans) < 1e-9;
+      h += `<div class="numbox ${a==null||a===''?'':ok?'right':'wrong'}"><label>Ваша відповідь</label><div class="val">${a==null||a===''?'—':esc(a)}</div>${ok?'':`<label>Правильна відповідь</label><div class="val">${esc(String(t.ans).replace('.',',').replace('-','−'))}</div>`}</div>`;
+    } else {
+      h += `<div class="numbox"><label for="numin">Ваша відповідь (число)</label>
+        <input id="numin" type="text" inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="14" value="${esc(a==null?'':a)}" placeholder="напр., −3 або 2,5">
+        <div class="counter" id="numhint">Ціле число або десятковий дріб через кому. Відповідь зберігається сама.</div></div>`;
+    }
+  }
+  return h;
+}
+
+/* ---------- екран тесту ---------- */
+let tick = null;
+function renderTest(){
+  const P = parts(), p = curPart(), i = S.cur[p.id]||0, t = p.tasks[i];
+  const BL = lastBlank = blankMode();
+  document.body.classList.toggle('blank', BL);
+  const tabs = MULTI ? `<div class="tabs">${P.map(x=>`<button class="tab ${x.id===p.id?'on':''}" data-p="${x.id}"><b>${esc(x.tab||x.title)}</b><span>${doneIn(x)}/${unitsIn(x)}</span></button>`).join('')}</div>`
+                     : `<span class="count">Виконано <span class="mono" id="cntall">${doneIn(p)}</span>/${unitsIn(p)}</span><span class="sp"></span>`;
+  const lastOfPart = i===p.tasks.length-1, pIdx = P.indexOf(p), nextP = P[pIdx+1];
+  const nextLabel = !lastOfPart ? '→' : nextP ? `${esc(nextP.title)} →` : 'Завершити';
+  const modeSw = BL ? `<div class="tmode">Бланк як на НМТ. <button type="button" id="mode">Режим для телефона</button></div>`
+                    : `<div class="tmode">Режим для телефона. <button type="button" id="mode">Бланк як на НМТ</button></div>`;
+  const navg = BL ? `<div class="nav">${p.tasks.map((x,k)=>`<button class="${answered(x,ansOf(p.id,x.n))?'done':''} ${k===i?'cur':''}" data-go="${p.id}:${k}">${esc(label(x))}</button>`).join('')}</div>` : '';
+  const qsec = `<section class="q">
+      <div class="qhead"><span class="qnum">${esc(label(t))}</span>${MULTI?`<span class="qpart">${esc(p.title)}</span>`:''}<span class="qtype">${TYPE_LABEL[t.type]}</span></div>
+      <div id="tbody" class="q" style="margin:0">${taskHTML(t, ansOf(p.id,t.n), false, BL)}</div>
+      ${modeSw}
+    </section>`;
+  app.innerHTML = BL
+   ? `<div class="bar"><div class="in"><div class="top">
+      <span class="timer mono" id="timer">${fmt(left())}</span>${tabs}
+      <button class="btn" id="finb">Завершити${MULTI?'':' тест'}</button><span id="fsslot"></span></div>${navg}</div></div>
+    <div class="wrap">${qsec}
+      <div class="navrow"><button class="btn" id="prev" ${i===0?'disabled':''}>← Попереднє</button><span class="pos mono">${esc(label(t))} / ${lastNum(p)}</span><button class="btn primary" id="next">${lastOfPart && !nextP ? 'Завершити' : lastOfPart ? esc(nextP.title)+' →' : 'Наступне →'}</button></div></div>`
+   : `<div class="bar"><div class="in"><div class="top">
+      <span class="timer mono" id="timer">${fmt(left())}</span>${tabs}
+      <button class="btn" id="tasks" aria-label="Усі завдання">${MULTI?'☰':'Усі завдання'}</button><span id="fsslot"></span></div></div></div>
+    <div class="wrap">${qsec}</div>
+    <div class="bottom"><div class="in"><button class="btn" id="prev" ${i===0?'disabled':''}>←</button><span class="pos">${esc(label(t))} / ${lastNum(p)}</span><button class="btn primary" id="next">${nextLabel}</button></div></div>`;
+  const go = (pid, k) => { S.part=pid; S.cur[pid]=k; save(); renderTest(); window.scrollTo(0,0); };
+  app.querySelectorAll('[data-p]').forEach(b => b.onclick = () => go(b.dataset.p, S.cur[b.dataset.p]||0));
+  document.getElementById('prev').onclick = () => { if(i>0) go(p.id, i-1); };
+  document.getElementById('next').onclick = () => { if(!lastOfPart) go(p.id, i+1); else if(nextP) go(nextP.id, S.cur[nextP.id]||0); else confirmFinish(); };
+  const tb = document.getElementById('tasks'); if(tb) tb.onclick = openDrawer;
+  const fb = document.getElementById('finb'); if(fb) fb.onclick = confirmFinish;
+  app.querySelectorAll('.nav [data-go]').forEach(b => b.onclick = () => { const [pid,k] = b.dataset.go.split(':'); go(pid, +k); });
+  document.getElementById('mode').onclick = () => { setMode(BL ? 'phone' : 'blank'); renderTest(); };
+  bindTask(p, t);
+  monFsBtn();
+  clearInterval(tick);
+  const upd = () => { const l=left(); const el=document.getElementById('timer'); if(el){ el.textContent=fmt(l); el.classList.toggle('low', l<10*60*1000);} if(l<=0 && S.phase==='test') finish(); };
+  tick = setInterval(upd, 1000);
+}
+function refreshCounts(){
+  const P = parts();
+  app.querySelectorAll('[data-p]').forEach(b => { const x = P.find(q=>q.id===b.dataset.p); b.querySelector('span').textContent = `${doneIn(x)}/${unitsIn(x)}`; });
+  const c = document.getElementById('cntall'); if(c) c.textContent = doneIn(curPart());
+  const cp = curPart(); app.querySelectorAll('.nav [data-go]').forEach(b => { const k = +b.dataset.go.split(':')[1], x = cp.tasks[k]; if(x) b.classList.toggle('done', answered(x, ansOf(cp.id, x.n))); });
+}
+function bindTask(p, t){
+  const box = document.getElementById('tbody');
+  const commit = a => { setAns(p.id, t.n, a); box.innerHTML = taskHTML(t, ansOf(p.id,t.n), false, blankMode()); bindTask(p, t); refreshCounts(); };
+  box.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{ const v=+b.dataset.a; commit(ansOf(p.id,t.n)===v?null:v); });
+  box.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{ let a=(ansOf(p.id,t.n)||[]).slice(); const k=+b.dataset.k;
+    if(a.includes(k)) a=a.filter(x=>x!==k); else if(a.length<3) a.push(k); else { const c=document.getElementById('cnt'); if(c){ c.textContent='Уже обрано 3 — спершу зніміть один із варіантів'; c.classList.add('flash'); setTimeout(()=>{ c.textContent='Обрано 3 з 3'; c.classList.remove('flash'); },1800);} return; }
+    commit(a); });
+  box.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{ const a=(ansOf(p.id,t.n)||t.groups.map(()=>null)).slice(); const g=+b.dataset.g, o=+b.dataset.o;
+    a[g] = a[g]===o ? null : o; commit(a); });
+  box.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{ const a=(ansOf(p.id,t.n)||Array(t.left.length).fill(null)).slice(); const r=+b.dataset.r, c=+b.dataset.c;
+    if(a[r]===c) a[r]=null; else { const o=a.indexOf(c); if(o>=0) a[o]=null; a[r]=c; } commit(a); });
+  box.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{ let a=(ansOf(p.id,t.n)||[null,null,null,null]).filter(x=>x!=null); const c=+b.dataset.s;
+    if(a.includes(c)) a=a.filter(x=>x!==c); else a.push(c); while(a.length<4) a.push(null); commit(a); });
+  box.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{ const a=(ansOf(p.id,t.n)||[null,null,null,null]).slice(); const r=+b.dataset.q, c=+b.dataset.c;
+    if(a[r]===c) a[r]=null; else { const o=a.indexOf(c); if(o>=0) a[o]=null; a[r]=c; } commit(a); });
+  const rs=document.getElementById('reset'); if(rs) rs.onclick=()=>commit(null);
+  const ni=document.getElementById('numin');
+  if(ni){
+    ni.oninput = () => {
+      const clean = ni.value.replace(/[^0-9,.\-−–]/g,'').replace(/\./g, ',');
+      if(clean!==ni.value){ const pos = ni.selectionStart - (ni.value.length-clean.length); ni.value = clean; try{ ni.setSelectionRange(pos,pos); }catch(e){} }
+      setAns(p.id, t.n, clean.trim()); refreshCounts();
+      const h = document.getElementById('numhint'), v = normNum(clean);
+      if(h){ const bad = v!=='' && !/^-?\d+(\.\d+)?$/.test(v); h.textContent = bad ? 'Перевірте запис: потрібне одне число, напр. −3 або 2,5.' : 'Ціле число або десятковий дріб через кому. Відповідь зберігається сама.'; h.classList.toggle('flash', bad); }
+    };
+    ni.onkeydown = e => { if(e.key==='Enter'){ e.preventDefault(); ni.blur(); } };
+  }
+  box.querySelectorAll('img.zoom').forEach(img=>{ img.onclick=()=>openLB(img.src,img.alt); });
+}
+function openDrawer(){
+  const P = parts();
+  const ov=document.createElement('div'); ov.className='ov';
+  ov.innerHTML=`<div class="drawer" role="dialog" aria-modal="true" aria-label="Завдання">
+    ${P.map(p=>`<div class="row"><h4>${esc(p.title)}</h4><span class="count">Виконано <span class="mono">${doneIn(p)}</span> з ${unitsIn(p)}</span></div>
+      <div class="navg">${p.tasks.map((x,i)=>`<button class="${answered(x,ansOf(p.id,x.n))?'done':''} ${p.id===curPart().id && i===(S.cur[p.id]||0)?'cur':''}" data-go="${p.id}:${i}">${esc(label(x))}</button>`).join('')}</div>`).join('')}
+    <div class="row"><button class="btn" id="close">Закрити</button><button class="btn primary" id="fin">Завершити${MULTI?' (обидва предмети)':' тест'}</button></div></div>`;
+  document.body.appendChild(ov);
+  ov.onclick=e=>{ if(e.target===ov) ov.remove(); };
+  ov.querySelector('#close').onclick=()=>ov.remove();
+  ov.querySelector('#fin').onclick=()=>{ ov.remove(); confirmFinish(); };
+  ov.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ ov.remove(); const [pid,k]=b.dataset.go.split(':'); S.part=pid; S.cur[pid]=+k; save(); renderTest(); window.scrollTo(0,0); });
+}
+function confirmFinish(){
+  const miss = parts().map(p=>({p, m:p.tasks.filter(x=>doneUnits(x,ansOf(p.id,x.n))<units(x)).map(x=>label(x))})).filter(x=>x.m.length);
+  const ov = document.createElement('div'); ov.className='ov';
+  ov.innerHTML = `<div class="dialog" role="dialog" aria-modal="true"><h3>Завершити${MULTI?' обидва предмети':' тест'}?</h3>
+    <p style="margin:0">${miss.length ? miss.map(x=>`${MULTI?esc(x.p.title)+' — без':'Без'} відповіді: <span class="mono">${x.m.join(', ')}</span>.`).join('<br>') : 'Ви відповіли на всі завдання.'}</p>
+    <p style="margin:0">Після завершення змінити відповіді не можна. Залишилося часу: <b class="mono">${fmt(left())}</b>.</p>
+    <div class="actions"><button class="btn primary" id="yes">Завершити</button><button class="btn" id="no">Повернутися</button></div></div>`;
+  document.body.appendChild(ov);
+  ov.querySelector('#no').onclick=()=>ov.remove();
+  ov.querySelector('#yes').onclick=()=>{ov.remove(); finish();};
+}
+function finish(){ clearInterval(tick); monStop(); S.phase='done'; S.end=Date.now(); S.sent='pending'; save(); render(); window.scrollTo(0,0); send(); }
+const arr = x => Array.isArray(x) ? x : (x==null ? [] : [x]);
+function normRes(j){ const per = {}; for(const k in (j.per||{})) per[k] = arr(j.per[k]); return Object.assign({}, j, {parts:arr(j.parts), per}); }
+let sending=false, resendT=null;
+async function send(){
+  if(sending || S.sent==='ok' || S.phase!=='done') return;
+  sending=true; S.sent='pending'; save(); showSent(); clearTimeout(resendT);
+  const j = await post('/result', Object.assign(who(), {start:S.start, end:S.end, answers:S.ans, mon:monSummary()}));
+  sending=false;
+  if(j && j.ok){ S.sent='ok'; S.result=normRes(j); save(); render(); checkReview(); return; }
+  S.sent='fail'; save(); showSent();
+  resendT = setTimeout(send, 20000);   // повторюємо самі, поки не вийде
+}
+function sentHTML(){
+  const w = `${esc(S.name)}, ${esc(S.cls)}`;
+  if(S.sent==='ok') return `<div class="sent ok">✓ Результат надіслано вчителеві · ${w}.</div>`;
+  if(S.sent==='fail') return `<div class="sent bad">Не вдалося надіслати результат: немає зв’язку із сервером. Сторінка пробує ще раз кожні 20 секунд — не закривайте її. Відповіді збережено на цьому пристрої. <button class="btn sm" id="resend">Надіслати зараз</button></div>`;
+  return `<div class="sent">Надсилаємо результат учителеві…</div>`;
+}
+function showSent(){ const b=document.getElementById('sentbox'); if(!b) return; b.innerHTML=sentHTML(); const rs=document.getElementById('resend'); if(rs) rs.onclick=()=>send(); }
+
+function openLB(src, alt){
+  const ov=document.createElement('div'); ov.className='lb2'; ov.setAttribute('role','dialog'); ov.setAttribute('aria-modal','true');
+  ov.innerHTML=`<div class="tools"><button data-z="-1" aria-label="Зменшити">−</button><button data-z="1" aria-label="Збільшити">+</button><button data-x aria-label="Закрити">✕ Закрити</button></div><div class="sc"><img alt="${esc(alt)}"></div>`;
+  const img=ov.querySelector('img'); img.src=src; document.body.appendChild(ov);
+  let z=1; const fit=()=>{ const w=ov.querySelector('.sc').clientWidth-8; img.style.width=Math.min(w*z, img.naturalWidth*3||w*z)+'px'; };
+  img.onload=fit; fit();
+  ov.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ z=Math.min(4,Math.max(1,z+(+b.dataset.z))); fit(); });
+  img.ondblclick=()=>{ z = z>1?1:2.5; fit(); };
+  ov.querySelector('[data-x]').onclick=()=>ov.remove();
+}
+
+/* ---------- результат і розбір ---------- */
+function ansText(t,a){
+  const LET = letOf(t);
+  if(a==null || a==='') return '—';
+  if(t.type==='single') return LET[a];
+  if(t.type==='num') return String(a);
+  if(t.type==='three') return a.slice().sort().join(', ');
+  if(t.type==='seq') return a.map(v=>v==null?'…':LET[v]).join(' → ');
+  if(t.type==='groups') return a.map(v=>v==null?'–':v+1).join('');
+  return a.map((v,i)=>`${t.rowNums?t.rowNums[i]:i+1}${v==null?'–':LET[v]}`).join(' ');
+}
+function keyText(t){
+  const LET = letOf(t);
+  if(t.type==='single') return LET[t.ans];
+  if(t.type==='num') return String(t.ans).replace('.',',').replace('-','−');
+  if(t.type==='three') return t.ans.join(', ');
+  if(t.type==='seq') return t.ans.map(v=>LET[v]).join(' → ');
+  if(t.type==='groups') return t.ans.map(v=>v+1).join('');
+  return t.ans.map((v,i)=>`${t.rowNums?t.rowNums[i]:i+1}${LET[v]}`).join(' ');
+}
+let reviewTimer=null, checking=false;
+async function checkReview(){
+  if(S.keys || checking || !S.attempt || S.sent!=='ok') return;
+  checking=true; const j = await post('/review', who(), [0,3000]); checking=false;
+  if(j && j.open && j.keys){ S.keys=j.keys; save(); render(); return; }
+  S.reviewMsg = !j ? 'Немає зв’язку із сервером — перевірте інтернет.' : '';
+  save(); const b=document.getElementById('revbox'); if(b){ b.innerHTML=reviewBoxHTML(); bindReviewBox(); }
+  clearTimeout(reviewTimer); reviewTimer = setTimeout(checkReview, 60000);   // онлайн: перевіряємо раз на хвилину
+}
+function reviewBoxHTML(){
+  if(S.sent!=='ok') return '';
+  return `<div class="panel" style="padding:14px 16px"><b>Розбір відкриє вчитель, коли всі здадуть.</b> Правильні відповіді й пояснення з’являться на цій сторінці самі — не закривайте її або відкрийте пізніше в цьому самому браузері.
+    ${S.reviewMsg?`<div class="hint err" style="margin-top:6px;color:var(--bad)">${esc(S.reviewMsg)}</div>`:''}
+    <div class="actions" style="margin-top:10px"><button class="btn sm" id="revcheck">Перевірити зараз</button></div></div>`;
+}
+function bindReviewBox(){ const b=document.getElementById('revcheck'); if(b) b.onclick=()=>{ S.reviewMsg=''; checkReview(); }; }
+const plural = n => { const a=n%10, b=n%100; return a===1&&b!==11?'бал':a>=2&&a<=4&&(b<12||b>14)?'бали':'балів'; };
+const gradeWord = g => g==null?'':g>=10?'високий рівень':g>=7?'достатній рівень':g>=4?'середній рівень':'початковий рівень';
+function renderDone(){
+  const R = S.result;
+  const used = S.end && S.start ? Math.min(SET.duration*60000, S.end - S.start) : null;
+  if(!R){
+    app.innerHTML = `<div class="wrap res"><div class="eyebrow">Роботу завершено</div><h2 style="margin:6px 0 10px">Рахуємо результат…</h2>
+      <div id="sentbox">${sentHTML()}</div>
+      <p class="foot">Бали рахує сервер, тож потрібне підключення до інтернету. Відповіді збережено на цьому пристрої — їх не буде втрачено.</p></div>`;
+    showSent(); return;
+  }
+  let head;
+  if(SET.grade12){
+    const sc = R.parts[0].scale;
+    head = `<div class="score">
+      <div><div class="big">${R.grade}<small> / 12</small></div><div class="eyebrow" style="margin-top:8px">оцінка · ${gradeWord(R.grade)}</div></div>
+      <div><div class="rate">${R.pts} / ${R.max}</div><div class="eyebrow" style="margin-top:8px">тестових балів · ${String(R.pct).replace('.',',')}%</div></div>
+      ${used!=null?`<div><div class="rate">${fmt(used)}</div><div class="eyebrow" style="margin-top:8px">витрачено часу</div></div>`:''}</div>
+      <p class="foot" style="margin:0">Оцінка — за відсотком набраних балів.${SET.noScale?'':` Для орієнтиру: на НМТ ${R.pts} ${plural(R.pts)} ${sc?`${R.pts%10===1&&R.pts%100!==11?'дав би':'дали б'} <b>${sc}</b> за шкалою 100–200`:(R.pts%10===1&&R.pts%100!==11?'не подолав би':'не подолали б')+' поріг'}.`}</p>`;
+  } else {
+    head = `<div class="subj">${R.parts.map(p=>`<div class="card2"><div class="eyebrow">${esc(p.title)}</div>
+        ${p.scale?`<div class="big2">${p.scale}<small> / 200</small></div>`:`<div class="fail">Поріг не подолано</div>`}
+        <div class="topic">${p.pts} з ${p.max} тестових балів${p.scale?'':` (потрібно щонайменше ${p.pass})`}</div></div>`).join('')}</div>
+      ${used!=null?`<p class="foot" style="margin:0">Витрачено часу: <span class="mono">${fmt(used)}</span> з ${SET.duration} хв.</p>`:''}`;
+  }
+  app.innerHTML = `<div class="wrap res">${brandHTML()}<div class="eyebrow">Результат</div>${head}
+    <div id="sentbox">${sentHTML()}</div>
+    ${S.keys ? reviewHTML(R) : `<div id="revbox">${reviewBoxHTML()}</div>`}
+    ${SET.footnote?`<p class="foot">${esc(SET.footnote)}</p>`:''}
+    ${S.sent==='ok'?`<p class="foot"><button class="btn sm" id="newstud">Інший учень на цьому телефоні</button></p>`:''}</div>`;
+  const ns=document.getElementById('newstud'); if(ns) ns.onclick=()=>{ if(confirm('Очистити цю сторінку для іншого учня? Ваш результат уже у вчителя.')){ try{ localStorage.removeItem(KEY); localStorage.removeItem(KEY+'-mon'); }catch(e){} location.reload(); } };
+  app.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{S.filter=b.dataset.f; save(); renderDone();});
+  const rs=document.getElementById('resend'); if(rs) rs.onclick=()=>send();
+  bindReviewBox();
+  app.querySelectorAll('img.zoom').forEach(img=>{ img.onclick=()=>openLB(img.src,img.alt); });
+}
+function reviewHTML(R){
+  const f = S.filter||'all';
+  const sec = parts().map(p=>{
+    const keys = S.keys[p.id] || [], per = (R.per||{})[p.id] || [];
+    const list = p.tasks.map((t0,i)=>Object.assign({}, t0, {ans:keys[i]?keys[i].ans:null, expl:keys[i]?keys[i].expl:''}, {_s:per[i]||0}))
+      .filter(t => f==='all' || t._s < t.max);
+    return `${MULTI?`<div class="ptitle">${esc(p.title)}</div>`:''}${list.length ? list.map(t=>{
+      const a=ansOf(p.id,t.n), s=t._s, m=t.max, st = s===m?'full': s===0?'zero':'part';
+      return `<article class="rv ${st}">
+        <div class="head"><span class="qnum">${esc(label(t))}</span><span class="pill ${st}">${s} з ${m} ${m===1?'бала':'балів'}</span>${t.topic?`<span class="topic">${t.topic}</span>`:''}</div>
+        <div class="q" style="margin:0">${taskHTML(t,a,true)}</div>
+        <div class="topic">Ваша відповідь: <span class="mono">${esc(ansText(t,a))}</span> · Правильна: <span class="mono">${esc(keyText(t))}</span></div>
+        ${t.expl?`<div class="expl"><b>Пояснення.</b> ${t.expl}</div>`:''}
+      </article>`; }).join('') : '<p>Помилок немає — усі завдання виконано на повний бал.</p>'}`;
+  }).join('');
+  return `<div class="actions"><div class="filter"><button class="btn ${f==='all'?'on':''}" data-f="all">Усі завдання</button><button class="btn ${f==='err'?'on':''}" data-f="err">Лише з помилками</button></div></div>
+    <div class="legend"><span><i class="sw" style="background:var(--ok)"></i>ваша правильна відповідь</span><span><i class="sw" style="background:var(--bad)"></i>ваша хибна відповідь</span><span><i class="sw" style="box-shadow:inset 0 0 0 3px var(--ok)"></i>правильна відповідь, яку ви не обрали</span></div>${sec}`;
+}
+
+function render(){
+  document.body.classList.add('touch'); if(S.phase!=='test') document.body.classList.remove('blank');
+  if(S.phase==='test' && S.deadline && left()<=0){ S.phase='done'; S.end = S.deadline; S.sent = S.sent || 'pending'; save(); }
+  if(S.phase==='done') return renderDone();
+  if(S.phase==='wait') return renderWait();
+  if(S.phase==='test') return renderTest();
+  return renderIntro();
+}
+render();
+if(S.phase==='test') post('/start', who(), [0,3000]).then(j => { if(j && j.ok && !j.wait && j.remain!=null){ syncDeadline(j.remain); } if(j && j.done && S.phase==='test'){ finish(); } });
+if(S.phase==='done' && S.sent!=='ok') send();
+if(S.phase==='done' && S.sent==='ok' && !S.keys) checkReview();
+</script>
+</body>
+</html>
