@@ -165,8 +165,10 @@ img { max-width: 100%; display: block; }
 
 
 .brand { margin: 28px 0 6px; text-align: center; font-size: 12.5px; color: var(--muted); letter-spacing: .02em; }
+
+/* «← Усі теми» — повернення на полицю тем спільної оболонки */
+.tback { display: inline-block; margin: 14px 0 0; font-weight: 700; font-size: 15px; color: var(--acc2); text-decoration: underline; }
 /* курс: вхід, бліци, тести */
-.tback { display: inline-block; margin: 14px 0 0; font-weight: 700; font-size: 15px; }
 .tback + .who { margin-top: 8px; }
 .who { display: flex; align-items: center; gap: 10px; justify-content: space-between; background: var(--panel); border-radius: 12px; padding: 10px 14px; margin: 14px 0 0; font-weight: 700; font-size: 15px; }
 .lnk { background: none; border: 0; color: var(--acc2); font: inherit; font-size: 14.5px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; }
@@ -270,7 +272,7 @@ const SHELL_API = "https://script.google.com/macros/s/AKfycbwvampukvvmdNAEuUr_DP
 const SHELL_TITLE = "Історія України: мобільні курси";
 const SHELL_SUB = "Теми курсу історії України для самостійного навчання з телефона.";
 const SHELL_BRAND = "Володимир Пастернак і Claude · Ліцей № 177 · 2026";
-const SHELL_TOPICS = [{"id": "starodavnia", "title": "Стародавня історія України", "sub": "Від перших людей до давніх слов’ян · 3 частини", "url": "../starodavnia/", "prefix": "mob_", "parts": 3, "cover": "img/starodavnia.jpg"}, {"id": "rus", "title": "Русь-Україна (Київська держава)", "sub": "Від союзів племен до роздробленості й культури Русі · 4 частини", "url": "../rus/", "prefix": "rus_", "parts": 4, "cover": "img/rus.jpg"}];
+const SHELL_TOPICS = [{"id": "starodavnia", "title": "Стародавня історія України", "sub": "Від перших людей до давніх слов’ян · 3 частини", "url": "../starodavnia/", "prefix": "mob_", "parts": 3, "cover": "img/starodavnia.jpg", "only": false}, {"id": "rus", "title": "Русь-Україна (Київська держава)", "sub": "Від союзів племен до роздробленості й культури Русі · 4 частини", "url": "../rus/", "prefix": "rus_", "parts": 4, "cover": "img/rus.jpg", "only": false}, {"id": "galych", "title": "Галицько-Волинська держава (Королівство Руське)", "sub": "Від Романа Мстиславича до 1340 р., монгольська навала · 2 частини", "url": "../galych/", "prefix": "gal_", "parts": 2, "cover": "img/galych.jpg", "only": false}];
 
 const API = SHELL_API;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -343,6 +345,7 @@ function login() {
 }
 
 function status(T) {
+  if (T.only) return `Частин: ${T.parts} · поки лише уроки, бліци й тести — згодом`;
   const p = LS.get(T.prefix + 'prog', {}), q = LS.get(T.prefix + 'queue', []).length;
   const nb = Array.from({ length: T.parts }, (_, i) => p['b' + (i + 1)]).filter(r => r && r.pass).length;
   const t = id => p[id] && p[id].pts != null ? `${p[id].pts} з ${p[id].max}` : '';
@@ -360,7 +363,7 @@ function shelf() {
     <div class="home-head"><div class="kick">Історія України · підготовка до НМТ</div><h1>${esc(SHELL_TITLE)}</h1><div class="sub">${esc(SHELL_SUB)}</div></div>
     <div class="h2">Теми</div><div class="sec-list">${SHELL_TOPICS.map(T => `<a class="part-btn topic" href="${T.url}">
       <span class="th"><img src="${T.cover}" alt=""></span><span><h3>${esc(T.title)}</h3><div class="st">${esc(T.sub)}</div><div class="st">${status(T)}</div></span></a>`).join('')}</div>
-    <p class="cap" style="margin-top:14px">У кожній темі — уроки з короткими перевірками після розділів, бліц після кожної частини й два тести. Результати бачить учитель.</p>
+    <p class="cap" style="margin-top:14px">У темах — уроки з короткими перевірками після розділів, бліц після кожної частини й два тести${SHELL_TOPICS.some(T => T.only) ? ' (у нових темах поки лише уроки)' : ''}. Результати бачить учитель.</p>
     <div class="sync" id="sync"></div>${brand()}</div>`;
   document.getElementById('out').onclick = () => { G.set('user', null); login(); };
   paint(); flush();
