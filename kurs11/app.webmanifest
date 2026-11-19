@@ -1,0 +1,32 @@
+{
+ "name": "Історія України, 11 клас",
+ "short_name": "Історія 11",
+ "description": "Мобільні курси для самостійного навчання з телефона: уроки, перевірки, бліци й тести.",
+ "lang": "uk",
+ "dir": "ltr",
+ "id": "./",
+ "start_url": "./",
+ "scope": "../",
+ "display": "standalone",
+ "orientation": "portrait",
+ "background_color": "#161616",
+ "theme_color": "#161616",
+ "icons": [
+  {
+   "src": "icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
