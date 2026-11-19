@@ -272,6 +272,7 @@ const SHELL_API = "https://script.google.com/macros/s/AKfycby3DMmeIAWr-c2QOMcjTx
 const SHELL_TITLE = "Історія України, 11 клас";
 const SHELL_SUB = "Мобільні курси для самостійного навчання з телефона: уроки, перевірки, бліци й тести.";
 const SHELL_BRAND = "Володимир Пастернак і Claude · Ліцей № 177 · 2026";
+const SHELL_OFFLINE = "offline.html";
 const SHELL_TOPICS = [{"id": "povoienni", "title": "Україна в перші повоєнні роки (1945 – 1953)", "sub": "Кордони, відбудова, голод 1946 – 1947 рр., операції «Вісла» і «Захід», ждановщина · 2 частини", "url": "../povoienni/", "prefix": "pv_", "parts": 2, "cover": "img/povoienni.jpg", "only": false}, {"id": "vidlyha", "title": "Україна в умовах десталінізації (1953 – 1964)", "sub": "Хрущов, XX з’їзд, Крим у складі УРСР, раднаргоспи, шістдесятники · 2 частини", "url": "../vidlyha/", "prefix": "vl_", "parts": 2, "cover": "img/vidlyha.jpg", "only": false}, {"id": "zastij", "title": "Україна в період загострення кризи радянської системи (1965 – 1985)", "sub": "Брежнєв, дефіцит, дисиденти й Гельсінська група, культура, кінець доби · 2 частини", "url": "../zastij-kurs/", "prefix": "zs_", "parts": 2, "cover": "img/zastij.jpg", "only": false}, {"id": "perebud", "title": "Відновлення незалежності України (1985 – 1991)", "sub": "Перебудова, Чорнобиль, Рух, Акт 24 серпня, референдум · 2 частини", "url": "../perebud/", "prefix": "pb_", "parts": 2, "cover": "img/perebud.jpg", "only": false}, {"id": "nezal", "title": "Незалежна Україна (1991 – 2022)", "sub": "Від проголошення незалежності до повномасштабного вторгнення · 2 частини", "url": "../nezal/", "prefix": "nu_", "parts": 2, "cover": "img/nezal.jpg", "only": false}];
 
 const API = SHELL_API;
@@ -355,6 +356,12 @@ function status(T) {
   if (q) parts.push(`⏳ не надіслано: ${q}`);
   return parts.join('<br>');
 }
+function offOn() {      // рядок бачить лише той, хто ввімкнув офлайн-режим на сторінці SHELL_OFFLINE
+  if (!SHELL_OFFLINE) return false;
+  try { if (navigator.serviceWorker && navigator.serviceWorker.controller) return true; } catch (e) {}
+  try { if (localStorage.getItem('mk_offline')) return true; } catch (e) {}
+  try { return matchMedia('(display-mode: standalone)').matches; } catch (e) { return false; }
+}
 function shelf() {
   const u = G.get('user', null);
   if (!u || !u.pin || G.get('needPin', false)) return login();
@@ -363,7 +370,7 @@ function shelf() {
     <div class="home-head"><div class="kick">Історія України · підготовка до НМТ</div><h1>${esc(SHELL_TITLE)}</h1><div class="sub">${esc(SHELL_SUB)}</div></div>
     <div class="h2">Теми</div><div class="sec-list">${SHELL_TOPICS.map(T => `<a class="part-btn topic" href="${T.url}">
       <span class="th"><img src="${T.cover}" alt=""></span><span><h3>${esc(T.title)}</h3><div class="st">${esc(T.sub)}</div><div class="st">${status(T)}</div></span></a>`).join('')}</div>
-    <p class="cap" style="margin-top:14px">У темах — уроки з короткими перевірками після розділів, бліц після кожної частини й два тести${SHELL_TOPICS.some(T => T.only) ? ' (у нових темах поки лише уроки)' : ''}. Результати бачить учитель.</p>
+    <p class="cap" style="margin-top:14px">У темах — уроки з короткими перевірками після розділів, бліц після кожної частини й два тести${SHELL_TOPICS.some(T => T.only) ? ' (у нових темах поки лише уроки)' : ''}. Результати бачить учитель.</p>${offOn() ? `<p class="cap" style="margin-top:10px"><a href="${SHELL_OFFLINE}" style="color:inherit">Офлайн-режим: збережені теми</a></p>` : ''}
     <div class="sync" id="sync"></div>${brand()}</div>`;
   document.getElementById('out').onclick = () => { G.set('user', null); login(); };
   paint(); flush();
