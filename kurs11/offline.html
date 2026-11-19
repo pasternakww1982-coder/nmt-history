@@ -38,7 +38,7 @@ ol{margin:6px 0 0;padding-left:20px;color:var(--muted)}ol b{color:var(--txt)}
 </div>
 
 <h2>3. Теми для читання без інтернету</h2>
-<p>Завантажуйте через Wi-Fi: тема займає 12 – 40 МБ. Бліци працюють і без мережі, а результат надішлеться, коли з’явиться зв’язок. <b>Тести й перший вхід потребують інтернету.</b></p>
+<p>Завантажуйте через Wi-Fi: тема займає 12 – 40 МБ. Нові теми з’являються тут самі. Бліци працюють і без мережі, а результат надішлеться, коли з’явиться зв’язок. <b>Тести й перший вхід потребують інтернету.</b></p>
 <div id="topics"></div>
 <p class="st" id="quota"></p>
 
@@ -69,17 +69,30 @@ function install() {
 const saved = () => { try { return JSON.parse(localStorage.getItem('mk_offline') || '{}'); } catch (e) { return {}; } };
 const setSaved = s => { try { localStorage.setItem('mk_offline', JSON.stringify(s)); } catch (e) {} };
 
+const META = 'mk-meta', mkey = k => new URL('../__' + k, location.href).href;
+const metaGet = async (k, d) => { try { const r = await (await caches.open(META)).match(mkey(k)); return r ? await r.json() : d; } catch (e) { return d; } };
+const metaSet = async (k, v) => { await (await caches.open(META)).put(mkey(k), new Response(JSON.stringify(v), { headers: { 'Content-Type': 'application/json' } })); if (navigator.serviceWorker.controller) navigator.serviceWorker.controller.postMessage('meta'); };
+const stamp = r => r.headers.get('etag') || r.headers.get('last-modified') || '';
+const refsOf = html => [...new Set(html.match(/img\/[A-Za-z0-9_.\-]+\.(?:jpe?g|png|webp|svg|gif)/g) || [])];
+
+async function topics() {      // теми — з рядка SHELL_TOPICS сторінки оболонки
+  const html = await (await fetch('./', { cache: 'no-cache' })).text();
+  const m = html.match(/const SHELL_TOPICS = (\[[\s\S]*?\]);\s*\n/); if (!m) throw new Error('topics');
+  const T = JSON.parse(m[1]).map(t => ({ dir: String(t.url).replace(/^(\.\.\/)+/, '').replace(/\/+$/, ''), title: t.title }));
+  await metaSet('dirs', T.map(t => t.dir)); return T;
+}
 async function stateOf(T) {
   const s = saved()[T.dir]; if (!s) return { st: 'none' };
-  const c = await caches.open(cacheOf(T.dir)), n = (await c.keys()).length;
-  if (n < T.files.length + 1) return { st: 'part' };
-  return { st: s.ver === T.ver ? 'ok' : 'old' };
+  if (!s.done) return { st: 'part' };
+  let cur = null;
+  if (navigator.onLine !== false) { try { const r = await fetch(SCOPE + T.dir + '/', { method: 'HEAD', cache: 'no-cache' }); if (r.ok) cur = stamp(r); } catch (e) {} }
+  return { st: cur && s.ver && cur !== s.ver ? 'old' : 'ok', bytes: s.bytes };
 }
 async function paint() {
   const box = $('topics'); box.innerHTML = '';
-  for (const T of DATA.topics) {
+  for (const T of DATA) {
     const s = await stateOf(T), el = document.createElement('div'); el.className = 'card';
-    const txt = { none: mb(T.bytes) + ' · не завантажено', part: 'Завантажено не повністю', ok: 'Збережено на телефоні ✓ · ' + mb(T.bytes), old: 'Збережено, але є оновлення' }[s.st];
+    const txt = { none: 'Не завантажено', part: 'Завантажено не повністю', ok: 'Збережено на телефоні ✓' + (s.bytes ? ' · ' + mb(s.bytes) : ''), old: 'Збережено, але уроки оновилися' }[s.st];
     const btn = { none: 'Завантажити', part: 'Довантажити', ok: '', old: 'Оновити' }[s.st];
     el.innerHTML = `<h3></h3><div class="st ${s.st === 'ok' ? 'ok' : ''}">${txt}</div><div class="bar"><i></i></div><div class="row">${btn ? `<button class="pri" data-a="get">${btn}</button>` : ''}${s.st !== 'none' ? '<button data-a="del">Видалити</button>' : ''}</div>`;
     el.querySelector('h3').textContent = T.title;
@@ -91,16 +104,27 @@ async function paint() {
 }
 async function download(T, el) {
   const st = el.querySelector('.st'), bar = el.querySelector('.bar'), fill = bar.querySelector('i');
-  el.querySelectorAll('button').forEach(b => b.disabled = true); bar.style.display = 'block'; st.className = 'st';
+  el.querySelectorAll('button').forEach(b => b.disabled = true); bar.style.display = 'block'; st.className = 'st'; st.textContent = 'Готую список файлів…';
   if (navigator.storage && navigator.storage.persist) { try { await navigator.storage.persist(); } catch (e) {} }
-  const c = await caches.open(cacheOf(T.dir)), base = SCOPE + T.dir + '/', list = [''].concat(T.files);
-  let done = 0, fail = 0, i = 0;
+  const c = await caches.open(cacheOf(T.dir)), base = SCOPE + T.dir + '/';
+  const st0 = await metaGet('stale', []); if (!st0.includes(T.dir)) await metaSet('stale', st0.concat(T.dir));   // на час завантаження комірник бере файли теми з мережі, а не зі збереженого
+  let list, ver = '', bytes = 0, fail = 0;
+  try {
+    const r = await fetch(base, { cache: 'no-cache' }); if (!r.ok) throw 0;
+    ver = stamp(r); const html = await r.clone().text(); bytes += html.length; list = refsOf(html); await c.put(base, r);
+  } catch (e) { st.textContent = 'Немає зв’язку із сайтом. Спробуйте ще раз.'; st.className = 'st bad'; setTimeout(paint, 2500); return; }
+  const s0 = saved(); s0[T.dir] = { done: false }; setSaved(s0);
+  let done = 0, i = 0;
   const one = async () => { while (i < list.length) { const f = list[i++];
-      try { const r = await fetch(base + f, { cache: 'no-cache' }); if (!r.ok) throw 0; await c.put(base + f, r); } catch (e) { fail++; }
+      try { const r = await fetch(base + f, { cache: 'no-cache' }); if (!r.ok) throw 0; const b = await r.clone().blob(); bytes += b.size; await c.put(base + f, r); } catch (e) { fail++; }
       done++; fill.style.width = (done / list.length * 100) + '%'; st.textContent = `Завантажую… ${done} з ${list.length}`; } };
   await Promise.all(Array.from({ length: 6 }, one));
-  if (fail) { st.textContent = `Не вдалося завантажити ${fail} файлів. Перевірте зв’язок і натисніть ще раз.`; st.className = 'st bad'; const s = saved(); s[T.dir] = { ver: '' }; setSaved(s); }
-  else { const s = saved(); s[T.dir] = { ver: T.ver }; setSaved(s); }
+  if (fail) { st.textContent = `Не вдалося завантажити ${fail} файлів. Перевірте зв’язок і натисніть ще раз.`; st.className = 'st bad'; }
+  else {
+    for (const k of await c.keys()) { const f = k.url.slice(base.length); if (f && !list.includes(f)) await c.delete(k); }     // зайве після оновлення уроків
+    const s = saved(); s[T.dir] = { done: true, ver, bytes }; setSaved(s);
+    await metaSet('stale', (await metaGet('stale', [])).filter(d => d !== T.dir));
+  }
   setTimeout(() => { paint(); quota(); }, fail ? 2500 : 300);
 }
 async function quota() {
@@ -116,7 +140,8 @@ $('off').onclick = async () => {
 (async () => {
   install();
   const on = await sw();
-  try { DATA = await (await fetch('offline.json', { cache: 'no-cache' })).json(); } catch (e) { $('topics').innerHTML = '<p class="st bad">Список тем зараз недоступний (немає зв’язку).</p>'; return; }
-  if (on) { await paint(); quota(); } else $('topics').innerHTML = '';
+  if (!on) return;
+  try { DATA = await topics(); } catch (e) { $('topics').innerHTML = '<p class="st bad">Список тем зараз недоступний. Відкрийте сторінку ще раз, коли буде зв’язок.</p>'; return; }
+  await paint(); quota();
 })();
 </script></body></html>
