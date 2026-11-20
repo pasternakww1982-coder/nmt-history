@@ -1,7 +1,7 @@
 /* Офлайн-режим мобільних курсів (створює mobile-course/tools/make_pwa.py — руками не правити).
    Теми й перелік їхніх файлів комірник і сторінка offline.html беруть із самих сторінок курсу, тож після нової теми
    чи правки уроків нічого перегенеровувати не треба. */
-const VER = '3ce08f1589';
+const VER = 'fb48365153';
 const SHELL = 'kurs11';
 const CORE = ["", "offline.html", "app.webmanifest", "icons/icon-192.png", "img/nezal.jpg", "img/perebud.jpg", "img/povoienni.jpg", "img/vidlyha.jpg", "img/zastij.jpg"];
 const BASE = new URL('./', self.location).pathname;      // /nmt-history/

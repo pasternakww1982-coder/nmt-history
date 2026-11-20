@@ -63,8 +63,8 @@ function install() {
   if (standalone) { $('inst').textContent = 'Застосунок уже встановлено — ви в ньому ✓'; $('inst').className = 'st ok'; return; }
   if (ios) $('ios').classList.remove('hide'); else $('andr').classList.remove('hide');
   addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferred = e; $('binst').classList.remove('hide'); $('andr').classList.add('hide'); });
-  $('binst').onclick = async () => { if (!deferred) return; deferred.prompt(); const r = await deferred.userChoice; deferred = null; $('binst').classList.add('hide'); if (r.outcome === 'accepted') { $('inst').textContent = 'Встановлено ✓ Шукайте іконку з портретом Михайла Грушевського на екрані телефона.'; $('inst').className = 'st ok'; } };
-  addEventListener('appinstalled', () => { $('inst').textContent = 'Встановлено ✓ Шукайте іконку з портретом Михайла Грушевського на екрані телефона.'; $('inst').className = 'st ok'; $('binst').classList.add('hide'); });
+  $('binst').onclick = async () => { if (!deferred) return; deferred.prompt(); const r = await deferred.userChoice; deferred = null; $('binst').classList.add('hide'); if (r.outcome === 'accepted') { $('inst').textContent = 'Встановлено ✓ Шукайте іконку з портретом В’ячеслава Чорновола на екрані телефона.'; $('inst').className = 'st ok'; } };
+  addEventListener('appinstalled', () => { $('inst').textContent = 'Встановлено ✓ Шукайте іконку з портретом В’ячеслава Чорновола на екрані телефона.'; $('inst').className = 'st ok'; $('binst').classList.add('hide'); });
 }
 const saved = () => { try { return JSON.parse(localStorage.getItem('mk_offline') || '{}'); } catch (e) { return {}; } };
 const setSaved = s => { try { localStorage.setItem('mk_offline', JSON.stringify(s)); } catch (e) {} };
