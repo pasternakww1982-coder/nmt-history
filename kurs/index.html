@@ -262,6 +262,8 @@ img { max-width: 100%; display: block; }
 .bar .tm { margin-left: auto; background: var(--panel2); border-radius: 10px; padding: 5px 10px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .bz-top .tm { margin-left: auto; } .bz-top .tm + .pts { margin-left: 0; }
 
+.off-row{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;margin-top:16px;padding:13px 16px;border:1px solid var(--line,#3a3a3a);border-radius:14px;text-decoration:none;color:inherit}
+.off-row b{font-size:15.5px}.off-row span{grid-column:1;font-size:13px;color:var(--muted)}.off-row span.new{color:var(--accent,#ee7733);font-weight:600}.off-row i{grid-column:2;grid-row:1/3;font-style:normal;font-size:22px;color:var(--accent,#ee7733)}
 .topic{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;text-decoration:none;color:inherit}
 .topic .th img{width:96px;height:96px;object-fit:cover;border-radius:12px;display:block}
 .topic h3{margin:0 0 4px} .topic .st{font-size:14px;color:var(--muted);line-height:1.45}
@@ -272,7 +274,8 @@ const SHELL_API = "https://script.google.com/macros/s/AKfycbwvampukvvmdNAEuUr_DP
 const SHELL_TITLE = "Історія України: мобільні курси";
 const SHELL_SUB = "Теми курсу історії України для самостійного навчання з телефона.";
 const SHELL_BRAND = "Володимир Пастернак і Claude · Ліцей № 177 · 2026";
-const SHELL_TOPICS = [{"id": "starodavnia", "title": "Стародавня історія України", "sub": "Від перших людей до давніх слов’ян · 3 частини", "url": "../starodavnia/", "prefix": "mob_", "parts": 3, "cover": "img/starodavnia.jpg", "only": false}, {"id": "rus", "title": "Русь-Україна (Київська держава)", "sub": "Від союзів племен до роздробленості й культури Русі · 4 частини", "url": "../rus/", "prefix": "rus_", "parts": 4, "cover": "img/rus.jpg", "only": false}, {"id": "galych", "title": "Галицько-Волинська держава (Королівство Руське)", "sub": "Від Романа Мстиславича до 1340 р., монгольська навала · 2 частини", "url": "../galych/", "prefix": "gal_", "parts": 2, "cover": "img/galych.jpg", "only": false}];
+const SHELL_OFFLINE = "";
+const SHELL_TOPICS = [{"id": "starodavnia", "title": "Стародавня історія України", "sub": "Від перших людей до давніх слов’ян · 3 частини", "url": "../starodavnia/", "prefix": "mob_", "parts": 3, "cover": "img/starodavnia.jpg", "only": false}, {"id": "rus", "title": "Русь-Україна (Київська держава)", "sub": "Від союзів племен до роздробленості й культури Русі · 4 частини", "url": "../rus/", "prefix": "rus_", "parts": 4, "cover": "img/rus.jpg", "only": false}, {"id": "galych", "title": "Галицько-Волинська держава (Королівство Руське)", "sub": "Від Романа Мстиславича до 1340 р., монгольська навала · 2 частини", "url": "../galych/", "prefix": "gal_", "parts": 2, "cover": "img/galych.jpg", "only": false}, {"id": "udilni", "title": "Руські удільні князівства у складі іноземних держав", "sub": "Литва, Польща й сусіди, Кримське ханство, суспільство й культура (1340 – 1569) · 3 частини", "url": "../udilni/", "prefix": "udl_", "parts": 3, "cover": "img/udilni.jpg", "only": true}];
 
 const API = SHELL_API;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -355,6 +358,19 @@ function status(T) {
   if (q) parts.push(`⏳ не надіслано: ${q}`);
   return parts.join('<br>');
 }
+function offOn() {      // чи ввімкнено офлайн-режим на цьому телефоні (від цього залежить підпис рядка під полицею)
+  if (!SHELL_OFFLINE) return false;
+  try { if (navigator.serviceWorker && navigator.serviceWorker.controller) return true; } catch (e) {}
+  try { if (localStorage.getItem('mk_offline')) return true; } catch (e) {}
+  try { return matchMedia('(display-mode: standalone)').matches; } catch (e) { return false; }
+}
+function offNote() {    // скільки тем ще не збережено на цьому телефоні (запис mk_offline веде сторінка SHELL_OFFLINE)
+  let sv = {}; try { sv = JSON.parse(localStorage.getItem('mk_offline') || '{}') || {}; } catch (e) {}
+  const dir = T => String(T.url).replace(/^(\.\.\/)+/, '').replace(/\/+$/, '');
+  const n = SHELL_TOPICS.filter(T => !(sv[dir(T)] && sv[dir(T)].done)).length;
+  if (!n) return '<span>Усі теми збережено на телефоні ✓</span>';
+  return `<span class="new">${n === SHELL_TOPICS.length ? 'Теми ще не збережено — завантажити' : 'Не збережено тем: ' + n + ' — довантажити'}</span>`;
+}
 function shelf() {
   const u = G.get('user', null);
   if (!u || !u.pin || G.get('needPin', false)) return login();
@@ -363,6 +379,9 @@ function shelf() {
     <div class="home-head"><div class="kick">Історія України · підготовка до НМТ</div><h1>${esc(SHELL_TITLE)}</h1><div class="sub">${esc(SHELL_SUB)}</div></div>
     <div class="h2">Теми</div><div class="sec-list">${SHELL_TOPICS.map(T => `<a class="part-btn topic" href="${T.url}">
       <span class="th"><img src="${T.cover}" alt=""></span><span><h3>${esc(T.title)}</h3><div class="st">${esc(T.sub)}</div><div class="st">${status(T)}</div></span></a>`).join('')}</div>
+    ${SHELL_OFFLINE ? `<a class="off-row" href="${SHELL_OFFLINE}">${offOn()
+      ? '<b>Офлайн-режим</b>' + offNote()
+      : '<b>Курс без інтернету</b><span>Поставити на телефон як застосунок і зберегти теми</span>'}<i>›</i></a>` : ''}
     <p class="cap" style="margin-top:14px">У темах — уроки з короткими перевірками після розділів, бліц після кожної частини й два тести${SHELL_TOPICS.some(T => T.only) ? ' (у нових темах поки лише уроки)' : ''}. Результати бачить учитель.</p>
     <div class="sync" id="sync"></div>${brand()}</div>`;
   document.getElementById('out').onclick = () => { G.set('user', null); login(); };
