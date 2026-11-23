@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Бліц-соло · Україна в 1914–1921 рр.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* єдина темна тема, як у презентаціях: вугільне тло, помаранчевий акцент */
+  --bg: #161616;
+  --panel: #232323;
+  --panel2: #2e2e2e;
+  --acc: #e97132;
+  --acc2: #f5a25d;
+  --txt: #f2f2f2;
+  --muted: #a8a39e;
+  --ok: #5fb878;
+  --bad: #e0604a;
+  --font: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  /* макет: одна колонка до 560 px, вертикальна стрічка карток */
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--txt); font-family: var(--font); font-size: 17px; line-height: 1.5; -webkit-text-size-adjust: 100%; }
+body { min-height: 100%; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 48px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+p { margin: 0; }
+b.a { color: var(--acc); font-weight: 700; }
+b.a2 { color: var(--acc2); font-weight: 700; }
+button { font-family: inherit; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--acc2); outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+
+/* ---------- верхня панель ---------- */
+.bar { position: sticky; top: 0; z-index: 20; background: rgba(22,22,22,.96); backdrop-filter: blur(6px); border-bottom: 1px solid #2a2a2a; }
+.bar-in { max-width: 560px; margin: 0 auto; padding: 10px 16px 8px; display: flex; align-items: center; gap: 12px; }
+.bar .back { background: var(--panel2); color: var(--acc2); border: 0; border-radius: 10px; padding: 8px 12px; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; }
+.bar .ttl { font-weight: 700; font-size: 15px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prog { height: 4px; background: #2a2a2a; }
+.prog i { display: block; height: 100%; width: 0; background: var(--acc); transition: width .15s; }
+
+/* ---------- головна ---------- */
+.hero { margin: 0 -16px; background: #0f0f0f; }
+.hero img { width: 100%; height: auto; }
+.hero-cap, .cap { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.hero-cap { padding: 6px 16px 0; }
+.kick { color: var(--acc); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.home-head { padding: 20px 0 8px; display: grid; gap: 8px; }
+.home-head h1 { font-size: 32px; font-weight: 800; }
+.home-head .part { color: var(--acc2); font-weight: 700; font-size: 19px; }
+.home-head .sub { color: var(--muted); }
+.proto { margin: 14px 0 4px; padding: 10px 14px; border: 1px dashed #4a4a4a; border-radius: 12px; color: var(--muted); font-size: 14px; }
+.h2 { font-size: 21px; font-weight: 800; margin: 26px 0 12px; }
+.sec-list { display: grid; gap: 12px; }
+.sec-btn { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; text-align: left; width: 100%; background: var(--panel); color: var(--txt); border: 0; border-radius: 16px; padding: 14px; cursor: pointer; }
+.sec-btn .num { width: 56px; height: 56px; border-radius: 14px; background: var(--panel2); color: var(--acc); font-size: 22px; font-weight: 800; display: grid; place-items: center; }
+.sec-btn.done .num { background: var(--acc); color: #161616; }
+.sec-btn h3 { font-size: 18px; font-weight: 700; }
+.sec-btn .st { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.sec-btn .st b { color: var(--acc2); }
+.sec-btn.soon { opacity: .45; cursor: default; }
+.prog-mini { height: 4px; background: #333; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.prog-mini i { display: block; height: 100%; background: var(--acc); }
+.prg { display: grid; gap: 10px; }
+.prg .box { background: var(--panel); border-radius: 14px; padding: 12px 14px; }
+.prg h3 { color: var(--acc); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.prg ul { margin: 0; padding-left: 18px; font-size: 15.5px; }
+
+/* ---------- розділ ---------- */
+.sec-head { padding: 18px 0 6px; display: grid; gap: 8px; }
+.sec-head h1 { font-size: 28px; font-weight: 800; }
+.sec-head .sub { color: var(--muted); }
+.cards { display: grid; gap: 16px; margin-top: 16px; }
+.card { background: var(--panel); border-radius: 18px; padding: 18px 16px; display: grid; gap: 12px; }
+.card h2 { font-size: 22px; font-weight: 800; }
+.card .date { color: var(--acc2); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; margin-top: -6px; }
+.card .txt { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: var(--acc); color: #161616; font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 3px 10px; }
+.tip { background: var(--panel2); border-left: 4px solid var(--acc2); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; font-size: 16px; }
+.tip .lbl { color: var(--acc2); font-weight: 700; font-size: 14px; }
+.fig { margin: 0; display: grid; gap: 6px; }
+.fig .pic { background: #0f0f0f; border-radius: 12px; overflow: hidden; cursor: zoom-in; position: relative; display: grid; place-items: center; }
+.fig .pic img { width: auto; height: auto; max-width: 100%; max-height: 62vh; }
+.fig .pic.boxed { height: 180px; }
+.fig .pic.boxed img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.zoom-hint { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.6); color: #fff; font-size: 12px; border-radius: 8px; padding: 2px 7px; pointer-events: none; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* карусель */
+.car { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 2px 16px 6px; scrollbar-width: none; }
+.car::-webkit-scrollbar { display: none; }
+.car .it { flex: 0 0 84%; scroll-snap-align: center; background: var(--panel2); border-radius: 14px; padding: 10px; display: grid; gap: 8px; align-content: start; }
+.car .it .pic { height: 210px; }
+.car .it h3 { font-size: 18px; font-weight: 700; color: var(--acc2); }
+.car .it .n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--acc); color: #161616; font-size: 14px; font-weight: 800; margin-right: 6px; }
+.car .it p { font-size: 15.5px; }
+.dots { display: flex; justify-content: center; gap: 6px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: #4a4a4a; }
+.dots i.on { background: var(--acc); }
+.swipe { color: var(--muted); font-size: 13.5px; text-align: center; }
+
+/* визначення */
+.defs { display: grid; gap: 14px; }
+.def { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid #333; }
+.def:first-child { border-top: 0; padding-top: 0; }
+.def h3 { font-size: 19px; color: var(--acc2); }
+
+/* хронологія */
+.scale { position: relative; padding: 34px 4px 8px; }
+.scale .line { position: absolute; left: 4px; right: 4px; top: 48px; height: 3px; background: var(--txt); border-radius: 2px; }
+.scale .marks { position: relative; display: flex; justify-content: space-between; }
+.scale .m { display: grid; justify-items: center; gap: 6px; width: 20%; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.scale .m i { width: 13px; height: 13px; border-radius: 50%; background: var(--acc); margin-top: 8px; }
+.scale .m .up { position: absolute; top: 0; color: var(--acc2); font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.scale .m { position: relative; }
+
+/* періоди */
+.pgroup { color: var(--acc2); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-top: 4px; }
+.per { display: grid; grid-template-columns: 8px 1fr; gap: 12px; background: var(--panel2); border-radius: 12px; padding: 12px 12px 12px 0; overflow: hidden; }
+.per .c { border-radius: 0 6px 6px 0; }
+.per h3 { font-size: 18px; }
+.per .s { color: var(--muted); font-size: 14px; }
+.per .d { color: var(--acc2); font-weight: 700; font-size: 15px; margin: 4px 0; }
+.per .r { font-size: 15px; }
+.per .r span { color: var(--muted); }
+
+/* карта */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.steps button { background: var(--panel2); color: var(--txt); border: 0; border-radius: 10px; padding: 9px 4px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.steps button.on { background: var(--acc); color: #161616; }
+.rot { color: var(--muted); font-size: 13.5px; }
+
+/* пам'ятка */
+.mon .pic { cursor: zoom-in; }
+.how { background: var(--acc); color: #161616; border-radius: 12px; padding: 12px 14px; font-weight: 600; }
+.how .lbl { font-weight: 800; display: block; font-size: 14px; }
+
+/* самоперевірка */
+.quiz h2 { display: flex; gap: 10px; align-items: center; }
+.qq { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid #333; }
+.qq:first-of-type { border-top: 0; padding-top: 0; }
+.qq .q { font-weight: 700; }
+.qq .qn { color: var(--acc2); margin-right: 4px; }
+.opt { text-align: left; width: 100%; background: var(--panel2); color: var(--txt); border: 2px solid transparent; border-radius: 12px; padding: 11px 14px; font-size: 16px; cursor: pointer; }
+.opt[disabled] { cursor: default; }
+.opt.right { border-color: var(--ok); background: #203826; }
+.opt.wrong { border-color: var(--bad); background: #3a221d; }
+.why { font-size: 15px; color: #ddd; background: #1b1b1b; border-radius: 10px; padding: 10px 12px; }
+.score { background: var(--panel2); border-radius: 12px; padding: 14px; text-align: center; display: grid; gap: 8px; }
+.score .big { font-size: 28px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; }
+.btn { background: var(--acc); color: #161616; border: 0; border-radius: 12px; padding: 13px 16px; font-size: 17px; font-weight: 800; cursor: pointer; width: 100%; }
+.btn.ghost { background: var(--panel2); color: var(--acc2); }
+.end { display: grid; gap: 10px; margin-top: 20px; }
+
+/* перегляд зображення */
+.lb { position: fixed; inset: 0; z-index: 50; background: #000; display: none; flex-direction: column; }
+.lb.open { display: flex; }
+.lb-top { display: flex; gap: 8px; padding: 10px; justify-content: flex-end; }
+.lb-top button { background: #2a2a2a; color: #fff; border: 0; border-radius: 10px; min-width: 44px; height: 40px; font-size: 18px; font-weight: 700; cursor: pointer; }
+.lb-view { flex: 1; position: relative; overflow: hidden; touch-action: none; }
+.lb-view img { position: absolute; left: 0; top: 0; transform-origin: 0 0; max-width: none; max-height: none; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.pic { touch-action: pan-x pan-y; }   /* щипок на зображенні не збільшує всю сторінку — відкриває перегляд */
+.lb-cap { color: #ccc; font-size: 13.5px; padding: 8px 14px 14px; }
+
+
+.brand { margin: 28px 0 6px; text-align: center; font-size: 12.5px; color: var(--muted); letter-spacing: .02em; }
+
+/* «← Усі теми» — повернення на полицю тем спільної оболонки */
+.tback { display: inline-block; margin: 14px 0 0; font-weight: 700; font-size: 15px; color: var(--acc2); text-decoration: underline; }
+/* курс: вхід, бліци, тести */
+.tback + .who { margin-top: 8px; }
+.who { display: flex; align-items: center; gap: 10px; justify-content: space-between; background: var(--panel); border-radius: 12px; padding: 10px 14px; margin: 14px 0 0; font-weight: 700; font-size: 15px; }
+.lnk { background: none; border: 0; color: var(--acc2); font: inherit; font-size: 14.5px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; }
+.login { display: grid; gap: 14px; margin-top: 18px; }
+.login label { display: grid; gap: 6px; font-weight: 700; font-size: 15px; }
+.login input { font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--panel2); background: var(--bg); color: var(--txt); }
+.login input:focus { outline: none; border-color: var(--acc); }
+.err { color: var(--bad); font-weight: 700; }
+.locked { opacity: .55; }
+.shake { animation: shk .4s; } @keyframes shk { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.okc { color: var(--ok); } .badc { color: var(--bad); }
+.sync { font-size: 14.5px; color: var(--muted); margin-top: 16px; text-align: center; }
+.bz-card .meta { color: var(--muted); font-size: 15px; }
+.bz-card .best { background: var(--panel2); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+.bz-card .best b { color: var(--acc2); }
+.bz-card .btn { margin-top: 4px; }
+.bz-in { display: grid; gap: 14px; padding-top: 14px; }
+.bz-top { display: flex; align-items: center; gap: 10px; }
+.bz-top .cnt { font-weight: 700; color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+.bz-top .pts { margin-left: auto; background: var(--panel2); border-radius: 10px; padding: 6px 10px; font-weight: 800; color: var(--acc2); font-variant-numeric: tabular-nums; }
+.bz-top .x { background: var(--panel2); color: var(--txt); border: 0; border-radius: 10px; width: 40px; height: 36px; font-size: 17px; cursor: pointer; }
+.qtype { font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--acc2); }
+.qtext { font-size: 19px; font-weight: 700; line-height: 1.38; }
+.pic.qi { border-radius: 12px; overflow: hidden; position: relative; background: #0f0f0f; }
+.pic.qi img { width: 100%; height: auto; max-height: 62vh; object-fit: contain; display: block; }
+.tiles { display: grid; gap: 10px; }
+.tile { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; text-align: left; border: 3px solid transparent; border-radius: 14px; padding: 12px; font: inherit; font-size: 16.5px; font-weight: 600; color: #fff; cursor: pointer; min-height: 58px; }
+.tile .l { width: 34px; height: 34px; border-radius: 9px; background: rgba(0,0,0,.25); display: grid; place-items: center; font-weight: 800; }
+.tile.c0 { background: #b8463a; } .tile.c1 { background: #2f6fa8; } .tile.c2 { background: #b38419; } .tile.c3 { background: #3f8a55; }
+.tile.n { background: var(--panel2); }
+.tile.sel { border-color: var(--acc2); background: #4a3524; }
+.tile[disabled] { cursor: default; }
+.tile.dim { opacity: .38; }
+.tile.right { border-color: #9ff0b4; opacity: 1; }
+.tile.wrong { border-color: #ffb3a6; opacity: 1; }
+.tile .ord { width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: #161616; display: grid; place-items: center; font-weight: 800; }
+.tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile.wi { grid-template-columns: 1fr; padding: 8px; position: relative; align-content: start; }
+.tile.wi .l, .tile.wi .ord { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgba(0,0,0,.65); }
+.tile.wi .ord { background: var(--acc); }
+.oi { position: relative; display: block; border-radius: 10px; overflow: hidden; background: #0f0f0f; }
+.oi img { width: 100%; height: 150px; object-fit: contain; display: block; }
+.oi .zoom-hint { position: absolute; right: 6px; bottom: 6px; width: 34px; height: 34px; border-radius: 9px; background: rgba(0,0,0,.65); display: grid; place-items: center; font-size: 18px; color: #fff; }
+.mlist { background: var(--panel); border-radius: 12px; padding: 10px 12px; display: grid; gap: 8px; font-size: 15.5px; }
+.mo { display: grid; grid-template-columns: 24px 1fr; gap: 6px; align-items: start; }
+.mo .oi img { height: 120px; }
+.mrow { display: grid; gap: 6px; }
+.ml { font-weight: 600; }
+.ml .pic.ri { margin-top: 6px; }
+.pic.ri { border-radius: 10px; overflow: hidden; background: #0f0f0f; position: relative; }
+.pic.ri img { width: 100%; height: 170px; object-fit: contain; display: block; }
+.mbtns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.mb { background: var(--panel2); color: var(--txt); border: 2px solid transparent; border-radius: 10px; height: 44px; font: inherit; font-size: 17px; font-weight: 800; cursor: pointer; }
+.mb.on { background: var(--acc); color: #161616; }
+.mb.right { border-color: #9ff0b4; }
+.mb.wrong { border-color: #ffb3a6; }
+.bz-act { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+.fb { border-radius: 14px; padding: 14px; display: grid; gap: 6px; }
+.fb.good { background: #1f3a27; } .fb.bad { background: #3a231e; } .fb.part { background: #3a311c; }
+.fb .h { font-weight: 800; font-size: 18px; }
+.res { text-align: center; display: grid; gap: 6px; background: var(--panel); border-radius: 18px; padding: 22px 16px; }
+.res .big { font-size: 46px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.res .gr { font-size: 18px; font-weight: 800; }
+.tintro p { margin: 0 0 8px; }
+.tnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.tnav.stk { flex-wrap: nowrap; overflow-x: auto; position: sticky; top: 53px; z-index: 5; background: var(--bg); padding: 8px 0; scrollbar-width: none; }
+.tnav.stk::-webkit-scrollbar { display: none; }
+.tnav.stk .nv { flex: 0 0 auto; }
+.nv { min-width: 38px; height: 38px; border-radius: 10px; background: var(--panel2); color: var(--txt); display: grid; place-items: center; font-weight: 800; font-size: 15px; text-decoration: none; position: relative; }
+.nv.on { background: #2c5a3a; } .nv.pt { background: #5a4a22; } .nv.no { background: #5a2c24; }
+.nv i { position: absolute; right: 2px; bottom: 0; font-size: 10px; font-style: normal; opacity: .8; }
+.task { display: grid; gap: 12px; scroll-margin-top: 110px; }
+.rst { justify-self: start; }
+.tsend { display: grid; gap: 8px; margin-top: 18px; text-align: center; }
+.dlg { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 50; display: grid; place-items: center; padding: 16px; }
+.dlg[hidden] { display: none; }
+.dlg-in { background: var(--panel); border-radius: 18px; padding: 20px; display: grid; gap: 10px; max-width: 420px; }
+.dlg-in h3 { margin: 0; }
+
+/* автор і ліцензія під фото — дрібно й приглушено */
+.cap .cr, .hero-cap .cr { display: block; margin-top: 2px; font-size: 10px; line-height: 1.3; opacity: .6; letter-spacing: .01em; }
+
+/* уривок джерела в умові завдання: підпис джерела — дрібніше */
+.qtext .a2 { display: inline-block; font-size: 14px; font-weight: 600; color: var(--muted); }
+
+.fb .ex { font-size: 15px; line-height: 1.45; color: #e8e8e8; border-top: 1px solid rgba(255,255,255,.15); padding-top: 8px; margin-top: 2px; }
+.mini-card { margin-top: 18px; }
+.mini-card .h { font-weight: 800; font-size: 18px; margin-bottom: 4px; }
+.bz-top .tm { background: var(--panel2); border-radius: 10px; padding: 6px 10px; font-weight: 800; font-variant-numeric: tabular-nums; color: #f2f2f2; }
+.bz-top .tm.warn, .bar .tm.warn { background: #7a2b20; color: #fff; }
+.bar .tm { margin-left: auto; background: var(--panel2); border-radius: 10px; padding: 5px 10px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bz-top .tm { margin-left: auto; } .bz-top .tm + .pts { margin-left: 0; }
+
+/* ---------- нові типи карток ---------- */
+.chip.off { background: #5a5a5a; color: #f2f2f2; }
+.chip.doc { background: var(--acc2); }
+.sub { background: var(--panel2); border-radius: 14px; padding: 14px; display: grid; gap: 8px; }
+.sub h3 { font-size: 18px; color: var(--acc); }
+.sub h3.l { color: var(--acc2); }
+.pill { justify-self: start; background: var(--acc2); color: #161616; font-weight: 800; border-radius: 999px; padding: 3px 12px; font-size: 14.5px; }
+.muted { color: var(--muted); font-size: 15px; display: grid; gap: 6px; }
+.quote { background: var(--panel2); border-left: 4px solid var(--acc); border-radius: 12px; padding: 14px; display: grid; gap: 10px; font-style: italic; font-size: 17.5px; }
+.quote .src { font-style: normal; color: var(--acc2); font-size: 14px; }
+.scheme { background: var(--panel2); border-radius: 14px; padding: 14px; display: grid; gap: 10px; text-align: center; }
+.scheme .h { color: var(--acc); font-weight: 800; }
+.scheme .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.scheme .two div { background: var(--acc); color: #161616; border-radius: 12px; padding: 10px; font-size: 14px; }
+.scheme .two b { display: block; font-size: 17px; }
+.trow { background: var(--panel2); border-radius: 14px; padding: 12px 14px; display: grid; gap: 6px; }
+.trow h3 { color: var(--acc2); font-size: 18px; }
+.trow .kv { display: grid; grid-template-columns: 38% 1fr; gap: 8px; font-size: 15.5px; }
+.trow .kv span { color: var(--muted); }
+/* стрічка подій */
+.tlv { display: grid; gap: 0; position: relative; padding-left: 26px; }
+.tlv::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 3px; background: var(--txt); border-radius: 2px; }
+.tlv .ev { position: relative; padding: 0 0 16px; display: grid; gap: 3px; }
+.tlv .ev i { position: absolute; left: -25px; top: 4px; width: 17px; height: 17px; border-radius: 50%; border: 2px solid var(--bg); }
+.tlv .ev .y { color: var(--acc2); font-weight: 800; font-variant-numeric: tabular-nums; }
+.tlv .ev .y.yprog { justify-self: start; background: var(--acc2); color: #161616; border-radius: 8px; padding: 1px 8px; }
+.tlv .ev b { font-size: 17px; }
+.legend { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+.legend span.sw { width: 34px; height: 16px; background: var(--acc2); border-radius: 6px; }
+/* стрічка періодів */
+.gp { position: relative; display: grid; gap: 10px; padding-top: 26px; }
+.gp .row { display: grid; gap: 3px; position: relative; z-index: 1; }
+.gp .nm { font-weight: 700; font-size: 15px; }
+.gp .tr { position: relative; height: 18px; background: #262626; border-radius: 6px; }
+.gp .sg { position: absolute; top: 0; bottom: 0; border-radius: 6px; }
+.gp .sb { font-size: 13px; color: var(--muted); }
+.gp .evl { position: absolute; top: 18px; bottom: 34px; border-left: 2px dashed var(--acc2); z-index: 0; pointer-events: none; }
+.gp .evt { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; font-weight: 800; color: var(--acc2); white-space: nowrap; }
+.gp .ax { position: relative; height: 34px; border-top: 3px solid var(--txt); margin-top: 4px; }
+.gp .tk { position: absolute; top: 0; transform: translateX(-50%); font-size: 11.5px; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+.gp .tk.lo { padding-top: 17px; }
+.gp .pr { position: absolute; top: -6px; height: 9px; background: var(--acc2); border-radius: 4px; }
+.prg-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.part-btn { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; text-align: left; width: 100%; background: var(--panel); color: var(--txt); border: 0; border-radius: 16px; padding: 10px; cursor: pointer; }
+.part-btn .th { width: 96px; height: 96px; border-radius: 12px; background: #0f0f0f; display: grid; place-items: center; overflow: hidden; }
+.part-btn .th img { max-width: 100%; max-height: 100%; }
+.part-btn h3 { font-size: 18px; }
+.part-btn .st { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+.ends { display: flex; justify-content: space-between; color: var(--acc2); font-weight: 700; font-size: 14px; }
+.scale { padding-top: 6px; }
+.scale .line { top: 19px; }
+.scale .m b { font-size: 11.5px; }
+
+.gp .nm, .gp .sb { justify-self: start; background: var(--panel); padding-right: 6px; position: relative; z-index: 1; }
+.gp .tr { z-index: 1; }
+
+.fsb { position: fixed; right: 12px; bottom: 14px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(46,46,46,.92); color: var(--acc2); font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+.fsb[hidden] { display: none; }
+/* бліц-соло онлайн */
+.login select { font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--panel2); background: var(--bg); color: var(--txt); }
+.login select:focus { outline: none; border-color: var(--acc); }
+.prg { height: 6px; border-radius: 3px; background: var(--panel2); overflow: hidden; }
+.prg i { display: block; height: 100%; background: var(--acc); }
+.res.pz { gap: 10px; }
+.res .gr.okc { color: var(--acc2); font-size: 22px; }
+.bz-act .btn[disabled] { opacity: .45; }
+
+/* розбір після бліцу */
+.rv-t { margin: 26px 0 6px; }
+.rvf { display: flex; gap: 8px; margin: 10px 0 14px; }
+.rvf .btn { flex: 1; margin: 0; }
+.rvf .btn.on { background: var(--acc); color: #fff; border-color: var(--acc); }
+.rv { margin-bottom: 12px; }
+.rv-h { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.rv-h > b { font-size: 20px; color: var(--acc); }
+.rv .pts { font-size: 13px; font-weight: 700; padding: 2px 10px; border-radius: 10px; }
+.rv .pts.g { background: rgba(46,125,50,.15); color: #2e7d32; }
+.rv .pts.h { background: rgba(245,124,0,.15); color: #e65100; }
+.rv .pts.b { background: rgba(198,40,40,.15); color: #c62828; }
+.rv-o { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.rvo { padding: 8px 10px; border-radius: 10px; border: 2px solid var(--panel2); font-size: 15px; display: flex; gap: 6px; align-items: baseline; }
+.rvo .mk { min-width: 1.1em; font-weight: 800; }
+.rvo.good { border-color: #2e7d32; background: rgba(46,125,50,.12); }
+.rvo.bad { border-color: #c62828; background: rgba(198,40,40,.12); }
+.rvo.miss { border-color: #2e7d32; border-style: dashed; }
+.rv-s { font-size: 15px; margin: 6px 0; }
+.rv-s .okt { color: #2e7d32; }
+.rv-e { font-size: 14.5px; line-height: 1.45; background: var(--panel2); padding: 10px 12px; border-radius: 10px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<button id="fsb" class="fsb" hidden aria-label="На весь екран">⤢</button>
+<div class="lb" id="lb" role="dialog" aria-label="Перегляд зображення">
+  <div class="lb-top"><button id="lbOut" aria-label="Зменшити">−</button><button id="lbIn" aria-label="Збільшити">+</button><button id="lbX" aria-label="Закрити">✕</button></div>
+  <div class="lb-view" id="lbv"><img id="lbi" alt=""></div>
+  <div class="lb-cap" id="lbc"></div>
+</div>
+<script>
+const QS = [{"id": "q01", "n": 1, "t": "single", "lim": 20, "q": "Головну українську раду, утворену у Львові на початку серпня 1914 р., очолив", "opts": ["Євген Петрушевич", "Михайло Галущинський", "Дмитро Донцов", "Кость Левицький"], "fix": false}, {"id": "q02", "n": 2, "t": "single", "lim": 20, "q": "Андрій Жук і Дмитро Донцов у серпні 1914 р. були серед засновників", "opts": ["Української бойової управи", "Головної української ради", "Союзу визволення України", "Загальної української ради"], "fix": false}, {"id": "q03", "n": 3, "t": "single", "lim": 20, "q": "Хто з педагогів, діячів «Просвіти», на початку Першої світової війни очолив легіон Українських січових стрільців?", "opts": ["Михайло Галущинський", "Кость Левицький", "Михайло Омелянович-Павленко", "Дмитро Вітовський"], "fix": false}, {"id": "q04", "n": 4, "t": "single", "lim": 20, "q": "Австрійський архикнязь Вільгельм Габсбург (Василь Вишиваний) у 1918 р.", "opts": ["очолював Загальну українську раду у Відні", "очолював делегацію УНР у Бересті", "командував групою з УСС у Південній Україні", "був генерал-губернатором Галичини і Буковини"], "fix": false}, {"id": "q05", "n": 5, "t": "single", "lim": 20, "q": "Галицько-Буковинське генерал-губернаторство припинило існування внаслідок", "opts": ["Горлицького прориву", "Лютневої революції в Росії", "Брусиловського прориву", "Берестейського мирного договору"], "fix": false}, {"id": "q06", "n": 6, "t": "single", "lim": 20, "q": "Що стало наслідком Галицької битви 1914 р.?", "opts": ["російські війська зайняли Львів і Східну Галичину", "австро-угорські війська зайняли Волинь і Поділля", "німецько-австрійські війська витіснили росіян з Галичини", "російські війська зайняли всю Галичину й Закарпаття"], "fix": false}, {"id": "q07", "n": 7, "t": "single", "lim": 20, "q": "Брусиловський прорив, під час якого російські війська знову зайняли Буковину й частину Галичини, відбувся в", "opts": ["1914 р.", "1917 р.", "1916 р.", "1915 р."], "fix": false}, {"id": "q08", "n": 8, "t": "single", "lim": 20, "q": "Вивезення в 1915 р. обладнання заводів, майна установ і навчальних закладів (зокрема Київського університету) з прифронтової смуги в глиб Росії — приклад", "opts": ["депортації", "окупації", "реквізиції", "евакуації"], "fix": false}, {"id": "q09", "n": 9, "t": "single", "lim": 20, "q": "Про яке явище свідчить те, що до російської армії в 1914–1917 рр. призвали близько 3,5 млн українців, а до австро-угорської — близько 250 тис.?", "opts": ["українізацію армії", "інтервенцію", "мобілізацію", "демобілізацію"], "fix": false}, {"id": "q10", "n": 10, "t": "single", "lim": 20, "q": "Поняття «світова війна» найточніше характеризує збройний конфлікт, який", "opts": ["охопив усі без винятку держави світу", "охопив держави кількох континентів і потребував напруження всіх ресурсів", "вели великі держави за переділ колоній в Африці й Азії", "точився між двома блоками європейських держав лише на території Європи"], "fix": false}, {"id": "q11", "n": 11, "t": "single", "lim": 35, "q": "«…Царі російські… ламали всі свої обов’язки супроти України… Наша приязнь — з Австро-Угорщиною. Перемога австро-угорської монархії буде нашою перемогою. І чим більший буде розгром Росії, тим швидше виб’є година визволення України…» (у сучасному правописі, скорочено)\n\nМаніфест якої організації цитовано?", "opts": ["Української Центральної Ради", "Головної української ради", "Загальної української ради", "Союзу визволення України"], "fix": false}, {"id": "q12", "n": 12, "t": "single", "lim": 35, "q": "Діяч, зображений на фото,", "opts": ["був першим головою Союзу визволення України", "очолив легіон УСС у серпні 1914 р.", "очолював Головну і Загальну українські ради", "називав себе Василем Вишиваним"], "fix": false, "img": ["p_dontsov"]}, {"id": "q13", "n": 13, "t": "single", "lim": 35, "q": "Як називали адміністративне утворення, яке в 1914–1915 рр. існувало на заштрихованій на картосхемі території?", "opts": ["Королівство Галичини та Володимирії", "Галицько-Буковинське генерал-губернаторство", "Західна область Української Народної Республіки", "Південно-Західний край"], "fix": false, "img": ["m_gengub"]}, {"id": "q14", "n": 14, "t": "single", "lim": 35, "q": "На картосхемі стрілками позначено наступ російських військ під час", "opts": ["Горлицького прориву", "Галицької битви", "«червневого наступу»", "Брусиловського прориву"], "fix": false, "img": ["m_galbat"]}, {"id": "q15", "n": 15, "t": "single", "lim": 35, "q": "Пунктиром на картосхемі позначено бойовий шлях", "opts": ["легіону Українських січових стрільців", "Січових стрільців Є. Коновальця", "Української галицької армії", "Армії УНР у Першому Зимовому поході"], "fix": false, "img": ["m_uss"]}, {"id": "q16", "n": 16, "t": "single", "lim": 20, "q": "Загальну українську раду, яка проголосила метою самостійність Наддніпрянщини, утворили у Відні в", "opts": ["серпні 1914 р.", "червні 1916 р.", "травні 1915 р.", "березні 1917 р."], "fix": false}, {"id": "q17", "n": 17, "t": "single", "lim": 35, "q": "«Східна Галичина і Лемківщина — споконвічно корінна частина єдиної великої Русі… Тому тут устрій має бути заснований на російських началах. Я буду запроваджувати тут російську мову, закон і устрій…» (скорочено)\n\nСлова, наведені в уривку, належать", "opts": ["командантові легіону Українських січових стрільців", "голові Головної української ради", "генерал-губернаторові окупованої Галичини", "діячеві Союзу визволення України"], "fix": false}, {"id": "q18", "n": 18, "t": "three", "lim": 40, "q": "Які події відбулися в 1914 р.?", "opts": ["створення Союзу визволення України", "утворення Загальної української ради", "бій УСС на горі Лисоня", "Брусиловський прорив", "утворення Головної української ради", "Горлицький прорив", "Галицька битва"], "fix": false}, {"id": "q19", "n": 19, "t": "three", "lim": 40, "q": "Які наслідки мала Перша світова війна для українських земель?", "opts": ["виселення частини населення Галичини й Волині в глиб Росії", "поява перших українських політичних партій", "руйнування господарства в прифронтових районах", "загибель і полон сотень тисяч українців з обох боків фронту", "завершення столипінської аграрної реформи", "об’єднання українських земель у складі Австро-Угорщини", "проголошення автономії Галичини російською владою"], "fix": false}, {"id": "q20", "n": 20, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["Брусиловський прорив", "Галицька битва", "утворення Української Центральної Ради", "бій УСС на горі Маківка"], "fix": false}, {"id": "q21", "n": 21, "t": "single", "lim": 20, "q": "Всеукраїнський національний конгрес, який переобрав склад Української Центральної Ради, зібрався в", "opts": ["листопаді 1917 р.", "червні 1917 р.", "березні 1917 р.", "квітні 1917 р."], "fix": false}, {"id": "q22", "n": 22, "t": "single", "lim": 35, "q": "Діяч, зображений на фото,", "opts": ["очолював Українську Центральну Раду", "першим очолив Директорію УНР", "очолював Генеральний секретаріат", "був першим президентом Української академії наук"], "fix": false, "img": ["p_hrush"]}, {"id": "q23", "n": 23, "t": "single", "lim": 35, "q": "Укажіть портрет діяча, який очолював Генеральний секретаріат — перший уряд УЦР.", "opts": ["А", "Б", "В", "Г"], "fix": true, "img": ["c_vynn"]}, {"id": "q24", "n": 24, "t": "single", "lim": 35, "q": "«Народе український!.. Ми, Українська Центральна Рада, …виклали Тимчасовому правительству наші домагання… Правительство відкинуло їх… Однині самі будемо творити наше життя…» (скорочено)\n\nДокумент, уривок з якого наведено, ухвалили в", "opts": ["листопаді 1917 р.", "липні 1917 р.", "червні 1917 р.", "січні 1918 р."], "fix": false}, {"id": "q25", "n": 25, "t": "single", "lim": 20, "q": "ІІ Універсал Центральна Рада ухвалила після переговорів з делегацією", "opts": ["держав Четверного союзу", "держав Антанти", "Ради народних комісарів", "Тимчасового уряду"], "fix": false}, {"id": "q26", "n": 26, "t": "single", "lim": 35, "q": "Якою цифрою на картосхемі позначено губернії, які ІІІ Універсал включив до складу УНР, хоча «Тимчасова інструкція» Тимчасового уряду до них влади Генерального секретаріату не поширювала?", "opts": ["1", "2", "3", "4"], "fix": true, "img": ["m_univ3"]}, {"id": "q27", "n": 27, "t": "single", "lim": 35, "q": "Заштрихована на картосхемі територія", "opts": ["увійшла до складу УНР за ІІІ Універсалом", "входила до Галицько-Буковинського генерал-губернаторства", "увійшла до складу Західноукраїнської Народної Республіки", "відійшла до УНР за Берестейським мирним договором"], "fix": false, "img": ["m_kholm"]}, {"id": "q28", "n": 28, "t": "single", "lim": 20, "q": "IV Універсал, який проголосив УНР «самостійною, ні від кого не залежною, вільною, суверенною державою», ухвалили", "opts": ["27 січня (9 лютого) 1918 р.", "9 (22) січня 1918 р.", "7 (20) листопада 1917 р.", "29 квітня 1918 р."], "fix": false}, {"id": "q29", "n": 29, "t": "single", "lim": 35, "q": "Цифрою 1 на картосхемі позначено місце бою, що відбувся під час наступу, показаного стрілками. Ідеться про бій", "opts": ["під Мотовилівкою", "під Крутами", "біля села Базар", "під Чортковом"], "fix": false, "img": ["m_kruty"]}, {"id": "q30", "n": 30, "t": "single", "lim": 20, "q": "Що спонукало УНР укласти Берестейський мирний договір з державами Четверного союзу?", "opts": ["вимога держав Антанти вийти з війни", "потреба військової допомоги проти більшовиків", "прагнення приєднати Східну Галичину й Буковину", "бажання відновити гетьманську форму правління"], "fix": false}, {"id": "q31", "n": 31, "t": "single", "lim": 20, "q": "Хто в 1917 р. належав до самостійників?", "opts": ["Сергій Єфремов", "Михайло Грушевський", "Микола Міхновський", "Володимир Винниченко"], "fix": false}, {"id": "q32", "n": 32, "t": "single", "lim": 20, "q": "Після ухвалення IV Універсалу Генеральний секретаріат перейменували на", "opts": ["Раду міністрів", "Народний секретаріат", "Державний секретаріат", "Раду народних міністрів"], "fix": false}, {"id": "q33", "n": 33, "t": "single", "lim": 20, "q": "Почесним отаманом Вільного козацтва з’їзд у Чигирині в жовтні 1917 р. обрав", "opts": ["Павла Скоропадського", "Миколу Міхновського", "Симона Петлюру", "Петра Болбочана"], "fix": false}, {"id": "q34", "n": 34, "t": "single", "lim": 20, "q": "Згідно з універсалами УЦР остаточно визначити державний устрій України й ухвалити її конституцію мали", "opts": ["Всеукраїнський з’їзд рад", "Всеукраїнський національний конгрес", "Трудовий конгрес України", "Всеукраїнські Установчі збори"], "fix": false}, {"id": "q35", "n": 35, "t": "single", "lim": 20, "q": "У грудні 1917 р. з’їзд рад у Харкові, скликаний більшовиками, проголосив", "opts": ["Українську Народну Республіку Рад", "незалежність Радянської України", "Донецько-Криворізьку республіку", "Українську Соціалістичну Радянську Республіку"], "fix": false}, {"id": "q36", "n": 36, "t": "single", "lim": 20, "q": "Ультиматум Ради народних комісарів Центральній Раді (грудень 1917 р.) вимагав, зокрема,", "opts": ["розпустити загони Вільного козацтва", "не пропускати на Дон козачі частини", "визнати Харків столицею України", "повернути Києву владу Тимчасового уряду"], "fix": false}, {"id": "q37", "n": 37, "t": "single", "lim": 20, "q": "Як називалися збори представників кримських татар, які в грудні 1917 р. проголосили Кримську Народну Республіку на чолі з Номаном Челебіджіханом?", "opts": ["синод", "диван", "меджліс", "курултай"], "fix": false}, {"id": "q38", "n": 38, "t": "single", "lim": 20, "q": "Петро Болбочан навесні 1918 р.", "opts": ["керував Листопадовим зривом у Львові", "керував обороною Києва від військ М. Муравйова", "очолив похід групи військ УНР на Крим", "очолив Перший Зимовий похід Армії УНР"], "fix": false}, {"id": "q39", "n": 39, "t": "three", "lim": 40, "q": "Які події відбулися в проміжку між ухваленням І та ІІІ Універсалів УЦР?", "opts": ["бій біля станції Крути", "переговори УЦР з делегацією Тимчасового уряду в Києві", "ультиматум Раднаркому Центральній Раді", "бої за владу в Києві між прихильниками Тимчасового уряду й більшовиками", "Всеукраїнський національний конгрес", "укладення Берестейського мирного договору", "створення Генерального секретаріату"], "fix": false}, {"id": "q40", "n": 40, "t": "three", "lim": 40, "q": "Хто з діячів входив до складу Української Центральної Ради?", "opts": ["Дмитро Донцов", "Андрій Жук", "Володимир Винниченко", "Михайло Галущинський", "Михайло Грушевський", "Сергій Єфремов", "Кость Левицький"], "fix": false}, {"id": "q41", "n": 41, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["ухвалення ІІ Універсалу УЦР", "укладення Берестейського мирного договору", "Всеукраїнський національний конгрес", "ультиматум Раднаркому Центральній Раді"], "fix": false}, {"id": "q42", "n": 42, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["ухвалення Конституції УНР", "повернення Центральної Ради до Києва", "бій біля станції Крути", "вступ військ М. Муравйова до Києва"], "fix": false}, {"id": "q43", "n": 43, "t": "single", "lim": 35, "q": "Укажіть портрет діяча, за влади якого заснували Українську академію наук на чолі з В. Вернадським.", "opts": ["А", "Б", "В", "Г"], "fix": true, "img": ["c_skor"]}, {"id": "q44", "n": 44, "t": "single", "lim": 35, "q": "«…Права приватної власності — як фундаменту культури й цивілізації — відновлюються в повній мірі… Відновлюється повна свобода по розробленню купчих по куплі-продажу землі…»\n\nДокумент, з якого наведено уривок, оприлюднили в день", "opts": ["ухвалення IV Універсалу УЦР", "Листопадового зриву у Львові", "державного перевороту в Києві", "проголошення Акта злуки"], "fix": false}, {"id": "q45", "n": 45, "t": "single", "lim": 35, "q": "Якою цифрою на картосхемі позначено територію, з якою гетьманський уряд у 1918 р. вів «митну війну», домагаючись її приєднання до Української Держави?", "opts": ["1", "2", "3", "4"], "fix": true, "img": ["m_hetman"]}, {"id": "q46", "n": 46, "t": "single", "lim": 20, "q": "Першим головою Директорії УНР був", "opts": ["Симон Петлюра", "Опанас Андрієвський", "Володимир Винниченко", "Євген Петрушевич"], "fix": false}, {"id": "q47", "n": 47, "t": "single", "lim": 20, "q": "У ніч на 1 листопада 1918 р. українські вояки взяли під контроль головні установи Львова під командуванням", "opts": ["Євгена Коновальця", "Михайла Галущинського", "Дмитра Вітовського", "Михайла Омеляновича-Павленка"], "fix": false}, {"id": "q48", "n": 48, "t": "single", "lim": 20, "q": "Українську Національну Раду, утворену у Львові в жовтні 1918 р., очолив", "opts": ["Сидір Голубович", "Кость Левицький", "Дмитро Вітовський", "Євген Петрушевич"], "fix": false}, {"id": "q49", "n": 49, "t": "single", "lim": 20, "q": "Акт злуки УНР і ЗУНР урочисто проголосили на Софійській площі в Києві", "opts": ["22 січня 1918 р.", "14 листопада 1918 р.", "22 січня 1919 р.", "13 листопада 1918 р."], "fix": false}, {"id": "q50", "n": 50, "t": "single", "lim": 20, "q": "Що передбачає принцип соборності?", "opts": ["незалежність української церкви від Москви", "об’єднання українських земель в одній державі", "єдність дій усіх українських партій", "незалежність України від усіх сусідніх держав"], "fix": false}, {"id": "q51", "n": 51, "t": "single", "lim": 20, "q": "Що в історії Української революції називають отаманщиною?", "opts": ["посаду головного отамана військ УНР", "непокору польових командирів центральній владі", "виборність командирів у Вільному козацтві", "колективне керівництво державою в Директорії"], "fix": false}, {"id": "q52", "n": 52, "t": "single", "lim": 20, "q": "Що стало причиною «Київської катастрофи» 31 серпня 1919 р.?", "opts": ["наступ польських військ з Волині", "вступ до міста денікінських військ", "удар Червоної армії з Лівобережжя", "повстання махновців у тилу УГА"], "fix": false}, {"id": "q53", "n": 53, "t": "single", "lim": 35, "q": "«Усі надлишки хліба, крім установленої норми на прожиток і насіння, селяни мають здати державі за твердими цінами. Приватна торгівля хлібом заборонена… Для вилучення хліба в селах діють продовольчі загони…» (переказ постанови 1919 р.)\n\nОписані заходи — складник політики", "opts": ["нової економічної політики", "Директорії щодо селянства", "гетьманської аграрної реформи", "воєнного комунізму"], "fix": false}, {"id": "q54", "n": 54, "t": "single", "lim": 20, "q": "Що з наведеного було проявом червоного терору в Україні в 1919 р.?", "opts": ["розстріли заручників з «буржуазії» органами ЧК", "репресії денікінської контррозвідки проти більшовиків", "погроми, що їх чинили загони свавільних отаманів", "каральні експедиції гетьманської Державної варти"], "fix": false}, {"id": "q55", "n": 55, "t": "single", "lim": 20, "q": "Що називають військовою інтервенцією Антанти на півдні України?", "opts": ["вступ польських військ на Волинь і Поділля в 1920 р.", "перебування французьких і грецьких військ у містах Причорномор’я", "наступ Добровольчої армії А. Денікіна в 1919 р.", "перебування німецьких і австро-угорських військ в Україні в 1918 р."], "fix": false}, {"id": "q56", "n": 56, "t": "single", "lim": 35, "q": "Повстанський рух на чолі з діячем, зображеним на фото, мав центр у", "opts": ["Гуляйполі на Катеринославщині", "Кам’янці-Подільському на Поділлі", "Таращі на Київщині", "Холодному Яру на Черкащині"], "fix": false, "img": ["p_makhno"]}, {"id": "q57", "n": 57, "t": "single", "lim": 35, "q": "Діяч, зображений на фото,", "opts": ["керував Листопадовим зривом у Львові", "очолював Українську Національну Раду", "очолював Директорію від її утворення", "підписав Варшавську угоду з Польщею"], "fix": false, "img": ["p_petl"]}, {"id": "q58", "n": 58, "t": "single", "lim": 20, "q": "За Ризьким мирним договором 1921 р.", "opts": ["Радянська Росія визнала незалежність ЗУНР", "Польща визнала УСРР і залишила за собою Західну Волинь", "Радянська Росія передала Польщі Правобережжя до Дніпра", "Польща передала УСРР Холмщину й Підляшшя"], "fix": false}, {"id": "q59", "n": 59, "t": "single", "lim": 20, "q": "Першим митрополитом Української автокефальної православної церкви обрали", "opts": ["Андрея Шептицького", "Йосифа Сліпого", "Івана Огієнка", "Василя Липківського"], "fix": false}, {"id": "q60", "n": 60, "t": "single", "lim": 35, "q": "Пам’ятник Тарасові Шевченку в Ромнах, зображений на фото, створив", "opts": ["Василь Кричевський", "Михайло Бойчук", "Іван Кавалерідзе", "Олександр Архипенко"], "fix": false, "img": ["a_romny"]}, {"id": "q61", "n": 61, "t": "single", "lim": 35, "q": "Ілюстрацію до поеми І. Котляревського «Енеїда», наведену на рисунку, створив", "opts": ["Василь Кричевський", "Михайло Бойчук", "Олександр Мурашко", "Георгій Нарбут"], "fix": false, "img": ["a_narbut"]}, {"id": "q62", "n": 62, "t": "single", "lim": 20, "q": "Українську академію наук заснували в", "opts": ["березні 1917 р.", "січні 1919 р.", "листопаді 1918 р.", "жовтні 1921 р."], "fix": false}, {"id": "q63", "n": 63, "t": "single", "lim": 35, "q": "На картосхемі позначено маршрут", "opts": ["Першого Зимового походу Армії УНР", "наступу Армії УНР і польських військ на Київ", "Чортківської офензиви УГА", "Другого Зимового походу Армії УНР"], "fix": false, "img": ["m_zym1"]}, {"id": "q64", "n": 64, "t": "three", "lim": 40, "q": "Які події відбулися в 1921 р.?", "opts": ["Чортківська офензива", "укладення Варшавської угоди", "укладення Ризького мирного договору", "завершення Першого Зимового походу", "утворення Української автокефальної православної церкви", "Другий Зимовий похід Армії УНР", "проголошення Акта злуки"], "fix": false}, {"id": "q65", "n": 65, "t": "three", "lim": 40, "q": "Що характеризує державний устрій Західноукраїнської Народної Республіки?", "opts": ["власна армія — Українська галицька армія", "уряд — Державний секретаріат", "уряд — Рада народних міністрів", "влада рад робітничих і селянських депутатів", "вища влада — Директорія з п’яти осіб", "законодавчий орган — Українська Національна Рада", "глава держави — гетьман"], "fix": false}, {"id": "q66", "n": 66, "t": "three", "lim": 40, "q": "Що стало причинами поразки Української революції?", "opts": ["відсутність сильної регулярної армії й отаманщина", "суперечності між українськими політичними силами", "підтримка українських урядів державами Антанти", "війна одночасно з кількома противниками без надійних союзників", "відмова УЦР від земельної реформи", "відсутність у селян інтересу до землі", "союз Директорії з Добровольчою армією А. Денікіна"], "fix": false}, {"id": "q67", "n": 67, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["державний переворот П. Скоропадського", "проголошення Акта злуки УНР і ЗУНР", "Листопадовий зрив у Львові", "утворення Директорії УНР"], "fix": false}, {"id": "q68", "n": 68, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["укладення Варшавської угоди", "початок Першого Зимового походу", "Другий Зимовий похід", "Чортківська офензива"], "fix": false}, {"id": "q69", "n": 69, "t": "seq", "lim": 40, "q": "Установіть послідовність подій.", "opts": ["розгром військ П. Врангеля в Криму", "проголошення в Бахчисараї Кримської Народної Республіки", "висадка військ Антанти в Одесі", "прихід в Україну німецьких і австро-угорських військ"], "fix": false}, {"id": "q70", "n": 70, "t": "seq", "lim": 40, "q": "Установіть послідовність подій, пов’язаних з діяльністю Симона Петлюри.", "opts": ["увійшов до Директорії як головний отаман військ", "очолив Директорію УНР", "став генеральним секретарем військових справ", "уклав угоду з Польщею у Варшаві"], "fix": false}];
+const IMGS = {"p_dontsov": {"src": "img/p_dontsov.jpg", "w": 332, "h": 454}, "m_gengub": {"src": "img/m_gengub.png", "w": 916, "h": 686}, "m_galbat": {"src": "img/m_galbat.png", "w": 800, "h": 648}, "m_uss": {"src": "img/m_uss.png", "w": 1078, "h": 644}, "p_hrush": {"src": "img/p_hrush.jpg", "w": 403, "h": 482}, "c_vynn": {"src": "img/c_vynn.jpg", "w": 1094, "h": 406}, "m_univ3": {"src": "img/m_univ3.png", "w": 1125, "h": 736}, "m_kholm": {"src": "img/m_kholm.png", "w": 826, "h": 648}, "m_kruty": {"src": "img/m_kruty.png", "w": 701, "h": 711}, "c_skor": {"src": "img/c_skor.jpg", "w": 1043, "h": 406}, "m_hetman": {"src": "img/m_hetman.png", "w": 1128, "h": 736}, "p_makhno": {"src": "img/p_makhno.jpg", "w": 330, "h": 524}, "p_petl": {"src": "img/p_petl.jpg", "w": 394, "h": 505}, "a_romny": {"src": "img/a_romny.jpg", "w": 800, "h": 565}, "a_narbut": {"src": "img/a_narbut.jpg", "w": 459, "h": 581}, "m_zym1": {"src": "img/m_zym1.png", "w": 812, "h": 648}};
+const INFO = {"title": "Україна в 1914–1921 рр.", "sub": "Перша світова війна · Українська революція · боротьба за державність", "n": 70, "max": 98, "min": 46, "pause": 10, "cnt": {"single": 56, "three": 7, "seq": 7}};
+const API = "local";
+const STORE_PREFIX = "b1914_";
+/* Мобільний урок: рендер карток, навігація, прогрес, перегляд зображень.
+   Дані: LESSONS (масив частин), IMGS (ключ → {src,w,h}), MODE ('all' | 'one'), NEXT_FILE (для окремого файлу). */
+const TITLE = typeof COURSE_TITLE === 'string' ? COURSE_TITLE : 'Стародавня історія України';
+const PFX = typeof STORE_PREFIX === 'string' ? STORE_PREFIX : 'mob_';
+const PARTS_WORD = typeof COURSE_PARTS_WORD === 'string' ? COURSE_PARTS_WORD : 'три частини';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(PFX + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(PFX + k, JSON.stringify(v)); } catch (e) {} }
+};
+const app = document.getElementById('app');
+const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const BRAND = typeof COURSE_BRAND === 'string' ? COURSE_BRAND : '';
+const brandHtml = () => BRAND ? `<p class="brand">${esc(BRAND)}</p>` : '';
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b class="a">$1</b>').replace(/__([^_].*?)__/g, '<b class="a2">$1</b>');
+const paras = ps => `<div class="txt">${(ps || []).map(p => `<p>${md(p)}</p>`).join('')}</div>`;
+
+const FS = {
+  el: document.documentElement,
+  can() { return !!(document.fullscreenEnabled || document.webkitFullscreenEnabled); },
+  on() { return !!(document.fullscreenElement || document.webkitFullscreenElement); },
+  off: false,                       // учень сам вимкнув кнопкою — не вмикаємо знову
+  enter() {
+    if (!this.can() || this.on()) return Promise.resolve();
+    try {
+      const r = this.el.requestFullscreen ? this.el.requestFullscreen({ navigationUI: 'hide' }) : this.el.webkitRequestFullscreen();
+      return Promise.resolve(r).catch(() => {});
+    } catch (e) { return Promise.resolve(); }
+  },
+  exit() { try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} },
+};
+const fsb = document.getElementById('fsb');
+function fsPaint() {
+  if (!FS.can()) { fsb.hidden = true; return; }
+  fsb.hidden = false;
+  fsb.textContent = FS.on() ? '⤡' : '⤢';
+  fsb.setAttribute('aria-label', FS.on() ? 'Вийти з повного екрана' : 'На весь екран');
+}
+fsb.addEventListener('click', e => {
+  e.stopPropagation();
+  if (FS.on()) { FS.off = true; FS.exit(); } else { FS.off = false; FS.enter(); }
+});
+document.addEventListener('click', e => { if (!FS.off && !FS.on() && e.target !== fsb) FS.enter(); }, true);
+document.addEventListener('fullscreenchange', fsPaint);
+document.addEventListener('webkitfullscreenchange', fsPaint);
+function lockLandscape(wide) {
+  try { if (wide && FS.on() && screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch (e) {}
+}
+function unlockOrientation() { try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {} }
+fsPaint();
+
+/* ---------- перегляд зображень ---------- */
+const lb = document.getElementById('lb'), lbv = document.getElementById('lbv'), lbi = document.getElementById('lbi');
+/* Масштаб — transform (translate + scale) з опорою в точці між пальцями: зображення не «стрибає».
+   Щипок двома пальцями, перетягування одним, подвійний дотик — збільшити/повернути; на комп’ютері — коліщатко й подвійний клік. */
+const V = { s: 1, x: 0, y: 0, bw: 0, bh: 0 };
+function vbox() { return { W: lbv.clientWidth, H: lbv.clientHeight }; }
+function lbFit() {
+  const { W, H } = vbox(), iw = lbi.naturalWidth || 1, ih = lbi.naturalHeight || 1, k = Math.min(W / iw, H / ih);
+  V.bw = iw * k; V.bh = ih * k; lbi.style.width = V.bw + 'px'; lbi.style.height = V.bh + 'px';
+  V.s = 1; V.x = (W - V.bw) / 2; V.y = (H - V.bh) / 2; lbApply();
+}
+function lbApply() {
+  const { W, H } = vbox(), w = V.bw * V.s, h = V.bh * V.s;
+  V.x = w <= W ? (W - w) / 2 : Math.min(0, Math.max(W - w, V.x));
+  V.y = h <= H ? (H - h) / 2 : Math.min(0, Math.max(H - h, V.y));
+  lbi.style.transform = `translate(${V.x}px, ${V.y}px) scale(${V.s})`;
+}
+function zoomAt(ns, px, py) {
+  ns = Math.max(1, Math.min(6, ns));
+  const qx = (px - V.x) / V.s, qy = (py - V.y) / V.s;
+  V.s = ns; V.x = px - qx * ns; V.y = py - qy * ns; lbApply();
+}
+function setZoom(z) { const { W, H } = vbox(); zoomAt(z, W / 2, H / 2); }
+function openLb(p) {
+  lbi.onload = lbFit; lbi.src = p.dataset.src; document.getElementById('lbc').innerHTML = md(p.dataset.cap); lb.classList.add('open');
+  if (lbi.complete && lbi.naturalWidth) lbFit();
+  if (!FS.off) FS.enter();
+}
+app.addEventListener('click', e => { const p = e.target.closest('.pic'); if (p) openLb(p); });
+/* щипок на зображенні в уроці відкриває перегляд (а не збільшує всю сторінку) */
+app.addEventListener('touchstart', e => {
+  if (e.touches.length !== 2) return;
+  const p = e.target.closest('.pic'); if (!p) return;
+  e.preventDefault(); openLb(p);
+}, { passive: false });
+function closeLb() { lb.classList.remove('open'); unlockOrientation(); }
+document.getElementById('lbX').onclick = closeLb;
+document.getElementById('lbIn').onclick = () => setZoom(V.s * 1.6);
+document.getElementById('lbOut').onclick = () => setZoom(V.s / 1.6);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+window.addEventListener('resize', () => { if (lb.classList.contains('open')) lbFit(); });
+const rel = t => { const r = lbv.getBoundingClientRect(); return { x: t.clientX - r.left, y: t.clientY - r.top }; };
+let g = null, lastTap = 0;
+lbv.addEventListener('touchstart', e => {
+  e.preventDefault();
+  if (e.touches.length >= 2) {
+    const a = rel(e.touches[0]), b = rel(e.touches[1]);
+    g = { t: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, s0: V.s, qx: ((a.x + b.x) / 2 - V.x) / V.s, qy: ((a.y + b.y) / 2 - V.y) / V.s };
+  } else if (e.touches.length === 1) {
+    const a = rel(e.touches[0]), now = Date.now();
+    if (now - lastTap < 300) { zoomAt(V.s > 1.05 ? 1 : 2.5, a.x, a.y); lastTap = 0; g = null; return; }
+    lastTap = now; g = { t: 'pan', px: a.x, py: a.y, x0: V.x, y0: V.y };
+  }
+}, { passive: false });
+lbv.addEventListener('touchmove', e => {
+  e.preventDefault(); if (!g) return;
+  if (g.t === 'pinch' && e.touches.length >= 2) {
+    const a = rel(e.touches[0]), b = rel(e.touches[1]), d = Math.hypot(a.x - b.x, a.y - b.y);
+    const ns = Math.max(1, Math.min(6, g.s0 * d / g.d0)), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    V.s = ns; V.x = mx - g.qx * ns; V.y = my - g.qy * ns; lbApply();
+  } else if (g.t === 'pan' && e.touches.length === 1) {
+    const a = rel(e.touches[0]); V.x = g.x0 + a.x - g.px; V.y = g.y0 + a.y - g.py; lbApply();
+  }
+}, { passive: false });
+lbv.addEventListener('touchend', e => {
+  if (e.touches.length === 1) { const a = rel(e.touches[0]); g = { t: 'pan', px: a.x, py: a.y, x0: V.x, y0: V.y }; }   // з двох пальців на один — далі перетягування
+  else if (!e.touches.length) g = null;
+}, { passive: false });
+lbv.addEventListener('wheel', e => { e.preventDefault(); const a = rel(e); zoomAt(V.s * (e.deltaY < 0 ? 1.15 : 1 / 1.15), a.x, a.y); }, { passive: false });
+lbi.addEventListener('dblclick', e => { const a = rel(e); zoomAt(V.s > 1.05 ? 1 : 2.5, a.x, a.y); });
+
+
+/* ---------- локальний «сервер»: Code.gs у сторінці (стан — у localStorage цього телефона) ---------- */
+const LOCALSRV = (function () {
+  const PX = 'b1914srv_';
+  const PropertiesService = { getScriptProperties: () => ({ getProperty: k => localStorage.getItem(PX + k), setProperty: (k, v) => localStorage.setItem(PX + k, String(v)) }) };
+  const sh = { setFrozenRows() {}, appendRow() {}, getLastRow: () => 0, getRange() { return { getValues: () => [[]], setValues() { return this; }, setFontWeight() { return this; } }; } };
+  const book = { getSheetByName: () => sh, insertSheet: () => sh, getSheets: () => [sh], deleteSheet() {}, getId: () => 'local' };
+  const SpreadsheetApp = { openById: () => book, create: () => book };
+  const LockService = { getScriptLock: () => ({ waitLock() {}, releaseLock() {} }) };
+  const ContentService = { createTextOutput: s => s, MimeType: {} };
+  const Utilities = { DigestAlgorithm: {}, Charset: {}, formatDate: d => (d || new Date()).toISOString(), base64Encode: s => s,
+    computeDigest: (a, s) => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return 'h' + (h >>> 0).toString(36) + s.length; } };
+/**
+ * Сервер онлайн-бліцу-соло «Україна в 1914–1921 рр.» (10 клас, 70 питань).
+ * Окремий проєкт Apps Script на tests@edu177.com, веб-застосунок: «Виконувати як: я», «Доступ: усі».
+ * Таблицю результатів створює функція setup() (запустити один раз у редакторі). Вхід — клас, прізвище й ім’я, власний код (без списків).
+ * Спроба одна; після неї сервер віддає розбір (правильні відповіді й пояснення). Ключі й пояснення — лише тут.
+ * Збирає src/blitz1914/online/make_online.py — не правити вручну.
+ */
+function setup() {
+  const P = PropertiesService.getScriptProperties();
+  let id = P.getProperty('SS');
+  if (!id) {
+    const ss = SpreadsheetApp.create('Бліц-соло «Україна в 1914–1921 рр.» — 10 клас, результати');
+    id = ss.getId(); P.setProperty('SS', id);
+  }
+  const ss = SpreadsheetApp.openById(id);
+  sheet_('Результати');
+  const Qs = sheet_('Питання');
+  if (Qs.getLastRow() < 2) Qs.getRange(2, 1, QTXT.length, 5).setValues(QTXT);
+  const s1 = ss.getSheetByName('Аркуш1') || ss.getSheetByName('Sheet1'); if (s1 && ss.getSheets().length > 1) ss.deleteSheet(s1);
+  return id;
+}
+const KEYS = [{"n": 1, "id": "q01", "t": "single", "ok": [3]}, {"n": 2, "id": "q02", "t": "single", "ok": [2]}, {"n": 3, "id": "q03", "t": "single", "ok": [0]}, {"n": 4, "id": "q04", "t": "single", "ok": [2]}, {"n": 5, "id": "q05", "t": "single", "ok": [0]}, {"n": 6, "id": "q06", "t": "single", "ok": [0]}, {"n": 7, "id": "q07", "t": "single", "ok": [2]}, {"n": 8, "id": "q08", "t": "single", "ok": [3]}, {"n": 9, "id": "q09", "t": "single", "ok": [2]}, {"n": 10, "id": "q10", "t": "single", "ok": [1]}, {"n": 11, "id": "q11", "t": "single", "ok": [1]}, {"n": 12, "id": "q12", "t": "single", "ok": [0]}, {"n": 13, "id": "q13", "t": "single", "ok": [1]}, {"n": 14, "id": "q14", "t": "single", "ok": [1]}, {"n": 15, "id": "q15", "t": "single", "ok": [0]}, {"n": 16, "id": "q16", "t": "single", "ok": [2]}, {"n": 17, "id": "q17", "t": "single", "ok": [2]}, {"n": 18, "id": "q18", "t": "three", "ok": [0, 4, 6]}, {"n": 19, "id": "q19", "t": "three", "ok": [0, 2, 3]}, {"n": 20, "id": "q20", "t": "seq", "ok": [1, 3, 0, 2]}, {"n": 21, "id": "q21", "t": "single", "ok": [3]}, {"n": 22, "id": "q22", "t": "single", "ok": [0]}, {"n": 23, "id": "q23", "t": "single", "ok": [2]}, {"n": 24, "id": "q24", "t": "single", "ok": [2]}, {"n": 25, "id": "q25", "t": "single", "ok": [3]}, {"n": 26, "id": "q26", "t": "single", "ok": [2]}, {"n": 27, "id": "q27", "t": "single", "ok": [3]}, {"n": 28, "id": "q28", "t": "single", "ok": [1]}, {"n": 29, "id": "q29", "t": "single", "ok": [1]}, {"n": 30, "id": "q30", "t": "single", "ok": [1]}, {"n": 31, "id": "q31", "t": "single", "ok": [2]}, {"n": 32, "id": "q32", "t": "single", "ok": [3]}, {"n": 33, "id": "q33", "t": "single", "ok": [0]}, {"n": 34, "id": "q34", "t": "single", "ok": [3]}, {"n": 35, "id": "q35", "t": "single", "ok": [0]}, {"n": 36, "id": "q36", "t": "single", "ok": [1]}, {"n": 37, "id": "q37", "t": "single", "ok": [3]}, {"n": 38, "id": "q38", "t": "single", "ok": [2]}, {"n": 39, "id": "q39", "t": "three", "ok": [1, 3, 6]}, {"n": 40, "id": "q40", "t": "three", "ok": [2, 4, 5]}, {"n": 41, "id": "q41", "t": "seq", "ok": [2, 0, 3, 1]}, {"n": 42, "id": "q42", "t": "seq", "ok": [2, 3, 1, 0]}, {"n": 43, "id": "q43", "t": "single", "ok": [3]}, {"n": 44, "id": "q44", "t": "single", "ok": [2]}, {"n": 45, "id": "q45", "t": "single", "ok": [1]}, {"n": 46, "id": "q46", "t": "single", "ok": [2]}, {"n": 47, "id": "q47", "t": "single", "ok": [2]}, {"n": 48, "id": "q48", "t": "single", "ok": [3]}, {"n": 49, "id": "q49", "t": "single", "ok": [2]}, {"n": 50, "id": "q50", "t": "single", "ok": [1]}, {"n": 51, "id": "q51", "t": "single", "ok": [1]}, {"n": 52, "id": "q52", "t": "single", "ok": [1]}, {"n": 53, "id": "q53", "t": "single", "ok": [3]}, {"n": 54, "id": "q54", "t": "single", "ok": [0]}, {"n": 55, "id": "q55", "t": "single", "ok": [1]}, {"n": 56, "id": "q56", "t": "single", "ok": [0]}, {"n": 57, "id": "q57", "t": "single", "ok": [3]}, {"n": 58, "id": "q58", "t": "single", "ok": [1]}, {"n": 59, "id": "q59", "t": "single", "ok": [3]}, {"n": 60, "id": "q60", "t": "single", "ok": [2]}, {"n": 61, "id": "q61", "t": "single", "ok": [3]}, {"n": 62, "id": "q62", "t": "single", "ok": [2]}, {"n": 63, "id": "q63", "t": "single", "ok": [0]}, {"n": 64, "id": "q64", "t": "three", "ok": [2, 4, 5]}, {"n": 65, "id": "q65", "t": "three", "ok": [0, 1, 5]}, {"n": 66, "id": "q66", "t": "three", "ok": [0, 1, 3]}, {"n": 67, "id": "q67", "t": "seq", "ok": [0, 2, 3, 1]}, {"n": 68, "id": "q68", "t": "seq", "ok": [3, 1, 0, 2]}, {"n": 69, "id": "q69", "t": "seq", "ok": [1, 3, 2, 0]}, {"n": 70, "id": "q70", "t": "seq", "ok": [2, 0, 1, 3]}];
+const QTXT = [[1, "Перша світова війна", "одна з чотирьох", "Головну українську раду, утворену у Львові на початку серпня 1914 р., ", "q01"], [2, "Перша світова війна", "одна з чотирьох", "Андрій Жук і Дмитро Донцов у серпні 1914 р. були серед засновників", "q02"], [3, "Перша світова війна", "одна з чотирьох", "Хто з педагогів, діячів «Просвіти», на початку Першої світової війни о", "q03"], [4, "Перша світова війна", "одна з чотирьох", "Австрійський архикнязь Вільгельм Габсбург (Василь Вишиваний) у 1918 р.", "q04"], [5, "Перша світова війна", "одна з чотирьох", "Галицько-Буковинське генерал-губернаторство припинило існування внаслі", "q05"], [6, "Перша світова війна", "одна з чотирьох", "Що стало наслідком Галицької битви 1914 р.?", "q06"], [7, "Перша світова війна", "одна з чотирьох", "Брусиловський прорив, під час якого російські війська знову зайняли Бу", "q07"], [8, "Перша світова війна", "одна з чотирьох", "Вивезення в 1915 р. обладнання заводів, майна установ і навчальних зак", "q08"], [9, "Перша світова війна", "одна з чотирьох", "Про яке явище свідчить те, що до російської армії в 1914–1917 рр. приз", "q09"], [10, "Перша світова війна", "одна з чотирьох", "Поняття «світова війна» найточніше характеризує збройний конфлікт, яки", "q10"], [11, "Перша світова війна", "одна з чотирьох", "Маніфест якої організації цитовано?", "q11"], [12, "Перша світова війна", "одна з чотирьох", "Діяч, зображений на фото,", "q12"], [13, "Перша світова війна", "одна з чотирьох", "Як називали адміністративне утворення, яке в 1914–1915 рр. існувало на", "q13"], [14, "Перша світова війна", "одна з чотирьох", "На картосхемі стрілками позначено наступ російських військ під час", "q14"], [15, "Перша світова війна", "одна з чотирьох", "Пунктиром на картосхемі позначено бойовий шлях", "q15"], [16, "Перша світова війна", "одна з чотирьох", "Загальну українську раду, яка проголосила метою самостійність Наддніпр", "q16"], [17, "Перша світова війна", "одна з чотирьох", "Слова, наведені в уривку, належать", "q17"], [18, "Перша світова війна", "три з семи", "Які події відбулися в 1914 р.?", "q18"], [19, "Перша світова війна", "три з семи", "Які наслідки мала Перша світова війна для українських земель?", "q19"], [20, "Перша світова війна", "послідовність", "Установіть послідовність подій.", "q20"], [21, "Початок Української революції", "одна з чотирьох", "Всеукраїнський національний конгрес, який переобрав склад Української ", "q21"], [22, "Початок Української революції", "одна з чотирьох", "Діяч, зображений на фото,", "q22"], [23, "Початок Української революції", "одна з чотирьох", "Укажіть портрет діяча, який очолював Генеральний секретаріат — перший ", "q23"], [24, "Початок Української революції", "одна з чотирьох", "Документ, уривок з якого наведено, ухвалили в", "q24"], [25, "Початок Української революції", "одна з чотирьох", "ІІ Універсал Центральна Рада ухвалила після переговорів з делегацією", "q25"], [26, "Початок Української революції", "одна з чотирьох", "Якою цифрою на картосхемі позначено губернії, які ІІІ Універсал включи", "q26"], [27, "Початок Української революції", "одна з чотирьох", "Заштрихована на картосхемі територія", "q27"], [28, "Початок Української революції", "одна з чотирьох", "IV Універсал, який проголосив УНР «самостійною, ні від кого не залежно", "q28"], [29, "Початок Української революції", "одна з чотирьох", "Цифрою 1 на картосхемі позначено місце бою, що відбувся під час наступ", "q29"], [30, "Початок Української революції", "одна з чотирьох", "Що спонукало УНР укласти Берестейський мирний договір з державами Четв", "q30"], [31, "Початок Української революції", "одна з чотирьох", "Хто в 1917 р. належав до самостійників?", "q31"], [32, "Початок Української революції", "одна з чотирьох", "Після ухвалення IV Універсалу Генеральний секретаріат перейменували на", "q32"], [33, "Початок Української революції", "одна з чотирьох", "Почесним отаманом Вільного козацтва з’їзд у Чигирині в жовтні 1917 р. ", "q33"], [34, "Початок Української революції", "одна з чотирьох", "Згідно з універсалами УЦР остаточно визначити державний устрій України", "q34"], [35, "Початок Української революції", "одна з чотирьох", "У грудні 1917 р. з’їзд рад у Харкові, скликаний більшовиками, проголос", "q35"], [36, "Початок Української революції", "одна з чотирьох", "Ультиматум Ради народних комісарів Центральній Раді (грудень 1917 р.) ", "q36"], [37, "Початок Української революції", "одна з чотирьох", "Як називалися збори представників кримських татар, які в грудні 1917 р", "q37"], [38, "Початок Української революції", "одна з чотирьох", "Петро Болбочан навесні 1918 р.", "q38"], [39, "Початок Української революції", "три з семи", "Які події відбулися в проміжку між ухваленням І та ІІІ Універсалів УЦР", "q39"], [40, "Початок Української революції", "три з семи", "Хто з діячів входив до складу Української Центральної Ради?", "q40"], [41, "Початок Української революції", "послідовність", "Установіть послідовність подій.", "q41"], [42, "Початок Української революції", "послідовність", "Установіть послідовність подій.", "q42"], [43, "Боротьба за державність 1918–1921", "одна з чотирьох", "Укажіть портрет діяча, за влади якого заснували Українську академію на", "q43"], [44, "Боротьба за державність 1918–1921", "одна з чотирьох", "Документ, з якого наведено уривок, оприлюднили в день", "q44"], [45, "Боротьба за державність 1918–1921", "одна з чотирьох", "Якою цифрою на картосхемі позначено територію, з якою гетьманський уря", "q45"], [46, "Боротьба за державність 1918–1921", "одна з чотирьох", "Першим головою Директорії УНР був", "q46"], [47, "Боротьба за державність 1918–1921", "одна з чотирьох", "У ніч на 1 листопада 1918 р. українські вояки взяли під контроль голов", "q47"], [48, "Боротьба за державність 1918–1921", "одна з чотирьох", "Українську Національну Раду, утворену у Львові в жовтні 1918 р., очоли", "q48"], [49, "Боротьба за державність 1918–1921", "одна з чотирьох", "Акт злуки УНР і ЗУНР урочисто проголосили на Софійській площі в Києві", "q49"], [50, "Боротьба за державність 1918–1921", "одна з чотирьох", "Що передбачає принцип соборності?", "q50"], [51, "Боротьба за державність 1918–1921", "одна з чотирьох", "Що в історії Української революції називають отаманщиною?", "q51"], [52, "Боротьба за державність 1918–1921", "одна з чотирьох", "Що стало причиною «Київської катастрофи» 31 серпня 1919 р.?", "q52"], [53, "Боротьба за державність 1918–1921", "одна з чотирьох", "Описані заходи — складник політики", "q53"], [54, "Боротьба за державність 1918–1921", "одна з чотирьох", "Що з наведеного було проявом червоного терору в Україні в 1919 р.?", "q54"], [55, "Боротьба за державність 1918–1921", "одна з чотирьох", "Що називають військовою інтервенцією Антанти на півдні України?", "q55"], [56, "Боротьба за державність 1918–1921", "одна з чотирьох", "Повстанський рух на чолі з діячем, зображеним на фото, мав центр у", "q56"], [57, "Боротьба за державність 1918–1921", "одна з чотирьох", "Діяч, зображений на фото,", "q57"], [58, "Боротьба за державність 1918–1921", "одна з чотирьох", "За Ризьким мирним договором 1921 р.", "q58"], [59, "Боротьба за державність 1918–1921", "одна з чотирьох", "Першим митрополитом Української автокефальної православної церкви обра", "q59"], [60, "Боротьба за державність 1918–1921", "одна з чотирьох", "Пам’ятник Тарасові Шевченку в Ромнах, зображений на фото, створив", "q60"], [61, "Боротьба за державність 1918–1921", "одна з чотирьох", "Ілюстрацію до поеми І. Котляревського «Енеїда», наведену на рисунку, с", "q61"], [62, "Боротьба за державність 1918–1921", "одна з чотирьох", "Українську академію наук заснували в", "q62"], [63, "Боротьба за державність 1918–1921", "одна з чотирьох", "На картосхемі позначено маршрут", "q63"], [64, "Боротьба за державність 1918–1921", "три з семи", "Які події відбулися в 1921 р.?", "q64"], [65, "Боротьба за державність 1918–1921", "три з семи", "Що характеризує державний устрій Західноукраїнської Народної Республік", "q65"], [66, "Боротьба за державність 1918–1921", "три з семи", "Що стало причинами поразки Української революції?", "q66"], [67, "Боротьба за державність 1918–1921", "послідовність", "Установіть послідовність подій.", "q67"], [68, "Боротьба за державність 1918–1921", "послідовність", "Установіть послідовність подій.", "q68"], [69, "Боротьба за державність 1918–1921", "послідовність", "Установіть послідовність подій.", "q69"], [70, "Боротьба за державність 1918–1921", "послідовність", "Установіть послідовність подій, пов’язаних з діяльністю Симона Петлюри", "q70"]];
+const EXPL = {"q01": "Головну українську раду (ГУР) у серпні 1914 р. утворили українські партії Галичини; її головою став Кость Левицький, він же з 1915 р. очолив Загальну українську раду. Є. Петрушевич — президент Української Національної Ради (1918), Д. Донцов — серед засновників Союзу визволення України, М. Галущинський — командант легіону УСС.", "q02": "Союз визволення України (СВУ) заснували у Львові в серпні 1914 р. емігранти з Наддніпрянщини, серед них А. Жук і Д. Донцов. СВУ вів агітацію серед полонених українців російської армії. Головну українську раду й Українську бойову управу створили галицькі діячі, Загальну українську раду — у Відні 1915 р.", "q03": "Педагог, директор гімназії в Рогатині Михайло Галущинський у серпні 1914 р. став командантом легіону УСС, а після війни багато років очолював «Просвіту». Д. Вітовський — сотник УСС, керівник Листопадового зриву 1918 р.; К. Левицький — голова ГУР і ЗУР; М. Омелянович-Павленко — командувач УГА, згодом — Першого Зимового походу.", "q04": "Вільгельм Габсбург, який називав себе Василем Вишиваним і носив вишиванку, у 1918 р. командував бойовою групою, основу якої становили УСС, на Херсонщині. Генерал-губернатором окупованих Галичини й Буковини був російський граф Г. Бобринський; ЗУР очолював К. Левицький; делегацію УНР у Бересті — О. Севрюк.", "q05": "Після Галицької битви 1914 р. Російська імперія утворила на зайнятих землях Східної Галичини й Північної Буковини Галицько-Буковинське генерал-губернаторство (очільник — граф Г. Бобринський). Влада закривала українські школи й товариства, переслідувала греко-католицьке духовенство. Улітку 1915 р. німецько-австрійські війська після Горлицького прориву витіснили росіян з Галичини, і генерал-губернаторство припинило існування. Брусиловський прорив 1916 р. повернув росіянам лише Буковину й частину Галичини.", "q06": "Галицька битва (серпень – вересень 1914 р.) закінчилася перемогою Росії: російські війська зайняли Львів, Східну Галичину й Північну Буковину. Витіснили росіян з Галичини німецько-австрійські війська під час Горлицького прориву 1915 р. Закарпаття росіяни не займали.", "q07": "Наступ Південно-Західного фронту під командуванням О. Брусилова розпочався в червні 1916 р. Російські війська зайняли Луцьк, Буковину, частину Галичини. 1914 р. — Галицька битва, 1915 р. — Горлицький прорив, 1917 р. — «червневий наступ».", "q08": "Евакуація — організоване вивезення з місцевості, якій загрожує небезпека, населення, установ, підприємств, майна. Улітку 1915 р., під час відступу російської армії, частину заводів і навчальних закладів з українських губерній вивезли до Росії. Реквізиція — примусове вилучення майна для потреб армії; депортація — примусове виселення людей (так росіяни виселяли з Галичини греко-католицьких священиків), а не вивезення установ і майна.", "q09": "Мобілізація — переведення збройних сил і господарства держави на воєнний стан, призов військовозобов’язаних до армії. Українці, мобілізовані до армій ворожих імперій, воювали одні проти одних. Українізація армії почалася лише в 1917 р., демобілізація — переведення армії на мирний стан.", "q10": "Світова війна — війна, у якій беруть участь провідні держави кількох континентів; бойові дії ведуться на суходолі й морях різних частин світу, а держави мобілізують усі свої ресурси. У Першій світовій війні брали участь 38 держав, проте не всі держави світу; бої точилися не лише в Європі.", "q11": "Маніфест «До українського народу» оприлюднила 3 серпня 1914 р. Головна українська рада у Львові. Галицькі політики закликали підтримати Австро-Угорщину як союзницю у боротьбі проти Росії. Маркер — слово «наша» щодо Австро-Угорщини і заклик до галицького населення. СВУ складали наддніпрянські емігранти, ЗУР утворена 1915 р. у Відні, УЦР — 1917 р. у Києві.", "q12": "На фото — Дмитро Донцов, уродженець Мелітополя, перший голова Союзу визволення України (1914), згодом — ідеолог українського націоналізму. ГУР і ЗУР очолював К. Левицький, легіон УСС у 1914 р. — М. Галущинський, Василем Вишиваним називав себе архикнязь Вільгельм Габсбург.", "q13": "Заштриховано Східну Галичину й Північну Буковину, які російські війська зайняли після Галицької битви 1914 р.; тут утворили Галицько-Буковинське генерал-губернаторство. Королівство Галичини та Володимирії — австрійський коронний край (до 1918 р.), Південно-Західний край — російська назва Київської, Волинської й Подільської губерній, Західна область УНР — назва ЗУНР після Акта злуки 1919 р.", "q14": "Стрілки ведуть із Волині й Поділля на Львів, Галич і далі до Сяну та Перемишля — це наступ російських армій під час Галицької битви (серпень – вересень 1914 р.). Горлицький прорив 1915 р. — наступ німецько-австрійських військ у протилежному напрямку. Брусиловський прорив (1916) мав напрямки на Луцьк і Буковину й Львова не досяг; «червневий наступ» 1917 р. провалився після кількох днів.", "q15": "Шлях починається у Львові (1914), далі — Карпати (бої на горі Маківка, 1915), околиці Бережан (гора Лисоня, 1916) і Південна Україна, куди УСС прибули з австрійською армією в 1918 р. Січові стрільці Є. Коновальця сформувалися в Києві 1918 р., УГА — у листопаді 1918 р. в Галичині, Перший Зимовий похід проходив Правобережжям у 1919–1920 рр.", "q16": "Загальна українська рада утворилася у Відні 5 травня 1915 р. замість ГУР; до неї увійшли представники галицьких і буковинських партій та СВУ, очолив її К. Левицький. Серпень 1914 р. — ГУР, УСС, СВУ; червень 1916 р. — Брусиловський прорив; березень 1917 р. — УЦР.", "q17": "Це заява російського генерал-губернатора Г. Бобринського у Львові (1914). Окупаційна влада вважала Галичину «корінною частиною єдиної Русі», запроваджувала російську мову, закривала українські установи, переслідувала греко-католицьку церкву. Галицькі й наддніпрянські українські організації такі погляди відкидали.", "q18": "1914 р.: серпень — ГУР, легіон УСС, СВУ; серпень – вересень — Галицька битва. Горлицький прорив і утворення ЗУР — 1915 р., Брусиловський прорив і бої на горі Лисоня — 1916 р.", "q19": "Україна стала ареною боїв: прифронтові райони зруйновано, українці гинули й потрапляли в полон в арміях обох воюючих імперій, під час відступу 1915 р. росіяни вивезли частину населення в глиб імперії («біженство»). Автономії Галичині Росія не давала, столипінську реформу війна перервала, перші українські партії постали ще наприкінці XIX ст.", "q20": "Галицька битва — серпень – вересень 1914 р.; бій на горі Маківка — квітень – травень 1915 р.; Брусиловський прорив — червень 1916 р.; УЦР — березень 1917 р.", "q21": "УЦР утворилася в березні 1917 р.; у квітні 1917 р. Всеукраїнський національний конгрес у Києві переобрав її склад і підтвердив М. Грушевського головою. Червень 1917 р. — І Універсал, листопад — ІІІ Універсал.", "q22": "На фото — історик Михайло Грушевський, голова Української Центральної Ради (1917–1918). Генеральний секретаріат і Директорію спершу очолював В. Винниченко, президентом Української академії наук став В. Вернадський.", "q23": "Генеральний секретаріат (червень 1917 р.) очолив письменник Володимир Винниченко (портрет В). На інших портретах — М. Грушевський (голова УЦР), С. Єфремов (заступник голови УЦР, генеральний секретар міжнаціональних справ) та А. Жук (діяч СВУ).", "q24": "Це І Універсал УЦР (10 (23) червня 1917 р.): після відмови Тимчасового уряду визнати автономію Центральна Рада проголосила її самочинно — «не відділяючись від Росії». ІІ Універсал — липень 1917 р., ІІІ — листопад 1917 р., IV — січень 1918 р.", "q25": "ІІ Універсал (3 (16) липня 1917 р.) з’явився після переговорів УЦР з міністрами Тимчасового уряду, що приїхали до Києва. Тимчасовий уряд визнав Генеральний секретаріат крайовим органом влади, а УЦР відмовилася від самочинного запровадження автономії до Всеросійських Установчих зборів.", "q26": "«Тимчасова інструкція» (серпень 1917 р.) обмежила владу Генерального секретаріату п’ятьма губерніями: Київською, Волинською, Подільською, Полтавською й Чернігівською. ІІІ Універсал (листопад 1917 р.) включив до УНР ще Херсонщину, Катеринославщину, Харківщину й материкову Таврію (цифра 3). Інші цифри: Холмщина (відійшла до УНР за Берестейським миром), Крим (до складу УНР не входив), Східна Галичина (з листопада 1918 р. — ЗУНР).", "q27": "Заштриховано Холмщину й Південне Підляшшя — землі на захід від Бугу, які за Берестейським мирним договором (січень (лютий) 1918 р.) відійшли до УНР. ІІІ Універсал їх не згадував, до ЗУНР вони не належали, у 1914–1915 рр. тут була російська влада, але не Галицько-Буковинське генерал-губернаторство.", "q28": "IV Універсал ухвалено 9 (22) січня 1918 р. 7 (20) листопада 1917 р. — ІІІ Універсал, 27 січня (9 лютого) 1918 р. — Берестейський мирний договір, 29 квітня 1918 р. — гетьманський переворот і ухвалення Конституції УНР.", "q29": "Стрілки показують наступ більшовицьких військ на Київ у першій війні радянської Росії проти УНР (грудень 1917 – лютий 1918 р.): з Харкова через Полтаву й з півночі через Бахмач. На шляху з Бахмача до Ніжина, біля станції Крути, у січні 1918 р. відбувся бій. Мотовилівка (листопад 1918 р.) — бій Директорії з гетьманцями, Базар (листопад 1921 р.) — трагедія Другого Зимового походу, Чортків — початок наступу УГА 1919 р.", "q30": "УНР підписала договір у січні (лютому) 1918 р., коли більшовицькі війська наступали на Київ. Мир дав УНР міжнародне визнання й військову допомогу Німеччини та Австро-Угорщини, що вигнали більшовиків. Східна Галичина за таємним додатком мала стати окремим краєм Австро-Угорщини, а не частиною УНР; Антанта мира не схвалювала.", "q31": "Самостійники вимагали відразу повної незалежності України. Їхнім лідером був М. Міхновський (Українська народна партія). Більшість УЦР — М. Грушевський, В. Винниченко, С. Єфремов — у 1917 р. обстоювали автономію України у складі федеративної Росії (автономісти).", "q32": "IV Універсал перейменував Генеральний секретаріат на Раду народних міністрів УНР. Рада міністрів — уряд Української Держави гетьмана, Державний секретаріат — уряд ЗУНР, Народний секретаріат — радянський уряд, створений більшовиками в Харкові в грудні 1917 р.", "q33": "Вільне козацтво — добровільні загони самооборони, що постали навесні 1917 р. на Київщині. З’їзд Вільного козацтва в Чигирині (жовтень 1917 р.) обрав почесним отаманом генерала П. Скоропадського, майбутнього гетьмана.", "q34": "Установчі збори — обраний населенням орган, який мав ухвалити конституцію й визначити державний устрій. ІІІ Універсал призначив вибори до Всеукраїнських Установчих зборів на грудень 1917 р.; через війну скликати їх не вдалося. Трудовий конгрес зібрався вже за Директорії (січень 1919 р.).", "q35": "Більшовики не здобули більшості на Всеукраїнському з’їзді рад у Києві й перенесли з’їзд до Харкова, де в грудні 1917 р. проголосили Україну Республікою Рад (Українська Народна Республіка Рад) і створили Народний секретаріат. Донецько-Криворізьку республіку проголосили в Харкові в лютому 1918 р., назву УСРР запроваджено 1919 р.", "q36": "Ультиматум РНК (грудень 1917 р.) звинувачував УЦР у «буржуазній політиці» й вимагав не пропускати козачі частини на Дон до генерала Каледіна, не роззброювати радянські полки й червоногвардійців. УЦР ультиматум відхилила — почалася перша війна радянської Росії проти УНР. Тимчасовий уряд на той час уже був повалений.", "q37": "Курултай — національні збори кримських татар; у грудні 1917 р. в Бахчисараї курултай ухвалив конституцію і проголосив Кримську Народну Республіку, її уряд (Директорію) очолив Номан Челебіджіхан. Меджліс — виконавчий орган, обраний курултаєм у 1991 р., диван — рада при хані за часів Кримського ханства.", "q38": "Полковник П. Болбочан у квітні 1918 р. очолив Кримську групу Армії УНР, яка вибила більшовиків з Криму й зайняла Сімферополь і Бахчисарай. Перший Зимовий похід очолив М. Омелянович-Павленко, Листопадовим зривом керував Д. Вітовський.", "q39": "Між І Універсалом (червень 1917 р.) і ІІІ Універсалом (листопад 1917 р.): Генеральний секретаріат (червень), переговори з міністрами Тимчасового уряду (липень), бої за владу в Києві (кінець жовтня — початок листопада 1917 р.). Національний конгрес — квітень 1917 р. (раніше); ультиматум РНК — грудень 1917 р., Крути й Берестейський мир — січень (лютий) 1918 р. (пізніше).", "q40": "М. Грушевський — голова УЦР, В. Винниченко — заступник голови й голова Генерального секретаріату, С. Єфремов — заступник голови. А. Жук і Д. Донцов — діячі СВУ, що діяли в Австро-Угорщині, М. Галущинський і К. Левицький — галицькі діячі.", "q41": "Національний конгрес — квітень 1917 р.; ІІ Універсал — липень 1917 р.; ультиматум РНК — грудень 1917 р.; Берестейський мир — січень (лютий) 1918 р.", "q42": "Крути — 29 січня 1918 р.; війська Муравйова захопили Київ 8–9 лютого (26–27 січня ст. ст.) 1918 р.; УЦР повернулася до Києва на початку березня 1918 р. з допомогою німецьких військ; Конституцію УНР ухвалено 29 квітня 1918 р.", "q43": "Українську академію наук заснували в Українській Державі гетьмана Павла Скоропадського (портрет Г). На інших портретах — сам В. Вернадський, перший президент УАН, В. Липківський (митрополит УАПЦ) і П. Болбочан (полковник Армії УНР, керівник походу на Крим 1918 р.).", "q44": "Це «Грамота до всього українського народу» гетьмана П. Скоропадського від 29 квітня 1918 р. — дня перевороту, що поклав край УЦР. Маркер — відновлення права приватної власності, яку скасовували універсали й земельний закон УЦР.", "q45": "Гетьман П. Скоропадський вважав Крим необхідним для Української Держави; восени 1918 р. уряд запровадив економічну блокаду («митну війну») Криму, і кримський уряд погодився на переговори про входження до Української Держави (цифра 2). Кубань у 1918 р. вела з Україною переговори про союз, Бессарабію анексувала Румунія, Східна Галичина в листопаді 1918 р. стала ЗУНР.", "q46": "Директорію утворили 14 листопада 1918 р. для керівництва повстанням проти гетьмана; її головою став В. Винниченко, С. Петлюра — головним отаманом військ. Головою Директорії Петлюра став у лютому 1919 р., після відставки Винниченка. Є. Петрушевич увійшов до Директорії після Акта злуки.", "q47": "Листопадовий зрив очолив сотник УСС Дмитро Вітовський, згодом — державний секретар військових справ ЗУНР. Є. Коновалець командував Січовими стрільцями в Києві, М. Галущинський — командант УСС (1914), М. Омелянович-Павленко очолив Перший Зимовий похід.", "q48": "Українську Національну Раду очолював Євген Петрушевич; у червні 1919 р. він став диктатором ЗУНР. К. Левицький і С. Голубович очолювали уряд (Державний секретаріат), Д. Вітовський — керівник Листопадового зриву.", "q49": "Універсал Директорії про злуку оголосили в Києві 22 січня 1919 р., у першу річницю IV Універсалу (22 січня 1918 р. за новим стилем); 13 листопада 1918 р. проголошено ЗУНР; 14 листопада 1918 р. утворено Директорію.", "q50": "Соборність — єдність усіх українських етнічних земель в одній державі. Її втілював Акт злуки УНР і ЗУНР 22 січня 1919 р. Незалежність від інших держав — самостійність, незалежність церкви — автокефалія.", "q51": "Отаманщина — свавілля командирів повстанських загонів (отаманів), які не підкорялися Директорії, діяли на власний розсуд, нерідко чинили погроми й переходили з боку на бік. Вона послаблювала армію УНР у 1919 р. Головний отаман — посада С. Петлюри, а не явище.", "q52": "Наприкінці серпня 1919 р. УГА й Армія УНР вступили до Києва, але того ж дня до міста ввійшли денікінці. Командування УГА не наважилося на бій, і українські війська залишили Київ. Невдача поглибила розлад між УНР і ЗУНР.", "q53": "Продрозкладка — примусове вилучення в селян «надлишків» хліба за безцінь, заборона вільної торгівлі — основа політики воєнного комунізму більшовиків у 1919–1921 рр. Неп (з 1921 р.) замінив розкладку продподатком і дозволив торгівлю. Гетьман відновлював приватну власність.", "q54": "Червоний терор — масові репресії більшовиків проти «класових ворогів»: розстріли заручників, «буржуазії», духовенства, офіцерів. Його проводили надзвичайні комісії (ЧК). Каральні загони Державної варти (1918) і репресії денікінців (білий терор) спрямовувалися проти прихильників більшовиків; погроми отаманів — прояв отаманщини.", "q55": "Інтервенція — втручання іноземних держав у внутрішні справи країни, зокрема збройне. Наприкінці 1918 р. в Одесі, Миколаєві, Херсоні, Севастополі висадилися війська Антанти (французи, греки та ін.); навесні 1919 р. під тиском повстанців і Червоної армії вони відійшли. Німецькі війська 1918 р. прийшли на запрошення УНР за Берестейським миром.", "q56": "На фото — Нестор Махно, ватажок Революційної повстанської армії України з центром у Гуляйполі. Холодний Яр — осередок Холодноярської республіки (1919–1922), Кам’янець-Подільський — тимчасова столиця УНР 1919 р., Таращанська дивізія — червоні загони.", "q57": "На фото — Симон Петлюра, головний отаман військ УНР, з лютого 1919 р. — голова Директорії. У квітні 1920 р. уклав Варшавську угоду з Польщею. Директорію спершу очолював В. Винниченко, Листопадовий зрив — Д. Вітовський, УНРаду — Є. Петрушевич.", "q58": "Ризький мир (березень 1921 р.) між Польщею, радянською Росією й УСРР завершив польсько-радянську війну: Польща визнала УСРР і зобов’язалася не підтримувати УНР; Східна Галичина й Західна Волинь лишилися за Польщею. Холмщина й Підляшшя після 1919 р. належали Польщі й за нею залишилися.", "q59": "Автокефальна церква — незалежна від інших церков, з власним предстоятелем. Всеукраїнський православний собор у жовтні 1921 р. утворив УАПЦ і обрав митрополитом Василя Липківського. А. Шептицький і Й. Сліпий — митрополити УГКЦ; І. Огієнко, міністр віросповідань УНР, став митрополитом лише в еміграції.", "q60": "Пам’ятник у Ромнах (1918) — робота скульптора Івана Кавалерідзе. О. Архипенко — скульптор-авангардист, що працював за кордоном, М. Бойчук — художник-монументаліст, засновник школи «бойчукістів», В. Кричевський — архітектор і художник, автор малого герба УНР.", "q61": "Це «Еней та його військо» (1919) Георгія Нарбута — графіка, ректора Української академії мистецтв, автора державних знаків (гербів, грошей, марок) Української Держави й УНР. Характерні риси — чіткий контур, яскраві площини кольору, декоративність.", "q62": "Закон про заснування УАН гетьман П. Скоропадський затвердив у листопаді 1918 р.; президентом став В. Вернадський. Березень 1917 р. — УЦР, січень 1919 р. — Акт злуки, жовтень 1921 р. — собор, що утворив УАПЦ.", "q63": "Маршрут — глибокий рейд тилами противника від Житомирщини через Київщину до Єлисаветграда, на південь до Вознесенська й Ананьєва і назад до Ямполя — це Перший Зимовий похід (грудень 1919 – травень 1920 р.). Другий Зимовий похід (листопад 1921 р.) — короткий рейд з Волині до Коростеня й Базара; наступ на Київ 1920 р. — прямо зі заходу; Чортківська офензива — у Галичині.", "q64": "1921 р.: березень — Ризький мир, жовтень — собор УАПЦ, листопад — Другий Зимовий похід. Варшавська угода й завершення Першого Зимового походу — 1920 р., Акт злуки й Чортківська офензива — 1919 р.", "q65": "ЗУНР (проголошена 13 листопада 1918 р.) мала парламент — Українську Національну Раду (президент Є. Петрушевич), уряд — Державний секретаріат, армію — УГА. Гетьман — в Українській Державі, Рада народних міністрів і Директорія — в УНР, ради — у радянській Україні.", "q66": "Причини поразки: розкол і суперечки в українському таборі (УЦР — гетьман — Директорія, УНР — ЗУНР), слабка армія й отаманщина, боротьба з більшовиками, білими, поляками без надійних союзників. Директорія з Денікіним воювала, УЦР ухвалила земельний закон, Антанта українських урядів не підтримувала, земельне питання було для селян головним.", "q67": "29 квітня 1918 р. — гетьманський переворот; 1 листопада 1918 р. — Листопадовий зрив; 14 листопада 1918 р. — Директорія; 22 січня 1919 р. — Акт злуки.", "q68": "Чортківська офензива — червень 1919 р.; Перший Зимовий похід почався в грудні 1919 р.; Варшавська угода — квітень 1920 р.; Другий Зимовий похід — листопад 1921 р.", "q69": "Кримська Народна Республіка — грудень 1917 р.; німецькі й австро-угорські війська прийшли за Берестейським миром — лютий – березень 1918 р.; десант Антанти в Одесі — грудень 1918 р.; розгром Врангеля Червоною армією за участі махновців — листопад 1920 р.", "q70": "Генеральний секретар військових справ — червень 1917 р.; Директорія — листопад 1918 р.; голова Директорії — лютий 1919 р.; Варшавська угода — квітень 1920 р."};   // пояснення: учень бачить їх лише після своєї спроби
+const MINUTES = 46;   // орієнтовна тривалість (таймери + паузи)
+const TZ = 'Europe/Kiev';
+const HEAD = {
+  'Результати': ['Завершено', 'Клас', 'Учень', 'Бали', 'Максимум', '%', 'Оцінка (1–12)', 'Тривалість, хв (телефон)', 'Від початку, хв (сервер)',
+    'Виходи зі сторінки', 'Без відповіді'].concat(KEYS.map(function (k) { return String(k.n); })),
+  'Питання': ['№', 'Розділ', 'Тип', 'Умова (початок)', 'id'],
+};
+function ss_() { return SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SS')); }
+function doGet() { return out_({ ok: true, server: 'blitz1914-solo', ready: !!PropertiesService.getScriptProperties().getProperty('SS') }); }
+function doPost(e) {
+  const lock = LockService.getScriptLock(); lock.waitLock(25000);
+  try { return out_(handle_(JSON.parse(e.postData.contents))); }
+  catch (err) { return out_({ error: String(err.message || err) }); }
+  finally { lock.releaseLock(); }
+}
+function out_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function sheet_(name) {
+  const ss = ss_(); let s = ss.getSheetByName(name);
+  if (!s) { s = ss.insertSheet(name); s.setFrozenRows(1); }
+  const H = HEAD[name];
+  if (s.getRange(1, 1, 1, H.length).getValues()[0].join('|') !== H.join('|')) s.getRange(1, 1, 1, H.length).setValues([H]).setFontWeight('bold');
+  return s;
+}
+const now_ = function (d) { return Utilities.formatDate(d || new Date(), TZ, 'dd.MM.yyyy HH:mm:ss'); };
+
+/* ---------- списки класів ---------- */
+function norm_(s) { return String(s || '').toLowerCase().replace(/[’ʼ\x60´']/g, '\'').replace(/ё/g, 'е').replace(/[^a-zа-яіїєґ'\- ]/g, ' ').replace(/\s+/g, ' ').trim(); }
+function clsNorm_(c) { return String(c || '').toUpperCase().replace(/\s+/g, '').replace(/^(\d+)([А-ЯІЇЄҐ])$/, '$1-$2'); }
+function key_(s) { return norm_(s).split(' ').filter(String).sort().join(' '); }
+function hash_(name, cls, pin) {
+  const raw = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, 'b1914|' + cls + '|' + key_(name) + '|' + pin, Utilities.Charset.UTF_8);
+  return Utilities.base64Encode(raw).slice(0, 22);
+}
+
+/* ---------- дії ---------- */
+function handle_(b) {
+  const P = PropertiesService.getScriptProperties();
+  const cls = clsNorm_(b.cls), name = nameNorm_(b.name);
+  if (CLASSES.indexOf(cls) < 0 || name.split(' ').length < 2) throw new Error('roster');
+  const id = cls + '|' + key_(name), pin = String(b.pin || '');
+  if (!/^\d{4,8}$/.test(pin)) throw new Error('pin');
+  const saved = P.getProperty('pin|' + id);
+  if (b.op === 'login' && !saved) P.setProperty('pin|' + id, hash_(name, cls, pin));
+  else if (!saved || saved !== hash_(name, cls, pin)) throw new Error('pin');
+  const done = P.getProperty('done|' + id);
+  const ans = JSON.parse(P.getProperty('ans|' + id) || '{}');
+  if (b.op === 'login') return { name: name, cls: cls, done: done ? withReview_(JSON.parse(done), ans) : null, ans: ans, started: P.getProperty('t0|' + id) };
+  if (done) return { done: withReview_(JSON.parse(done), ans) };
+  if (b.op === 'start') { if (!P.getProperty('t0|' + id)) P.setProperty('t0|' + id, String(Date.now())); return { ans: ans }; }
+  if (b.op === 'ans') {
+    if (!KEYS.some(function (k) { return k.id === b.id; })) throw new Error('питання');
+    ans[b.id] = clean_(b.a); P.setProperty('ans|' + id, JSON.stringify(ans)); return { ok: true };
+  }
+  if (b.op === 'finish') {
+    const all = Object.assign({}, ans);
+    Object.keys(b.ans || {}).forEach(function (k) { if (KEYS.some(function (x) { return x.id === k; })) all[k] = clean_(b.ans[k]); });
+    const r = grade_(all), t0 = Number(P.getProperty('t0|' + id)) || null;
+    const sec = Number(b.sec) > 0 ? Math.round(Number(b.sec) / 6) / 10 : '';
+    const srv = t0 ? Math.round((Date.now() - t0) / 6000) / 10 : '';
+    const miss = KEYS.filter(function (k) { return all[k.id] === null || all[k.id] === undefined; }).length;
+    sheet_('Результати').appendRow([now_(), cls, name, r.pts, r.max, r.pct, r.grade, sec, srv, Number(b.exits) || 0, miss].concat(r.per));
+    const res = { pts: r.pts, max: r.max, pct: r.pct, grade: r.grade };
+    P.setProperty('done|' + id, JSON.stringify(res)); P.setProperty('ans|' + id, JSON.stringify(all));
+    return withReview_(res, all);
+  }
+  throw new Error('невідома дія');
+}
+/** розбір після спроби: відповіді учня, правильні відповіді, бали за кожне питання, пояснення */
+function withReview_(res, ans) {
+  const r = grade_(ans);
+  return Object.assign({}, res, { review: KEYS.map(function (k, i) {
+    return { id: k.id, ok: k.ok, a: ans[k.id] === undefined ? null : ans[k.id], p: r.per[i], e: EXPL[k.id] || '' }; }) });
+}
+const CLASSES = ['10-А', '10-Б'];
+function nameNorm_(s) {
+  return String(s || '').replace(/[`´ʼ']/g, '’').replace(/[^A-Za-zА-Яа-яІіЇїЄєҐґ’\- ]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 60)
+    .split(' ').map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }).join(' ');
+}
+function clean_(a) {
+  if (a === null || a === undefined) return null;
+  if (typeof a === 'number') return Math.floor(a);
+  if (Array.isArray(a)) return a.slice(0, 7).map(function (x) { return x === null ? null : Math.floor(Number(x)); });
+  return null;
+}
+/** Бали за правилами НМТ: одна відповідь — 1; відповідність — по 1 за пару; послідовність — 3 / 2 (перша й остання) / 1 (перша або остання); три з семи — по 1. */
+function grade_(ans) {
+  let pts = 0, max = 0;
+  const per = KEYS.map(function (k) {
+    const a = ans[k.id];
+    let p = 0; const m = k.t === 'single' ? 1 : k.t === 'match' ? 4 : 3;
+    if (a !== null && a !== undefined) {
+      if (k.t === 'single') p = a === k.ok[0] ? 1 : 0;
+      else if (k.t === 'three') p = uniq_(a).filter(function (j) { return k.ok.indexOf(j) >= 0; }).slice(0, 3).length;
+      else if (k.t === 'match') p = k.ok.filter(function (j, r) { return a[r] === j; }).length;
+      else if (k.t === 'seq' && a.length === 4) {
+        if (k.ok.every(function (j, r) { return a[r] === j; })) p = 3;
+        else if (a[0] === k.ok[0] && a[3] === k.ok[3]) p = 2;
+        else if (a[0] === k.ok[0] || a[3] === k.ok[3]) p = 1;
+      }
+    }
+    pts += p; max += m; return p;
+  });
+  const pct = max ? Math.round(1000 * pts / max) / 10 : 0;
+  return { pts: pts, max: max, pct: pct, grade: grade12_(pct), per: per };
+}
+function uniq_(a) { return (Array.isArray(a) ? a : []).filter(function (x, i, s) { return x !== null && s.indexOf(x) === i; }); }
+function grade12_(pc) { const t = [25, 33, 41, 49, 56, 63, 70, 77, 84, 91]; let g = 2; t.forEach(function (v, k) { if (pc >= v) g = k + 3; }); return g; }
+
+  return handle_;
+})();
+call = async body => LOCALSRV(JSON.parse(JSON.stringify(body)));
+
+/* ---------- Бліц-соло онлайн «Україна в 1914–1921 рр.» (10 клас): одне питання на екрані, свій таймер на кожне, пауза між питаннями, одна спроба.
+   Ключів на сторінці немає: бали, оцінку й розбір (правильні відповіді, пояснення) сервер (Apps Script) віддає після останнього питання. ---------- */
+const LET = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Є'];
+const TYPE = { single: 'Одна правильна відповідь', three: 'Три правильні з семи', seq: 'Послідовність', match: 'Відповідність' };
+const LBLRE = /^(?:Місцезнаходження |Місце |малюнок )?([А-ЕЄ]|\d)$/;
+const N = QS.length;
+let U = store.get('user', null), S = store.get('st', null), clk = null, busy = false;
+const save = () => store.set('st', S);
+
+/* однаковий для учня порядок питань і варіантів (з імені й класу): після перезавантаження чи на іншому телефоні — той самий */
+function rng(seed) { let h = 1779033703 ^ seed.length; for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  return () => { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
+function mix(a, r) { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function plan() {
+  const r = rng(U.cls + '|' + U.name.toLowerCase());
+  const order = mix(QS.map((_, i) => i), r), ord = {};
+  QS.forEach(q => { const idx = q.opts.map((_, j) => j); ord[q.id] = q.fix ? idx : mix(idx, r); });
+  return { order, ord };
+}
+
+/* ---------- сервер ---------- */
+async function call(body) {
+  const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), cache: 'no-store', redirect: 'follow' });
+  if (!r.ok) throw new Error('http ' + r.status);
+  const j = await r.json(); if (j.error) throw new Error(j.error); return j;
+}
+const auth = () => ({ name: U.name, cls: U.cls, pin: U.pin });
+/* відповіді йдуть на сервер одразу (черга на випадок, якщо зв’язок зник) — так спроба не губиться навіть зі зміною телефона */
+const Q = {
+  push(id, a) { const q = store.get('queue', []).filter(x => x.id !== id); q.push({ id, a }); store.set('queue', q); this.flush(); },
+  busy: false,
+  async flush() {
+    if (this.busy) return; this.busy = true;
+    try { let q = store.get('queue', []);
+      while (q.length) { await call({ op: 'ans', ...auth(), id: q[0].id, a: q[0].a }); q = store.get('queue', []); q.shift(); store.set('queue', q); }
+    } catch (e) {}
+    this.busy = false;
+  },
+};
+setInterval(() => Q.flush(), 15000);
+
+/* ---------- вхід ---------- */
+function login(msg) {
+  stop();
+  app.innerHTML = `<div class="wrap">
+    <div class="home-head"><div class="kick">Історія України · 10 клас · бліц-соло</div><h1>${esc(INFO.title)}</h1>
+      <div class="sub">${esc(INFO.sub)}</div></div>
+    <form class="card login" id="lg">
+      <label>Клас<select id="lgc" required><option value="">— оберіть —</option><option>10-А</option><option>10-Б</option></select></label>
+      <label>Прізвище та ім’я<input id="lgn" autocomplete="name" placeholder="Наприклад: Шевченко Олена" required></label>
+      <label>Ваш код (4–8 цифр)<input id="lgp" type="text" inputmode="numeric" pattern="\\d{4,8}" maxlength="8" autocomplete="off" placeholder="Придумайте й запам’ятайте" required></label>
+      <div class="err" id="lge" ${msg ? '' : 'hidden'}>${esc(msg || '')}</div>
+      <button class="btn">Увійти</button>
+      <p class="cap">Прізвище та ім’я — повністю, як у журналі. Код ви задаєте під час першого входу; він знадобиться, якщо доведеться увійти знову.</p>
+    </form></div>`;
+  if (U) { document.getElementById('lgn').value = U.name; document.getElementById('lgc').value = U.cls; }
+  document.getElementById('lg').onsubmit = async e => {
+    e.preventDefault();
+    const name = document.getElementById('lgn').value.trim().replace(/\s+/g, ' '), cls = document.getElementById('lgc').value;
+    const pin = document.getElementById('lgp').value.trim(), er = document.getElementById('lge');
+    const fail = t => { er.hidden = false; er.textContent = t; };
+    if (!cls) return fail('Оберіть клас.');
+    if (name.split(' ').length < 2) return fail('Вкажіть прізвище та ім’я.');
+    if (!/^\d{4,8}$/.test(pin)) return fail('Код — від 4 до 8 цифр.');
+    const btn = e.target.querySelector('.btn'); btn.disabled = true; er.hidden = true;
+    try {
+      const r = await call({ op: 'login', name, cls, pin });
+      const same = U && U.name === r.name && U.cls === r.cls;
+      U = { name: r.name, cls: r.cls, pin }; store.set('user', U);
+      if (!same) { S = null; store.set('queue', []); }
+      if (r.done) { S = { done: r.done }; save(); return result(); }
+      if (!S) S = { ...plan(), qi: null, ans: {}, exits: 0 };
+      Object.assign(S.ans, r.ans || {}); S.started = r.started || S.started || null; save();
+      S.qi == null ? intro() : resume();
+    } catch (err) {
+      btn.disabled = false;
+      fail(err.message === 'pin' ? 'Код не збігається з тим, який ви задали раніше. Якщо забули — скажіть учителю.'
+        : err.message === 'roster' ? 'Оберіть клас і вкажіть прізвище та ім’я.'
+        : 'Не вдалося зв’язатися із сервером. Перевірте інтернет і спробуйте ще раз.');
+    }
+  };
+}
+
+function intro() {
+  const c = INFO.cnt;
+  app.innerHTML = `<div class="wrap bz-in"><div class="home-head"><div class="kick">${esc(U.cls)} · ${esc(U.name)}</div><h1>${esc(INFO.title)}</h1></div>
+    <div class="card"><h2>Як це працює</h2><div class="txt">
+      <p><b class="a">${INFO.n} питань</b> по одному на екрані: ${c.single} — одна з чотирьох, ${c.three} — три з семи, ${c.seq} — послідовність. Максимум — ${INFO.max} балів.</p>
+      <p>На кожне питання — свій час: <b class="a">20 с</b> (з уривком, картою чи фото — 35 с), три з семи й послідовність — 40 с. Коли час мине, зараховується те, що ви встигли позначити.</p>
+      <p>Між питаннями — пауза ${INFO.pause} с, її можна пропустити кнопкою. Повернутися до попереднього питання не можна, правильних відповідей під час бліцу не показуємо.</p>
+      <p><b class="a">Спроба одна.</b> Наприкінці ви побачите бали, оцінку й розбір: свої помилки, правильні відповіді й пояснення.</p>
+      <p class="cap">Усього близько ${INFO.min} хвилин. Зображення можна збільшити дотиком.</p></div></div>
+    <button class="btn" id="go">Почати бліц</button>
+    <button class="btn ghost" id="out">Це не я — вийти</button></div>`;
+  document.getElementById('go').onclick = async e => {
+    e.target.disabled = true;
+    try { const r = await call({ op: 'start', ...auth() }); if (r.done) { S = { done: r.done }; save(); return result(); } Object.assign(S.ans, r.ans || {}); }
+    catch (err) { if (err.message === 'pin' || err.message === 'roster') return login('Увійдіть ще раз.'); /* без зв’язку — почнемо, відповіді надішлемо пізніше */ }
+    S.qi = 0; S.t0 = Date.now(); skipDone(); startQ(); show();
+  };
+  document.getElementById('out').onclick = () => { store.set('user', null); store.set('st', null); U = null; S = null; login(); };
+}
+
+/* ---------- питання ---------- */
+const cur = () => QS[S.order[S.qi]];
+const blank = q => q.t === 'match' ? [null, null, null, null] : [];
+function skipDone() { while (S.qi < N && S.ans[cur().id] !== undefined) S.qi++; }
+function startQ() { if (S.qi >= N) return; const q = cur(); S.qdl = Date.now() + q.lim * 1000; S.pdl = null; S.sel = blank(q); save(); }
+function stop() { clearInterval(clk); clk = null; }
+function resume() {
+  if (S.done) return result();
+  skipDone();
+  if (S.qi >= N) return finish();
+  if (S.pdl && Date.now() < S.pdl) return pause();
+  if (!S.qdl || S.pdl) startQ();
+  if (Date.now() >= S.qdl) return commit(true);
+  show();
+}
+function pic(key, cls) { const i = IMGS[key]; if (!i) return '';
+  return `<div class="pic ${cls || ''}" data-src="${i.src}" data-cap=""><img src="${i.src}" width="${i.w}" height="${i.h}" alt=""><span class="zoom-hint">⤢</span></div>`; }
+function opic(key) { const i = IMGS[key]; if (!i) return '';
+  return `<span class="oi"><img src="${i.src}" width="${i.w}" height="${i.h}" alt=""><span class="zoom-hint pic" data-src="${i.src}" data-cap="">⤢</span></span>`; }
+const isLbl = q => q.fix;
+const optHtml = (q, j) => `${q.oimg ? opic(q.oimg[j]) : ''}${isLbl(q) ? '' : `<span>${md(q.opts[j])}</span>`}`;
+const lab = (q, j, k) => isLbl(q) ? q.opts[j].match(LBLRE)[1] : q.t === 'three' ? k + 1 : LET[k];
+const rowLet = q => !!q.left && q.left.every(l => /^[А-Г]$/.test(l));
+const MLB = q => rowLet(q) ? ['1', '2', '3', '4', '5'] : LET;
+
+function show() {
+  stop(); busy = false;
+  const q = cur(), o = S.ord[q.id];
+  let tiles;
+  if (q.t === 'match') {
+    tiles = (isLbl(q) ? '' : `<div class="mlist">${o.map((j, k) => `<div class="mo"><b class="a2">${MLB(q)[k]}</b> ${optHtml(q, j)}</div>`).join('')}</div>`) +
+      q.left.map((l, i) => `<div class="mrow"><div class="ml">${rowLet(q) ? `<b>Зображення ${l}</b>` : `<b>${i + 1}.</b> ${q.rimg ? pic(q.rimg[i], 'ri') : ''}${md(l)}`}</div>
+        <div class="mbtns">${o.map((j, k) => `<button class="mb" data-i="${i}" data-j="${j}">${MLB(q)[k]}</button>`).join('')}</div></div>`).join('');
+  } else {
+    tiles = o.map((j, k) => `<button class="tile n${q.oimg ? ' wi' : ''}" data-j="${j}"><span class="l">${lab(q, j, k)}</span>${optHtml(q, j)}</button>`).join('');
+    if (q.oimg) tiles = `<div class="tgrid">${tiles}</div>`;
+  }
+  const act = q.t === 'single' ? '' : `<div class="bz-act"><button class="btn ghost" id="bzr">Скинути</button><button class="btn" id="bzok">Відповісти</button></div>`;
+  app.innerHTML = `<div class="wrap bz-in"><div class="bz-top"><span class="cnt">Питання ${S.qi + 1} з ${N}</span><span class="tm" id="bzt"></span></div>
+    <div class="prg"><i style="width:${100 * S.qi / N}%"></i></div>
+    <div class="qtype">${TYPE[q.t]}${q.t === 'seq' ? ' · натискайте в правильному порядку' : ''}</div>
+    <div class="qtext">${md(q.q).replace(/\n/g, '<br>')}</div>${(q.img || []).map(k => pic(k, 'qi')).join('')}
+    <div class="tiles" id="tl">${tiles}</div>${act}</div>`;
+  window.scrollTo(0, 0);
+  const tl = document.getElementById('tl');
+  tl.querySelectorAll('.tile').forEach(b => b.onclick = e => { if (e.target.closest('.pic')) return; pick(q, +b.dataset.j); });
+  tl.querySelectorAll('.mb').forEach(b => b.onclick = () => { S.sel[+b.dataset.i] = +b.dataset.j; save(); paint(q); });
+  if (q.t !== 'single') {
+    document.getElementById('bzr').onclick = () => { S.sel = blank(q); save(); paint(q); };
+    document.getElementById('bzok').onclick = () => commit(false);
+  }
+  paint(q);
+  const tick = () => {
+    const left = Math.ceil((S.qdl - Date.now()) / 1000), el = document.getElementById('bzt');
+    if (el) { el.textContent = '⏱ ' + Math.max(0, left); el.classList.toggle('warn', left <= 5); }
+    if (left <= 0) commit(true);
+  };
+  tick(); clk = setInterval(tick, 250);
+}
+function pick(q, j) {
+  if (busy) return;
+  if (q.t === 'single') { S.sel = [j]; save(); paint(q); busy = true; return setTimeout(() => commit(false), 300); }
+  const k = S.sel.indexOf(j);
+  if (k >= 0) S.sel.splice(k, 1); else if (S.sel.length < (q.t === 'three' ? 3 : 4)) S.sel.push(j);
+  save(); paint(q);
+}
+function paint(q) {
+  if (q.t === 'match') {
+    document.querySelectorAll('#tl .mb').forEach(b => b.classList.toggle('on', S.sel[+b.dataset.i] === +b.dataset.j));
+    document.getElementById('bzok').disabled = S.sel.some(x => x === null);
+    return;
+  }
+  const o = S.ord[q.id];
+  document.querySelectorAll('#tl .tile').forEach(b => {
+    const j = +b.dataset.j, k = S.sel.indexOf(j), l = b.querySelector('.l, .ord');
+    b.classList.toggle('sel', k >= 0);
+    if (q.t === 'seq') { l.className = k >= 0 ? 'ord' : 'l'; l.textContent = k >= 0 ? k + 1 : lab(q, j, o.indexOf(j)); }
+  });
+  const ok = document.getElementById('bzok'); if (ok) ok.disabled = S.sel.length !== (q.t === 'three' ? 3 : 4);
+}
+/* відповідь (або що встигли позначити, коли час минув) → на сервер; далі пауза */
+function commit(timeout) {
+  stop();
+  const q = cur(); let a = S.sel || blank(q);
+  if (q.t === 'single') a = a.length ? a[0] : null;
+  else if (q.t === 'seq') { a = [...a]; while (a.length < 4) a.push(null); }
+  else if (q.t === 'three') a = [...a];
+  else a = [...a];
+  const empty = a === null || (Array.isArray(a) && a.every(x => x === null));
+  S.ans[q.id] = empty ? null : a; Q.push(q.id, S.ans[q.id]);
+  S.qi++; S.sel = null; S.qdl = null;
+  skipDone();
+  if (S.qi >= N) { save(); return finish(); }
+  S.pdl = Date.now() + INFO.pause * 1000; save();
+  pause(timeout);
+}
+function pause(timeout) {
+  stop();
+  app.innerHTML = `<div class="wrap bz-in"><div class="bz-top"><span class="cnt">Відповідь збережено · ${S.qi} з ${N}</span></div>
+    <div class="prg"><i style="width:${100 * S.qi / N}%"></i></div>
+    <div class="res pz">${timeout ? '<div>⏱ Час на питання минув — зараховано те, що ви встигли позначити.</div>' : ''}<div>Коротка перерва</div><div class="big" id="pzt">${INFO.pause}</div>
+      <div class="cap">Наступне питання відкриється само</div></div>
+    <button class="btn" id="pzgo">Далі →</button></div>`;
+  window.scrollTo(0, 0);
+  document.getElementById('pzgo').onclick = next;
+  const tick = () => { const left = Math.ceil((S.pdl - Date.now()) / 1000), el = document.getElementById('pzt');
+    if (el) el.textContent = Math.max(0, left); if (left <= 0) next(); };
+  tick(); clk = setInterval(tick, 250);
+}
+function next() { stop(); S.pdl = null; startQ(); show(); }
+
+/* ---------- кінець ---------- */
+async function finish() {
+  stop();
+  if (!S.sec) { S.sec = S.t0 ? Math.round((Date.now() - S.t0) / 1000) : null; save(); }
+  app.innerHTML = `<div class="wrap bz-in"><div class="res"><div>Бліц завершено</div><div class="cap" id="fin">Надсилаємо відповіді…</div></div>
+    <button class="btn" id="again" hidden>Надіслати ще раз</button></div>`;
+  window.scrollTo(0, 0);
+  const again = document.getElementById('again');
+  again.onclick = () => finish();
+  try {
+    const r = await call({ op: 'finish', ...auth(), ans: S.ans, sec: S.sec, exits: S.exits || 0 });
+    store.set('queue', []); S = { done: r }; save(); result();
+  } catch (e) {
+    if (e.message === 'pin' || e.message === 'roster') return login('Увійдіть ще раз — ваші відповіді збережено на телефоні.');
+    document.getElementById('fin').textContent = 'Немає зв’язку із сервером. Відповіді збережено на телефоні — перевірте інтернет і натисніть кнопку.';
+    again.hidden = false;
+  }
+}
+function result() {
+  stop();
+  const r = S.done;
+  app.innerHTML = `<div class="wrap bz-in"><div class="home-head"><div class="kick">${esc(U.cls)} · ${esc(U.name)}</div><h1>${esc(INFO.title)}</h1></div>
+    <div class="res"><div>Ваш результат</div><div class="big">${r.pts} з ${r.max}</div><div class="cap">${r.pct} % балів</div>
+      <div class="gr okc">Оцінка: ${r.grade}</div></div>
+    <p class="cap" style="text-align:center">Результат збережено на цьому телефоні. Спроба одна, тож пройти бліц ще раз не можна.</p>
+    ${r.review ? reviewHtml(r.review) : ''}</div>`;
+  const f = document.getElementById('rvf');
+  if (f) f.querySelectorAll('button').forEach(b => b.onclick = () => {
+    f.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('.rv').forEach(c => c.style.display = b.dataset.f === 'err' && c.dataset.full === '1' ? 'none' : '');
+  });
+}
+/* розбір: питання в порядку бліцу (№ — як у таблиці вчителя), позначки: ✓ ваша правильна, ✗ ваша хибна, ○ правильна, яку ви не обрали */
+function reviewHtml(rv) {
+  const by = {}; rv.forEach(x => by[x.id] = x);
+  const err = rv.filter(x => x.p < (QS.find(q => q.id === x.id).t === 'single' ? 1 : 3)).length;
+  const cards = QS.map(q => {
+    const x = by[q.id]; if (!x) return '';
+    const m = q.t === 'single' ? 1 : 3, full = x.p >= m;
+    const a = x.a, ok = x.ok;
+    let body;
+    if (q.t === 'seq') {
+      const lt = j => q.fix ? q.opts[j] : LET[j];
+      body = `<div class="rv-o">${q.opts.map((o, j) => `<div class="rvo"><b>${LET[j]}</b> ${md(o)}</div>`).join('')}</div>
+        <div class="rv-s">Ваш порядок: <b>${Array.isArray(a) && a.some(v => v !== null) ? a.map(j => j === null ? '—' : LET[j]).join(' → ') : 'немає відповіді'}</b><br>
+        Правильний: <b class="okt">${ok.map(j => LET[j]).join(' → ')}</b></div>`;
+    } else {
+      const mine = q.t === 'single' ? (a === null || a === undefined ? [] : [a]) : (Array.isArray(a) ? a.filter(v => v !== null) : []);
+      body = `<div class="rv-o">${q.opts.map((o, j) => {
+        const isOk = ok.indexOf(j) >= 0, isMine = mine.indexOf(j) >= 0;
+        const c = isOk && isMine ? 'good' : isMine ? 'bad' : isOk ? 'miss' : '';
+        const mk = isOk && isMine ? '✓' : isMine ? '✗' : isOk ? '○' : '';
+        const lb = q.fix ? '' : `<b>${q.t === 'three' ? j + 1 : LET[j]}</b> `;
+        return `<div class="rvo ${c}"><span class="mk">${mk}</span>${lb}${md(o)}</div>`; }).join('')}</div>
+        ${mine.length ? '' : '<div class="rv-s">Немає відповіді — час минув.</div>'}`;
+    }
+    return `<div class="card rv${full ? ' full' : ''}" data-full="${full ? 1 : 0}"><div class="rv-h"><b>${q.n}</b><span class="pts ${full ? 'g' : x.p ? 'h' : 'b'}">${x.p} з ${m}</span></div>
+      <div class="qtext">${md(q.q).replace(/\n/g, '<br>')}</div>${(q.img || []).map(k => pic(k, 'qi')).join('')}
+      ${body}<div class="rv-e">${md(x.e)}</div></div>`;
+  }).join('');
+  return `<h2 class="rv-t">Розбір · помилок: ${err}</h2>
+    <p class="cap">✓ — ваша правильна відповідь, ✗ — ваша хибна, ○ — правильна відповідь, яку ви не обрали. У питаннях з картою, фото чи портретами варіанти — це цифри або літери на зображенні.</p>
+    <div class="rvf" id="rvf"><button class="btn ghost on" data-f="all">Усі питання</button><button class="btn ghost" data-f="err">Лише з помилками</button></div>${cards}`;
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && S && !S.done && S.qi != null && S.qi < N) { S.exits = (S.exits || 0) + 1; save(); }
+  if (!document.hidden && S && !S.done && S.qi != null) resume();
+});
+window.addEventListener('online', () => Q.flush());
+
+if (!API) app.innerHTML = '<div class="wrap"><p>Сторінка ще не підключена до сервера.</p></div>';
+else if (!U) login();
+else if (S && S.done) result();
+else if (!S || S.qi == null) login();
+else { Q.flush(); resume(); }
+
+</script>
+</body>
+</html>
