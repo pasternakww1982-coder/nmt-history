@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Тест · Світ після Першої світової війни</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* єдина темна тема, як у презентаціях: вугільне тло, помаранчевий акцент */
+  --bg: #161616;
+  --panel: #232323;
+  --panel2: #2e2e2e;
+  --acc: #e97132;
+  --acc2: #f5a25d;
+  --txt: #f2f2f2;
+  --muted: #a8a39e;
+  --ok: #5fb878;
+  --bad: #e0604a;
+  --font: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  /* макет: одна колонка до 560 px, вертикальна стрічка карток */
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--txt); font-family: var(--font); font-size: 17px; line-height: 1.5; -webkit-text-size-adjust: 100%; }
+body { min-height: 100%; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 16px 48px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; line-height: 1.2; }
+p { margin: 0; }
+b.a { color: var(--acc); font-weight: 700; }
+b.a2 { color: var(--acc2); font-weight: 700; }
+button { font-family: inherit; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--acc2); outline-offset: 2px; }
+img { max-width: 100%; display: block; }
+
+/* ---------- верхня панель ---------- */
+.bar { position: sticky; top: 0; z-index: 20; background: rgba(22,22,22,.96); backdrop-filter: blur(6px); border-bottom: 1px solid #2a2a2a; }
+.bar-in { max-width: 560px; margin: 0 auto; padding: 10px 16px 8px; display: flex; align-items: center; gap: 12px; }
+.bar .back { background: var(--panel2); color: var(--acc2); border: 0; border-radius: 10px; padding: 8px 12px; font-weight: 700; font-size: 15px; cursor: pointer; white-space: nowrap; }
+.bar .ttl { font-weight: 700; font-size: 15px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prog { height: 4px; background: #2a2a2a; }
+.prog i { display: block; height: 100%; width: 0; background: var(--acc); transition: width .15s; }
+
+/* ---------- головна ---------- */
+.hero { margin: 0 -16px; background: #0f0f0f; }
+.hero img { width: 100%; height: auto; }
+.hero-cap, .cap { font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+.hero-cap { padding: 6px 16px 0; }
+.kick { color: var(--acc); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.home-head { padding: 20px 0 8px; display: grid; gap: 8px; }
+.home-head h1 { font-size: 32px; font-weight: 800; }
+.home-head .part { color: var(--acc2); font-weight: 700; font-size: 19px; }
+.home-head .sub { color: var(--muted); }
+.proto { margin: 14px 0 4px; padding: 10px 14px; border: 1px dashed #4a4a4a; border-radius: 12px; color: var(--muted); font-size: 14px; }
+.h2 { font-size: 21px; font-weight: 800; margin: 26px 0 12px; }
+.sec-list { display: grid; gap: 12px; }
+.sec-btn { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; text-align: left; width: 100%; background: var(--panel); color: var(--txt); border: 0; border-radius: 16px; padding: 14px; cursor: pointer; }
+.sec-btn .num { width: 56px; height: 56px; border-radius: 14px; background: var(--panel2); color: var(--acc); font-size: 22px; font-weight: 800; display: grid; place-items: center; }
+.sec-btn.done .num { background: var(--acc); color: #161616; }
+.sec-btn h3 { font-size: 18px; font-weight: 700; }
+.sec-btn .st { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.sec-btn .st b { color: var(--acc2); }
+.sec-btn.soon { opacity: .45; cursor: default; }
+.prog-mini { height: 4px; background: #333; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.prog-mini i { display: block; height: 100%; background: var(--acc); }
+.prg { display: grid; gap: 10px; }
+.prg .box { background: var(--panel); border-radius: 14px; padding: 12px 14px; }
+.prg h3 { color: var(--acc); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.prg ul { margin: 0; padding-left: 18px; font-size: 15.5px; }
+
+/* ---------- розділ ---------- */
+.sec-head { padding: 18px 0 6px; display: grid; gap: 8px; }
+.sec-head h1 { font-size: 28px; font-weight: 800; }
+.sec-head .sub { color: var(--muted); }
+.cards { display: grid; gap: 16px; margin-top: 16px; }
+.card { background: var(--panel); border-radius: 18px; padding: 18px 16px; display: grid; gap: 12px; }
+.card h2 { font-size: 22px; font-weight: 800; }
+.card .date { color: var(--acc2); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; margin-top: -6px; }
+.card .txt { display: grid; gap: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { background: var(--acc); color: #161616; font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 3px 10px; }
+.tip { background: var(--panel2); border-left: 4px solid var(--acc2); border-radius: 10px; padding: 12px 14px; display: grid; gap: 6px; font-size: 16px; }
+.tip .lbl { color: var(--acc2); font-weight: 700; font-size: 14px; }
+.fig { margin: 0; display: grid; gap: 6px; }
+.fig .pic { background: #0f0f0f; border-radius: 12px; overflow: hidden; cursor: zoom-in; position: relative; display: grid; place-items: center; }
+.fig .pic img { width: auto; height: auto; max-width: 100%; max-height: 62vh; }
+.fig .pic.boxed { height: 180px; }
+.fig .pic.boxed img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.zoom-hint { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.6); color: #fff; font-size: 12px; border-radius: 8px; padding: 2px 7px; pointer-events: none; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* карусель */
+.car { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 2px 16px 6px; scrollbar-width: none; }
+.car::-webkit-scrollbar { display: none; }
+.car .it { flex: 0 0 84%; scroll-snap-align: center; background: var(--panel2); border-radius: 14px; padding: 10px; display: grid; gap: 8px; align-content: start; }
+.car .it .pic { height: 210px; }
+.car .it h3 { font-size: 18px; font-weight: 700; color: var(--acc2); }
+.car .it .n { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--acc); color: #161616; font-size: 14px; font-weight: 800; margin-right: 6px; }
+.car .it p { font-size: 15.5px; }
+.dots { display: flex; justify-content: center; gap: 6px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: #4a4a4a; }
+.dots i.on { background: var(--acc); }
+.swipe { color: var(--muted); font-size: 13.5px; text-align: center; }
+
+/* визначення */
+.defs { display: grid; gap: 14px; }
+.def { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid #333; }
+.def:first-child { border-top: 0; padding-top: 0; }
+.def h3 { font-size: 19px; color: var(--acc2); }
+
+/* хронологія */
+.scale { position: relative; padding: 34px 4px 8px; }
+.scale .line { position: absolute; left: 4px; right: 4px; top: 48px; height: 3px; background: var(--txt); border-radius: 2px; }
+.scale .marks { position: relative; display: flex; justify-content: space-between; }
+.scale .m { display: grid; justify-items: center; gap: 6px; width: 20%; text-align: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+.scale .m i { width: 13px; height: 13px; border-radius: 50%; background: var(--acc); margin-top: 8px; }
+.scale .m .up { position: absolute; top: 0; color: var(--acc2); font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.scale .m { position: relative; }
+
+/* періоди */
+.pgroup { color: var(--acc2); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-top: 4px; }
+.per { display: grid; grid-template-columns: 8px 1fr; gap: 12px; background: var(--panel2); border-radius: 12px; padding: 12px 12px 12px 0; overflow: hidden; }
+.per .c { border-radius: 0 6px 6px 0; }
+.per h3 { font-size: 18px; }
+.per .s { color: var(--muted); font-size: 14px; }
+.per .d { color: var(--acc2); font-weight: 700; font-size: 15px; margin: 4px 0; }
+.per .r { font-size: 15px; }
+.per .r span { color: var(--muted); }
+
+/* карта */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.steps button { background: var(--panel2); color: var(--txt); border: 0; border-radius: 10px; padding: 9px 4px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.steps button.on { background: var(--acc); color: #161616; }
+.rot { color: var(--muted); font-size: 13.5px; }
+
+/* пам'ятка */
+.mon .pic { cursor: zoom-in; }
+.how { background: var(--acc); color: #161616; border-radius: 12px; padding: 12px 14px; font-weight: 600; }
+.how .lbl { font-weight: 800; display: block; font-size: 14px; }
+
+/* самоперевірка */
+.quiz h2 { display: flex; gap: 10px; align-items: center; }
+.qq { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid #333; }
+.qq:first-of-type { border-top: 0; padding-top: 0; }
+.qq .q { font-weight: 700; }
+.qq .qn { color: var(--acc2); margin-right: 4px; }
+.opt { text-align: left; width: 100%; background: var(--panel2); color: var(--txt); border: 2px solid transparent; border-radius: 12px; padding: 11px 14px; font-size: 16px; cursor: pointer; }
+.opt[disabled] { cursor: default; }
+.opt.right { border-color: var(--ok); background: #203826; }
+.opt.wrong { border-color: var(--bad); background: #3a221d; }
+.why { font-size: 15px; color: #ddd; background: #1b1b1b; border-radius: 10px; padding: 10px 12px; }
+.score { background: var(--panel2); border-radius: 12px; padding: 14px; text-align: center; display: grid; gap: 8px; }
+.score .big { font-size: 28px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; }
+.btn { background: var(--acc); color: #161616; border: 0; border-radius: 12px; padding: 13px 16px; font-size: 17px; font-weight: 800; cursor: pointer; width: 100%; }
+.btn.ghost { background: var(--panel2); color: var(--acc2); }
+.end { display: grid; gap: 10px; margin-top: 20px; }
+
+/* перегляд зображення */
+.lb { position: fixed; inset: 0; z-index: 50; background: #000; display: none; flex-direction: column; }
+.lb.open { display: flex; }
+.lb-top { display: flex; gap: 8px; padding: 10px; justify-content: flex-end; }
+.lb-top button { background: #2a2a2a; color: #fff; border: 0; border-radius: 10px; min-width: 44px; height: 40px; font-size: 18px; font-weight: 700; cursor: pointer; }
+.lb-view { flex: 1; position: relative; overflow: hidden; touch-action: none; }
+.lb-view img { position: absolute; left: 0; top: 0; transform-origin: 0 0; max-width: none; max-height: none; user-select: none; -webkit-user-drag: none; will-change: transform; }
+.pic { touch-action: pan-x pan-y; }   /* щипок на зображенні не збільшує всю сторінку — відкриває перегляд */
+.lb-cap { color: #ccc; font-size: 13.5px; padding: 8px 14px 14px; }
+
+
+.brand { margin: 28px 0 6px; text-align: center; font-size: 12.5px; color: var(--muted); letter-spacing: .02em; }
+
+/* «← Усі теми» — повернення на полицю тем спільної оболонки */
+.tback { display: inline-block; margin: 14px 0 0; font-weight: 700; font-size: 15px; color: var(--acc2); text-decoration: underline; }
+/* курс: вхід, бліци, тести */
+.tback + .who { margin-top: 8px; }
+.who { display: flex; align-items: center; gap: 10px; justify-content: space-between; background: var(--panel); border-radius: 12px; padding: 10px 14px; margin: 14px 0 0; font-weight: 700; font-size: 15px; }
+.lnk { background: none; border: 0; color: var(--acc2); font: inherit; font-size: 14.5px; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 0; }
+.login { display: grid; gap: 14px; margin-top: 18px; }
+.login label { display: grid; gap: 6px; font-weight: 700; font-size: 15px; }
+.login input { font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--panel2); background: var(--bg); color: var(--txt); }
+.login input:focus { outline: none; border-color: var(--acc); }
+.err { color: var(--bad); font-weight: 700; }
+.locked { opacity: .55; }
+.shake { animation: shk .4s; } @keyframes shk { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.okc { color: var(--ok); } .badc { color: var(--bad); }
+.sync { font-size: 14.5px; color: var(--muted); margin-top: 16px; text-align: center; }
+.bz-card .meta { color: var(--muted); font-size: 15px; }
+.bz-card .best { background: var(--panel2); border-radius: 12px; padding: 10px 14px; font-size: 15px; }
+.bz-card .best b { color: var(--acc2); }
+.bz-card .btn { margin-top: 4px; }
+.bz-in { display: grid; gap: 14px; padding-top: 14px; }
+.bz-top { display: flex; align-items: center; gap: 10px; }
+.bz-top .cnt { font-weight: 700; color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; }
+.bz-top .pts { margin-left: auto; background: var(--panel2); border-radius: 10px; padding: 6px 10px; font-weight: 800; color: var(--acc2); font-variant-numeric: tabular-nums; }
+.bz-top .x { background: var(--panel2); color: var(--txt); border: 0; border-radius: 10px; width: 40px; height: 36px; font-size: 17px; cursor: pointer; }
+.qtype { font-size: 13px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--acc2); }
+.qtext { font-size: 19px; font-weight: 700; line-height: 1.38; }
+.pic.qi { border-radius: 12px; overflow: hidden; position: relative; background: #0f0f0f; }
+.pic.qi img { width: 100%; height: auto; max-height: 62vh; object-fit: contain; display: block; }
+.tiles { display: grid; gap: 10px; }
+.tile { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; text-align: left; border: 3px solid transparent; border-radius: 14px; padding: 12px; font: inherit; font-size: 16.5px; font-weight: 600; color: #fff; cursor: pointer; min-height: 58px; }
+.tile .l { width: 34px; height: 34px; border-radius: 9px; background: rgba(0,0,0,.25); display: grid; place-items: center; font-weight: 800; }
+.tile.c0 { background: #b8463a; } .tile.c1 { background: #2f6fa8; } .tile.c2 { background: #b38419; } .tile.c3 { background: #3f8a55; }
+.tile.n { background: var(--panel2); }
+.tile.sel { border-color: var(--acc2); background: #4a3524; }
+.tile[disabled] { cursor: default; }
+.tile.dim { opacity: .38; }
+.tile.right { border-color: #9ff0b4; opacity: 1; }
+.tile.wrong { border-color: #ffb3a6; opacity: 1; }
+.tile .ord { width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: #161616; display: grid; place-items: center; font-weight: 800; }
+.tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tile.wi { grid-template-columns: 1fr; padding: 8px; position: relative; align-content: start; }
+.tile.wi .l, .tile.wi .ord { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgba(0,0,0,.65); }
+.tile.wi .ord { background: var(--acc); }
+.oi { position: relative; display: block; border-radius: 10px; overflow: hidden; background: #0f0f0f; }
+.oi img { width: 100%; height: 150px; object-fit: contain; display: block; }
+.oi .zoom-hint { position: absolute; right: 6px; bottom: 6px; width: 34px; height: 34px; border-radius: 9px; background: rgba(0,0,0,.65); display: grid; place-items: center; font-size: 18px; color: #fff; }
+.mlist { background: var(--panel); border-radius: 12px; padding: 10px 12px; display: grid; gap: 8px; font-size: 15.5px; }
+.mo { display: grid; grid-template-columns: 24px 1fr; gap: 6px; align-items: start; }
+.mo .oi img { height: 120px; }
+.mrow { display: grid; gap: 6px; }
+.ml { font-weight: 600; }
+.ml .pic.ri { margin-top: 6px; }
+.pic.ri { border-radius: 10px; overflow: hidden; background: #0f0f0f; position: relative; }
+.pic.ri img { width: 100%; height: 170px; object-fit: contain; display: block; }
+.mbtns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.mb { background: var(--panel2); color: var(--txt); border: 2px solid transparent; border-radius: 10px; height: 44px; font: inherit; font-size: 17px; font-weight: 800; cursor: pointer; }
+.mb.on { background: var(--acc); color: #161616; }
+.mb.right { border-color: #9ff0b4; }
+.mb.wrong { border-color: #ffb3a6; }
+.bz-act { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+.fb { border-radius: 14px; padding: 14px; display: grid; gap: 6px; }
+.fb.good { background: #1f3a27; } .fb.bad { background: #3a231e; } .fb.part { background: #3a311c; }
+.fb .h { font-weight: 800; font-size: 18px; }
+.res { text-align: center; display: grid; gap: 6px; background: var(--panel); border-radius: 18px; padding: 22px 16px; }
+.res .big { font-size: 46px; font-weight: 800; color: var(--acc); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.res .gr { font-size: 18px; font-weight: 800; }
+.tintro p { margin: 0 0 8px; }
+.tnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+.tnav.stk { flex-wrap: nowrap; overflow-x: auto; position: sticky; top: 53px; z-index: 5; background: var(--bg); padding: 8px 0; scrollbar-width: none; }
+.tnav.stk::-webkit-scrollbar { display: none; }
+.tnav.stk .nv { flex: 0 0 auto; }
+.nv { min-width: 38px; height: 38px; border-radius: 10px; background: var(--panel2); color: var(--txt); display: grid; place-items: center; font-weight: 800; font-size: 15px; text-decoration: none; position: relative; }
+.nv.on { background: #2c5a3a; } .nv.pt { background: #5a4a22; } .nv.no { background: #5a2c24; }
+.nv i { position: absolute; right: 2px; bottom: 0; font-size: 10px; font-style: normal; opacity: .8; }
+.task { display: grid; gap: 12px; scroll-margin-top: 110px; }
+.rst { justify-self: start; }
+.tsend { display: grid; gap: 8px; margin-top: 18px; text-align: center; }
+.dlg { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 50; display: grid; place-items: center; padding: 16px; }
+.dlg[hidden] { display: none; }
+.dlg-in { background: var(--panel); border-radius: 18px; padding: 20px; display: grid; gap: 10px; max-width: 420px; }
+.dlg-in h3 { margin: 0; }
+
+/* автор і ліцензія під фото — дрібно й приглушено */
+.cap .cr, .hero-cap .cr { display: block; margin-top: 2px; font-size: 10px; line-height: 1.3; opacity: .6; letter-spacing: .01em; }
+
+/* уривок джерела в умові завдання: підпис джерела — дрібніше */
+.qtext .a2 { display: inline-block; font-size: 14px; font-weight: 600; color: var(--muted); }
+
+.fb .ex { font-size: 15px; line-height: 1.45; color: #e8e8e8; border-top: 1px solid rgba(255,255,255,.15); padding-top: 8px; margin-top: 2px; }
+.mini-card { margin-top: 18px; }
+.mini-card .h { font-weight: 800; font-size: 18px; margin-bottom: 4px; }
+.bz-top .tm { background: var(--panel2); border-radius: 10px; padding: 6px 10px; font-weight: 800; font-variant-numeric: tabular-nums; color: #f2f2f2; }
+.bz-top .tm.warn, .bar .tm.warn { background: #7a2b20; color: #fff; }
+.bar .tm { margin-left: auto; background: var(--panel2); border-radius: 10px; padding: 5px 10px; font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.bz-top .tm { margin-left: auto; } .bz-top .tm + .pts { margin-left: 0; }
+
+/* розбір бліцу після проходження (суворий режим) */
+.rv { display: grid; gap: 10px; margin: 10px 0; }
+.rv .fb .h { font-size: 16px; }
+details.rvok { margin-top: 14px; }
+details.rvok > summary { cursor: pointer; font-weight: 700; font-size: 17px; padding: 12px 14px; background: var(--panel); border-radius: 14px; list-style: none; }
+details.rvok > summary::after { content: ' ▾'; color: var(--muted); }
+details.rvok[open] > summary::after { content: ' ▴'; }
+.btn[data-pause] { background: var(--panel2); color: var(--muted); opacity: 1; cursor: default; }
+.btn[data-pause] b { color: var(--acc2); }
+/* результат бліцу за розділами */
+.sst .sbar { height: 6px; border-radius: 3px; background: var(--panel2); margin-top: 6px; overflow: hidden; }
+.sst .sbar i { display: block; height: 100%; background: var(--ok); border-radius: 3px; }
+.sst.weak .sbar i { background: var(--bad); }
+.sst.weak .st b { color: var(--bad); }
+
+/* ---------- нові типи карток ---------- */
+.chip.off { background: #5a5a5a; color: #f2f2f2; }
+.chip.doc { background: var(--acc2); }
+.sub { background: var(--panel2); border-radius: 14px; padding: 14px; display: grid; gap: 8px; }
+.sub h3 { font-size: 18px; color: var(--acc); }
+.sub h3.l { color: var(--acc2); }
+.pill { justify-self: start; background: var(--acc2); color: #161616; font-weight: 800; border-radius: 999px; padding: 3px 12px; font-size: 14.5px; }
+.muted { color: var(--muted); font-size: 15px; display: grid; gap: 6px; }
+.quote { background: var(--panel2); border-left: 4px solid var(--acc); border-radius: 12px; padding: 14px; display: grid; gap: 10px; font-style: italic; font-size: 17.5px; }
+.quote .src { font-style: normal; color: var(--acc2); font-size: 14px; }
+.scheme { background: var(--panel2); border-radius: 14px; padding: 14px; display: grid; gap: 10px; text-align: center; }
+.scheme .h { color: var(--acc); font-weight: 800; }
+.scheme .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.scheme .two div { background: var(--acc); color: #161616; border-radius: 12px; padding: 10px; font-size: 14px; }
+.scheme .two b { display: block; font-size: 17px; }
+.trow { background: var(--panel2); border-radius: 14px; padding: 12px 14px; display: grid; gap: 6px; }
+.trow h3 { color: var(--acc2); font-size: 18px; }
+.trow .kv { display: grid; grid-template-columns: 38% 1fr; gap: 8px; font-size: 15.5px; }
+.trow .kv span { color: var(--muted); }
+/* стрічка подій */
+.tlv { display: grid; gap: 0; position: relative; padding-left: 26px; }
+.tlv::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; width: 3px; background: var(--txt); border-radius: 2px; }
+.tlv .ev { position: relative; padding: 0 0 16px; display: grid; gap: 3px; }
+.tlv .ev i { position: absolute; left: -25px; top: 4px; width: 17px; height: 17px; border-radius: 50%; border: 2px solid var(--bg); }
+.tlv .ev .y { color: var(--acc2); font-weight: 800; font-variant-numeric: tabular-nums; }
+.tlv .ev .y.yprog { justify-self: start; background: var(--acc2); color: #161616; border-radius: 8px; padding: 1px 8px; }
+.tlv .ev b { font-size: 17px; }
+.legend { display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 14px; }
+.legend span.sw { width: 34px; height: 16px; background: var(--acc2); border-radius: 6px; }
+/* стрічка періодів */
+.gp { position: relative; display: grid; gap: 10px; padding-top: 26px; }
+.gp .row { display: grid; gap: 3px; position: relative; z-index: 1; }
+.gp .nm { font-weight: 700; font-size: 15px; }
+.gp .tr { position: relative; height: 18px; background: #262626; border-radius: 6px; }
+.gp .sg { position: absolute; top: 0; bottom: 0; border-radius: 6px; }
+.gp .sb { font-size: 13px; color: var(--muted); }
+.gp .evl { position: absolute; top: 18px; bottom: 34px; border-left: 2px dashed var(--acc2); z-index: 0; pointer-events: none; }
+.gp .evt { position: absolute; top: 0; transform: translateX(-50%); font-size: 12px; font-weight: 800; color: var(--acc2); white-space: nowrap; }
+.gp .ax { position: relative; height: 34px; border-top: 3px solid var(--txt); margin-top: 4px; }
+.gp .tk { position: absolute; top: 0; transform: translateX(-50%); font-size: 11.5px; color: var(--muted); white-space: nowrap; padding-top: 3px; }
+.gp .tk.lo { padding-top: 17px; }
+.gp .pr { position: absolute; top: -6px; height: 9px; background: var(--acc2); border-radius: 4px; }
+.prg-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.part-btn { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: center; text-align: left; width: 100%; background: var(--panel); color: var(--txt); border: 0; border-radius: 16px; padding: 10px; cursor: pointer; }
+.part-btn .th { width: 96px; height: 96px; border-radius: 12px; background: #0f0f0f; display: grid; place-items: center; overflow: hidden; }
+.part-btn .th img { max-width: 100%; max-height: 100%; }
+.part-btn h3 { font-size: 18px; }
+.part-btn .st { font-size: 14px; color: var(--muted); margin-top: 4px; }
+
+.ends { display: flex; justify-content: space-between; color: var(--acc2); font-weight: 700; font-size: 14px; }
+.scale { padding-top: 6px; }
+.scale .line { top: 19px; }
+.scale .m b { font-size: 11.5px; }
+
+.gp .nm, .gp .sb { justify-self: start; background: var(--panel); padding-right: 6px; position: relative; z-index: 1; }
+.gp .tr { z-index: 1; }
+
+.fsb { position: fixed; right: 12px; bottom: 14px; z-index: 30; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(46,46,46,.92); color: var(--acc2); font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+.fsb[hidden] { display: none; }
+/* бліц-соло онлайн */
+.login select { font: inherit; font-size: 17px; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--panel2); background: var(--bg); color: var(--txt); }
+.login select:focus { outline: none; border-color: var(--acc); }
+.prg { height: 6px; border-radius: 3px; background: var(--panel2); overflow: hidden; }
+.prg i { display: block; height: 100%; background: var(--acc); }
+.res.pz { gap: 10px; }
+.res .gr.okc { color: var(--acc2); font-size: 22px; }
+.bz-act .btn[disabled] { opacity: .45; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<button id="fsb" class="fsb" hidden aria-label="На весь екран">⤢</button>
+<div class="lb" id="lb" role="dialog" aria-label="Перегляд зображення">
+  <div class="lb-top"><button id="lbOut" aria-label="Зменшити">−</button><button id="lbIn" aria-label="Збільшити">+</button><button id="lbX" aria-label="Закрити">✕</button></div>
+  <div class="lb-view" id="lbv"><img id="lbi" alt=""></div>
+  <div class="lb-cap" id="lbc"></div>
+</div>
+<script>
+const QS = [{"id": "q01", "n": 1, "t": "single", "q": "Коли було підписано Комп’єнське перемир’я?", "opts": ["30 жовтня 1918 р.", "3 листопада 1918 р.", "11 листопада 1918 р.", "18 січня 1919 р."], "lim": 45, "fix": false}, {"id": "q02", "n": 2, "t": "single", "q": "Який документ уперше передбачав створення Ліги Націй?", "opts": ["«14 пунктів» В. Вільсона", "Тріанонський мирний договір", "Сен-Жерменський мирний договір", "рішення Вашингтонської конференції"], "lim": 45, "fix": false}, {"id": "q03", "n": 3, "t": "single", "q": "Яка держава мала отримати найбільшу частку німецьких репарацій?", "opts": ["Велика Британія", "Італія", "Бельгія", "Франція"], "lim": 45, "fix": false}, {"id": "q04", "n": 4, "t": "single", "q": "«Союзні й асоційовані уряди заявляють, а Німеччина визнає, що Німеччина та її союзники несуть відповідальність за заподіяння всіх втрат і збитків, яких зазнали союзні й асоційовані уряди та їхні громадяни внаслідок війни, нав’язаної їм нападом Німеччини та її союзників.» (стаття 231)\n\nЗ якого документа наведено уривок?", "opts": ["Версальського мирного договору", "Комп’єнського перемир’я", "Статуту Ліги Націй", "Локарнського гарантійного пакту"], "lim": 90, "fix": false}, {"id": "q05", "n": 5, "t": "single", "q": "Яка з держав не брала участі у Вашингтонській конференції 1921 – 1922 рр.?", "opts": ["Китай", "Німеччина", "Нідерланди", "Італія"], "lim": 45, "fix": false}, {"id": "q06", "n": 6, "t": "single", "q": "Який мирний договір країни Антанти уклали з Австрією?", "opts": ["Версальський", "Нейський", "Сен-Жерменський", "Севрський"], "lim": 45, "fix": false}, {"id": "q07", "n": 7, "t": "single", "q": "Мандатні території Ліги Націй на Близькому Сході (1920-ті рр.)\n\nЯкою цифрою на картосхемі позначено територію, яку Ліга Націй передала під мандат Франції?", "opts": ["1", "2", "3", "4"], "lim": 90, "fix": true, "img": ["mandates_map"]}, {"id": "q08", "n": 8, "t": "single", "q": "За Нейським мирним договором Південна Добруджа залишилася у складі", "opts": ["Греції", "Румунії", "Болгарії", "Королівства СХС"], "lim": 45, "fix": false}, {"id": "q09", "n": 9, "t": "single", "q": "Хто головував на Паризькій мирній конференції?", "opts": ["В. Вільсон", "Ж. Клемансо", "Д. Ллойд Джордж", "В. Орландо"], "lim": 45, "fix": false}, {"id": "q10", "n": 10, "t": "single", "q": "Яку територію отримала Японія за рішенням Паризької мирної конференції?", "opts": ["Шаньдунський півострів", "Німецьке Самоа", "острів Науру", "острів Нова Гвінея"], "lim": 45, "fix": false}, {"id": "q11", "n": 11, "t": "single", "q": "Кому за Версальським договором на 15 років передавали вугільні шахти Саарської області?", "opts": ["Франції", "Бельгії", "Великій Британії", "Польщі"], "lim": 45, "fix": false}, {"id": "q12", "n": 12, "t": "single", "q": "«Якщо будь-який член Ліги вдасться до війни всупереч своїм зобов’язанням…, інші члени Ліги зобов’язуються негайно розірвати з ним усі торговельні й фінансові відносини, заборонити будь-які стосунки між своїми громадянами та громадянами держави, що порушила Статут…» (стаття 16)\n\nЯкий засіб протидії агресорові передбачає наведений уривок статті Статуту Ліги Націй?", "opts": ["економічні санкції", "військову операцію Ліги", "стягнення репарацій", "міжнародний арбітраж"], "lim": 90, "fix": false}, {"id": "q13", "n": 13, "t": "single", "q": "Л. Рейвен-Хілл. Карикатура в британському журналі «Панч», грудень 1919 р.\n\nЯку проблему висміює карикатура британського журналу «Панч» (1919 р.)?", "opts": ["відмову США вступити до Ліги Націй", "відмову Німеччині у вступі до Ліги Націй", "суперечки Англії та Франції щодо умов миру", "претензії Італії на нові території"], "lim": 90, "fix": false, "img": ["gap_in_the_bridge_1919"]}, {"id": "q14", "n": 14, "t": "single", "q": "З якою державою країни Антанти уклали Тріанонський мирний договір?", "opts": ["з Австрією", "з Угорщиною", "з Болгарією", "з Туреччиною"], "lim": 45, "fix": false}, {"id": "q15", "n": 15, "t": "single", "q": "В. Дайсон. Карикатура в британській газеті «Дейлі Геральд», травень 1919 р. Підпис: «Тигр: Дивно! Мені здається, я чую, як плаче дитина!». На дитині напис: «Призов 1940 року»\n\nЯку думку висловив автор карикатури 1919 р.?", "opts": ["умови Версальського миру стануть причиною нової війни", "переможці не подбали про дітей, осиротілих через війну", "мир укладено, попри голод у переможеній Німеччині", "загальний військовий обов’язок збережуть до 1940 р."], "lim": 90, "fix": false, "img": ["dyson_cannon_fodder_1919"]}, {"id": "q16", "n": 16, "t": "single", "q": "«Має бути створена незалежна … держава, яка охопить території з безсумнівно … населенням; їй має бути забезпечено вільний і надійний доступ до моря, а її політичну й економічну незалежність і територіальну цілісність мають гарантувати міжнародні угоди.» (назву держави й народу пропущено)\n\nПро яку державу йдеться в уривку з програми президента США В. Вільсона (січень 1918 р.)?", "opts": ["Польщу", "Сербію", "Литву", "Фінляндію"], "lim": 90, "fix": false}, {"id": "q17", "n": 17, "t": "single", "q": "Британський економіст Дж. М. Кейнс вважав Версальський мирний договір", "opts": ["надто жорстким: репарації руйнували економіку Німеччини", "надто м’яким: він не гарантував безпеки Франції", "справедливим компромісом між вимогами Франції та США", "надійною запорукою тривалого й справедливого миру в Європі"], "lim": 45, "fix": false}, {"id": "q18", "n": 18, "t": "single", "q": "Що передбачав мирний договір країн Антанти з Австрією 1919 р.?", "opts": ["визнання незалежності Чехословаччини, Польщі й Угорщини", "обмеження австрійської армії 100 тис. осіб", "плебісцит про об’єднання Австрії з Німеччиною", "збереження за Австрією виходу до Адріатичного моря"], "lim": 45, "fix": false}, {"id": "q19", "n": 19, "t": "single", "q": "Що передбачав Лозаннський мирний договір 1923 р.?", "opts": ["скасування іноземного контролю над фінансами Туреччини", "утворення незалежної держави Курдистан", "передачу Стамбула під управління Ліги Націй", "повернення Туреччині Сирії та Іраку"], "lim": 45, "fix": false}, {"id": "q20", "n": 20, "t": "single", "q": "Що заважало Лізі Націй зупиняти агресорів у 1930-х рр.?", "opts": ["рішення треба було ухвалювати одностайно", "постійні члени Ради мали право вето, а решта — ні", "держава не могла вийти з Ліги без згоди Ради", "Ліга не мала права розглядати суперечки держав"], "lim": 45, "fix": false}, {"id": "q21", "n": 21, "t": "match", "q": "Установіть відповідність між лідером і його позицією на Паризькій мирній конференції.", "left": ["Вудро Вільсон", "Жорж Клемансо", "Девід Ллойд Джордж", "Вітторіо Орландо"], "opts": ["вимагав для своєї держави обіцяних за участь у війні територій", "обстоював мир без анексій і право народів на самовизначення", "домагався, щоб переможені держави брали участь в обговоренні умов миру", "наполягав на найжорсткіших умовах для Німеччини: великих репараціях і обмеженні армії", "хотів покарати Німеччину, але не доводити її до краху й не дати Франції надто посилитися"], "lim": 150, "fix": false}, {"id": "q22", "n": 22, "t": "match", "q": "Установіть відповідність між державою і територією, яку вона втратила внаслідок Першої світової війни.", "left": ["Німеччина", "Австро-Угорщина", "Османська імперія", "Болгарія"], "opts": ["Трансільванія", "Західна Фракія", "Ельзас і Лотарингія", "Сирія і Палестина", "Фінляндія"], "lim": 150, "fix": false}, {"id": "q23", "n": 23, "t": "seq", "q": "Установіть послідовність підписання мирних договорів країн Антанти з переможеними державами.", "opts": ["мирний договір з Болгарією", "мирний договір з Османською імперією", "мирний договір з Німеччиною", "мирний договір з Угорщиною"], "lim": 105, "fix": false}, {"id": "q24", "n": 24, "t": "seq", "q": "Установіть послідовність подій, пов’язаних з німецькими репараціями.", "opts": ["ухвалення плану Юнга", "окупація Рурської області військами Франції та Бельгії", "запровадження плану Дауеса", "затвердження Лондонського графіка репараційних платежів"], "lim": 105, "fix": false}, {"id": "q25", "n": 25, "t": "three", "q": "Які держави, крім Великої Британії та Франції, отримали мандати Ліги Націй?", "opts": ["Бельгія", "Італія", "Японія", "США", "Австралія", "Португалія", "Нідерланди"], "lim": 105, "fix": false}, {"id": "q26", "n": 26, "t": "three", "q": "Які положення містив Версальський мирний договір?", "opts": ["Німеччина втрачає всі свої колонії", "Саарська область назавжди відходить до Франції", "Рейнська область стає демілітаризованою зоною", "Австрія приєднується до Німеччини", "армія Німеччини обмежується 100 тис. осіб", "Східна Пруссія переходить до Польщі", "Німеччина зберігає військову авіацію"], "lim": 105, "fix": false}, {"id": "q27", "n": 27, "t": "three", "q": "Які положення містив Статут Ліги Націй?", "opts": ["члени Ліги поважають територіальну цілісність одне одного", "місцем перебування Ліги визначено Женеву", "члени Ліги утримують спільну армію Ліги Націй", "Ліга встановлює нові кордони між державами Європи", "членами Ліги можуть бути лише держави-переможниці", "Ліга може втручатися у внутрішні справи держав", "суперечки між членами Ліги розглядає арбітраж або Рада"], "lim": 105, "fix": false}, {"id": "q28", "n": 28, "t": "three", "q": "Які рішення Паризької мирної конференції заклали підґрунтя майбутніх конфліктів?", "opts": ["репарації, накладені на Німеччину", "відмова Італії в частині обіцяних їй земель", "скорочення армій усіх держав-переможниць", "створення міжнародної організації — Ліги Націй", "нові кордони, за якими мільйони людей стали меншинами", "надання Німеччині місця в Раді Ліги Націй", "гарантії непорушності кордонів Німеччини й Франції"], "lim": 105, "fix": false}, {"id": "q29", "n": 29, "t": "three", "q": "Які домовленості ухвалила Вашингтонська конференція 1921 – 1922 рр.?", "opts": ["обмежено кількість крейсерів кожної держави", "США визнають особливі інтереси Японії в Китаї", "усі держави мають рівні права на торгівлю з Китаєм", "лінкори обмежено у співвідношенні 5 : 5 : 3 : 1,75 : 1,75", "учасники укладають військовий союз на Тихому океані", "Франція та Італія припиняють будувати підводні човни", "держави поважають володіння одна одної на Тихому океані"], "lim": 105, "fix": false}, {"id": "q30", "n": 30, "t": "three", "q": "Які положення містили договори Паризької мирної конференції 1919 – 1920 рр.?", "opts": ["Данциг стає вільним містом під захистом Ліги", "Закарпаття входить до складу Чехословаччини", "Константинополь переходить до Греції", "Болгарія зберігає вихід до Егейського моря", "Шлезвіг без плебісциту передано Данії", "Мемель (Клайпеда) залишається за Німеччиною", "Південний Тироль відходить до Італії"], "lim": 105, "fix": false}];
+const IMGS = {"mandates_map": {"src": "img/mandates_map.jpg", "w": 1100, "h": 786}, "gap_in_the_bridge_1919": {"src": "img/gap_in_the_bridge_1919.jpg", "w": 1000, "h": 708}, "dyson_cannon_fodder_1919": {"src": "img/dyson_cannon_fodder_1919.jpg", "w": 649, "h": 800}};
+const INFO = {"title": "Світ після Першої світової війни", "sub": "Паризька мирна конференція · Версальсько-Вашингтонська система · Ліга Націй · репарації", "kick": "Всесвітня історія · 10 клас · тематичний тест", "classes": ["10-А", "10-Б"], "timing": "<b class=\"a\">45 с</b> (з документом, картою чи карикатурою — 90 с), три з семи й послідовність — 105 с, відповідність — 2 хв 30 с", "n": 30, "max": 52, "min": 44, "pause": 10, "cnt": {"single": 20, "three": 6, "match": 2, "seq": 2}};
+const API = "https://script.google.com/macros/s/AKfycbx4WiwndXt9r0xql-dLo2y3EaUefIS-Vr7BzGzk4_J7NnflD1gO28tmglnaYmH49NLA/exec";
+const STORE_PREFIX = "vipw_";
+/* Мобільний урок: рендер карток, навігація, прогрес, перегляд зображень.
+   Дані: LESSONS (масив частин), IMGS (ключ → {src,w,h}), MODE ('all' | 'one'), NEXT_FILE (для окремого файлу). */
+const TITLE = typeof COURSE_TITLE === 'string' ? COURSE_TITLE : 'Стародавня історія України';
+const PFX = typeof STORE_PREFIX === 'string' ? STORE_PREFIX : 'mob_';
+const PARTS_WORD = typeof COURSE_PARTS_WORD === 'string' ? COURSE_PARTS_WORD : 'три частини';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(PFX + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(PFX + k, JSON.stringify(v)); } catch (e) {} }
+};
+const app = document.getElementById('app');
+const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+const BRAND = typeof COURSE_BRAND === 'string' ? COURSE_BRAND : '';
+const brandHtml = () => BRAND ? `<p class="brand">${esc(BRAND)}</p>` : '';
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<b class="a">$1</b>').replace(/__([^_].*?)__/g, '<b class="a2">$1</b>');
+const paras = ps => `<div class="txt">${(ps || []).map(p => `<p>${md(p)}</p>`).join('')}</div>`;
+
+const FS = {
+  el: document.documentElement,
+  can() { return !!(document.fullscreenEnabled || document.webkitFullscreenEnabled); },
+  on() { return !!(document.fullscreenElement || document.webkitFullscreenElement); },
+  off: false,                       // учень сам вимкнув кнопкою — не вмикаємо знову
+  enter() {
+    if (!this.can() || this.on()) return Promise.resolve();
+    try {
+      const r = this.el.requestFullscreen ? this.el.requestFullscreen({ navigationUI: 'hide' }) : this.el.webkitRequestFullscreen();
+      return Promise.resolve(r).catch(() => {});
+    } catch (e) { return Promise.resolve(); }
+  },
+  exit() { try { (document.exitFullscreen || document.webkitExitFullscreen).call(document); } catch (e) {} },
+};
+const fsb = document.getElementById('fsb');
+function fsPaint() {
+  if (!FS.can()) { fsb.hidden = true; return; }
+  fsb.hidden = false;
+  fsb.textContent = FS.on() ? '⤡' : '⤢';
+  fsb.setAttribute('aria-label', FS.on() ? 'Вийти з повного екрана' : 'На весь екран');
+}
+fsb.addEventListener('click', e => {
+  e.stopPropagation();
+  if (FS.on()) { FS.off = true; FS.exit(); } else { FS.off = false; FS.enter(); }
+});
+document.addEventListener('click', e => { if (!FS.off && !FS.on() && e.target !== fsb) FS.enter(); }, true);
+document.addEventListener('fullscreenchange', fsPaint);
+document.addEventListener('webkitfullscreenchange', fsPaint);
+function lockLandscape(wide) {
+  try { if (wide && FS.on() && screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch (e) {}
+}
+function unlockOrientation() { try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {} }
+fsPaint();
+
+/* ---------- перегляд зображень ---------- */
+const lb = document.getElementById('lb'), lbv = document.getElementById('lbv'), lbi = document.getElementById('lbi');
+/* Масштаб — transform (translate + scale) з опорою в точці між пальцями: зображення не «стрибає».
+   Щипок двома пальцями, перетягування одним, подвійний дотик — збільшити/повернути; на комп’ютері — коліщатко й подвійний клік. */
+const V = { s: 1, x: 0, y: 0, bw: 0, bh: 0 };
+function vbox() { return { W: lbv.clientWidth, H: lbv.clientHeight }; }
+function lbFit() {
+  const { W, H } = vbox(), iw = lbi.naturalWidth || 1, ih = lbi.naturalHeight || 1, k = Math.min(W / iw, H / ih);
+  V.bw = iw * k; V.bh = ih * k; lbi.style.width = V.bw + 'px'; lbi.style.height = V.bh + 'px';
+  V.s = 1; V.x = (W - V.bw) / 2; V.y = (H - V.bh) / 2; lbApply();
+}
+function lbApply() {
+  const { W, H } = vbox(), w = V.bw * V.s, h = V.bh * V.s;
+  V.x = w <= W ? (W - w) / 2 : Math.min(0, Math.max(W - w, V.x));
+  V.y = h <= H ? (H - h) / 2 : Math.min(0, Math.max(H - h, V.y));
+  lbi.style.transform = `translate(${V.x}px, ${V.y}px) scale(${V.s})`;
+}
+function zoomAt(ns, px, py) {
+  ns = Math.max(1, Math.min(6, ns));
+  const qx = (px - V.x) / V.s, qy = (py - V.y) / V.s;
+  V.s = ns; V.x = px - qx * ns; V.y = py - qy * ns; lbApply();
+}
+function setZoom(z) { const { W, H } = vbox(); zoomAt(z, W / 2, H / 2); }
+function openLb(p) {
+  lbi.onload = lbFit; lbi.src = p.dataset.src; document.getElementById('lbc').innerHTML = md(p.dataset.cap); lb.classList.add('open');
+  if (lbi.complete && lbi.naturalWidth) lbFit();
+  if (!FS.off) FS.enter();
+}
+app.addEventListener('click', e => { const p = e.target.closest('.pic'); if (p) openLb(p); });
+/* щипок на зображенні в уроці відкриває перегляд (а не збільшує всю сторінку) */
+app.addEventListener('touchstart', e => {
+  if (e.touches.length !== 2) return;
+  const p = e.target.closest('.pic'); if (!p) return;
+  e.preventDefault(); openLb(p);
+}, { passive: false });
+function closeLb() { lb.classList.remove('open'); unlockOrientation(); }
+document.getElementById('lbX').onclick = closeLb;
+document.getElementById('lbIn').onclick = () => setZoom(V.s * 1.6);
+document.getElementById('lbOut').onclick = () => setZoom(V.s / 1.6);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+window.addEventListener('resize', () => { if (lb.classList.contains('open')) lbFit(); });
+const rel = t => { const r = lbv.getBoundingClientRect(); return { x: t.clientX - r.left, y: t.clientY - r.top }; };
+let g = null, lastTap = 0;
+lbv.addEventListener('touchstart', e => {
+  e.preventDefault();
+  if (e.touches.length >= 2) {
+    const a = rel(e.touches[0]), b = rel(e.touches[1]);
+    g = { t: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, s0: V.s, qx: ((a.x + b.x) / 2 - V.x) / V.s, qy: ((a.y + b.y) / 2 - V.y) / V.s };
+  } else if (e.touches.length === 1) {
+    const a = rel(e.touches[0]), now = Date.now();
+    if (now - lastTap < 300) { zoomAt(V.s > 1.05 ? 1 : 2.5, a.x, a.y); lastTap = 0; g = null; return; }
+    lastTap = now; g = { t: 'pan', px: a.x, py: a.y, x0: V.x, y0: V.y };
+  }
+}, { passive: false });
+lbv.addEventListener('touchmove', e => {
+  e.preventDefault(); if (!g) return;
+  if (g.t === 'pinch' && e.touches.length >= 2) {
+    const a = rel(e.touches[0]), b = rel(e.touches[1]), d = Math.hypot(a.x - b.x, a.y - b.y);
+    const ns = Math.max(1, Math.min(6, g.s0 * d / g.d0)), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+    V.s = ns; V.x = mx - g.qx * ns; V.y = my - g.qy * ns; lbApply();
+  } else if (g.t === 'pan' && e.touches.length === 1) {
+    const a = rel(e.touches[0]); V.x = g.x0 + a.x - g.px; V.y = g.y0 + a.y - g.py; lbApply();
+  }
+}, { passive: false });
+lbv.addEventListener('touchend', e => {
+  if (e.touches.length === 1) { const a = rel(e.touches[0]); g = { t: 'pan', px: a.x, py: a.y, x0: V.x, y0: V.y }; }   // з двох пальців на один — далі перетягування
+  else if (!e.touches.length) g = null;
+}, { passive: false });
+lbv.addEventListener('wheel', e => { e.preventDefault(); const a = rel(e); zoomAt(V.s * (e.deltaY < 0 ? 1.15 : 1 / 1.15), a.x, a.y); }, { passive: false });
+lbi.addEventListener('dblclick', e => { const a = rel(e); zoomAt(V.s > 1.05 ? 1 : 2.5, a.x, a.y); });
+
+
+/* ---------- Онлайн-тест у форматі бліцу-соло (рушій src/perebud/solo1): одне питання на екрані, свій таймер на кожне, пауза між питаннями, одна спроба.
+   Ключів на сторінці немає: бали й оцінку рахує сервер (Apps Script) після останнього питання. ---------- */
+const LET = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Є'];
+const TYPE = { single: 'Одна правильна відповідь', three: 'Три правильні з семи', seq: 'Послідовність', match: 'Відповідність' };
+const LBLRE = /^(?:Місцезнаходження |Місце |малюнок )?([А-ЕЄ]|\d)$/;
+const N = QS.length;
+let U = store.get('user', null), S = store.get('st', null), clk = null, busy = false;
+const save = () => store.set('st', S);
+
+/* однаковий для учня порядок питань і варіантів (з імені й класу): після перезавантаження чи на іншому телефоні — той самий */
+function rng(seed) { let h = 1779033703 ^ seed.length; for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  return () => { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
+function mix(a, r) { a = [...a]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function plan() {
+  const r = rng(U.cls + '|' + U.name.toLowerCase());
+  const order = mix(QS.map((_, i) => i), r), ord = {};
+  QS.forEach(q => { const idx = q.opts.map((_, j) => j); ord[q.id] = q.fix ? idx : mix(idx, r); });
+  return { order, ord };
+}
+
+/* ---------- сервер ---------- */
+async function call(body) {
+  const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body), cache: 'no-store', redirect: 'follow' });
+  if (!r.ok) throw new Error('http ' + r.status);
+  const j = await r.json(); if (j.error) throw new Error(j.error); return j;
+}
+const auth = () => ({ name: U.name, cls: U.cls, pin: U.pin });
+/* відповіді йдуть на сервер одразу (черга на випадок, якщо зв’язок зник) — так спроба не губиться навіть зі зміною телефона */
+const Q = {
+  push(id, a) { const q = store.get('queue', []).filter(x => x.id !== id); q.push({ id, a }); store.set('queue', q); this.flush(); },
+  busy: false,
+  async flush() {
+    if (this.busy) return; this.busy = true;
+    try { let q = store.get('queue', []);
+      while (q.length) { await call({ op: 'ans', ...auth(), id: q[0].id, a: q[0].a }); q = store.get('queue', []); q.shift(); store.set('queue', q); }
+    } catch (e) {}
+    this.busy = false;
+  },
+};
+setInterval(() => Q.flush(), 15000);
+
+/* ---------- вхід ---------- */
+function login(msg) {
+  stop();
+  app.innerHTML = `<div class="wrap">
+    <div class="home-head"><div class="kick">${esc(INFO.kick)}</div><h1>${esc(INFO.title)}</h1>
+      <div class="sub">${esc(INFO.sub)}</div></div>
+    <form class="card login" id="lg">
+      <label>Клас<select id="lgc" required><option value="">— оберіть —</option>${INFO.classes.map(c => `<option>${c}</option>`).join('')}</select></label>
+      <label>Прізвище та ім’я<input id="lgn" autocomplete="name" placeholder="Наприклад: Шевченко Олена" required></label>
+      <label>Ваш код (4–8 цифр)<input id="lgp" type="text" inputmode="numeric" pattern="\\d{4,8}" maxlength="8" autocomplete="off" placeholder="Придумайте й запам’ятайте" required></label>
+      <div class="err" id="lge" ${msg ? '' : 'hidden'}>${esc(msg || '')}</div>
+      <button class="btn">Увійти</button>
+      <p class="cap">Прізвище та ім’я — повністю, як у журналі. Код ви задаєте під час першого входу; він знадобиться, якщо доведеться продовжити з іншого телефона.</p>
+    </form></div>`;
+  if (U) { document.getElementById('lgn').value = U.name; document.getElementById('lgc').value = U.cls; }
+  document.getElementById('lg').onsubmit = async e => {
+    e.preventDefault();
+    const name = document.getElementById('lgn').value.trim().replace(/\s+/g, ' '), cls = document.getElementById('lgc').value;
+    const pin = document.getElementById('lgp').value.trim(), er = document.getElementById('lge');
+    const fail = t => { er.hidden = false; er.textContent = t; };
+    if (!cls) return fail('Оберіть клас.');
+    if (name.split(' ').length < 2) return fail('Вкажіть прізвище та ім’я.');
+    if (!/^\d{4,8}$/.test(pin)) return fail('Код — від 4 до 8 цифр.');
+    const btn = e.target.querySelector('.btn'); btn.disabled = true; er.hidden = true;
+    try {
+      const r = await call({ op: 'login', name, cls, pin });
+      const same = U && U.name === r.name && U.cls === r.cls;
+      U = { name: r.name, cls: r.cls, pin }; store.set('user', U);
+      if (!same) { S = null; store.set('queue', []); }
+      if (r.done) { S = { done: r.done }; save(); return result(); }
+      if (!S) S = { ...plan(), qi: null, ans: {}, exits: 0 };
+      Object.assign(S.ans, r.ans || {}); S.started = r.started || S.started || null; save();
+      S.qi == null ? intro() : resume();
+    } catch (err) {
+      btn.disabled = false;
+      fail(err.message === 'pin' ? 'Код не збігається з тим, який ви задали раніше. Якщо забули — скажіть учителю.'
+        : err.message === 'roster' ? 'Оберіть клас і вкажіть прізвище та ім’я.'
+        : 'Не вдалося зв’язатися із сервером. Перевірте інтернет і спробуйте ще раз.');
+    }
+  };
+}
+
+function intro() {
+  const c = INFO.cnt;
+  app.innerHTML = `<div class="wrap bz-in"><div class="home-head"><div class="kick">${esc(U.cls)} · ${esc(U.name)}</div><h1>${esc(INFO.title)}</h1></div>
+    <div class="card"><h2>Як це працює</h2><div class="txt">
+      <p><b class="a">${INFO.n} питань</b> по одному на екрані: ${c.single} — одна з чотирьох, ${c.three} — три з семи, ${c.match} — відповідність, ${c.seq} — послідовність. Максимум — ${INFO.max} балів.</p>
+      <p>На кожне питання — свій час: ${INFO.timing}. Коли час мине, зараховується те, що ви встигли позначити.</p>
+      <p>Між питаннями — пауза ${INFO.pause} с, її можна пропустити кнопкою. Повернутися до попереднього питання не можна, правильних відповідей під час роботи не показуємо.</p>
+      <p><b class="a">Спроба одна.</b> Наприкінці ви побачите бали й оцінку. Учитель бачить, скільки тривала робота і скільки разів ви виходили зі сторінки.</p>
+      <p class="cap">Усього близько ${INFO.min} хвилин. Зображення можна збільшити дотиком.</p></div></div>
+    <button class="btn" id="go">Почати тест</button>
+    <button class="btn ghost" id="out">Це не я — вийти</button></div>`;
+  document.getElementById('go').onclick = async e => {
+    e.target.disabled = true;
+    try { const r = await call({ op: 'start', ...auth() }); if (r.done) { S = { done: r.done }; save(); return result(); } Object.assign(S.ans, r.ans || {}); }
+    catch (err) { if (err.message === 'pin' || err.message === 'roster') return login('Увійдіть ще раз.'); /* без зв’язку — почнемо, відповіді надішлемо пізніше */ }
+    S.qi = 0; S.t0 = Date.now(); skipDone(); startQ(); show();
+  };
+  document.getElementById('out').onclick = () => { store.set('user', null); store.set('st', null); U = null; S = null; login(); };
+}
+
+/* ---------- питання ---------- */
+const cur = () => QS[S.order[S.qi]];
+const blank = q => q.t === 'match' ? [null, null, null, null] : [];
+function skipDone() { while (S.qi < N && S.ans[cur().id] !== undefined) S.qi++; }
+function startQ() { if (S.qi >= N) return; const q = cur(); S.qdl = Date.now() + q.lim * 1000; S.pdl = null; S.sel = blank(q); save(); }
+function stop() { clearInterval(clk); clk = null; }
+function resume() {
+  if (S.done) return result();
+  skipDone();
+  if (S.qi >= N) return finish();
+  if (S.pdl && Date.now() < S.pdl) return pause();
+  if (!S.qdl || S.pdl) startQ();
+  if (Date.now() >= S.qdl) return commit(true);
+  show();
+}
+function pic(key, cls) { const i = IMGS[key]; if (!i) return '';
+  return `<div class="pic ${cls || ''}" data-src="${i.src}" data-cap=""><img src="${i.src}" width="${i.w}" height="${i.h}" alt=""><span class="zoom-hint">⤢</span></div>`; }
+function opic(key) { const i = IMGS[key]; if (!i) return '';
+  return `<span class="oi"><img src="${i.src}" width="${i.w}" height="${i.h}" alt=""><span class="zoom-hint pic" data-src="${i.src}" data-cap="">⤢</span></span>`; }
+const isLbl = q => q.fix;
+const optHtml = (q, j) => `${q.oimg ? opic(q.oimg[j]) : ''}${isLbl(q) ? '' : `<span>${md(q.opts[j])}</span>`}`;
+const lab = (q, j, k) => isLbl(q) ? q.opts[j].match(LBLRE)[1] : q.t === 'three' ? k + 1 : LET[k];
+const rowLet = q => !!q.left && q.left.every(l => /^[А-Г]$/.test(l));
+const MLB = q => rowLet(q) ? ['1', '2', '3', '4', '5'] : LET;
+
+function show() {
+  stop(); busy = false;
+  const q = cur(), o = S.ord[q.id];
+  let tiles;
+  if (q.t === 'match') {
+    tiles = (isLbl(q) ? '' : `<div class="mlist">${o.map((j, k) => `<div class="mo"><b class="a2">${MLB(q)[k]}</b> ${optHtml(q, j)}</div>`).join('')}</div>`) +
+      q.left.map((l, i) => `<div class="mrow"><div class="ml">${rowLet(q) ? `<b>Зображення ${l}</b>` : `<b>${i + 1}.</b> ${q.rimg ? pic(q.rimg[i], 'ri') : ''}${md(l)}`}</div>
+        <div class="mbtns">${o.map((j, k) => `<button class="mb" data-i="${i}" data-j="${j}">${MLB(q)[k]}</button>`).join('')}</div></div>`).join('');
+  } else {
+    tiles = o.map((j, k) => `<button class="tile n${q.oimg ? ' wi' : ''}" data-j="${j}"><span class="l">${lab(q, j, k)}</span>${optHtml(q, j)}</button>`).join('');
+    if (q.oimg) tiles = `<div class="tgrid">${tiles}</div>`;
+  }
+  const act = q.t === 'single' ? '' : `<div class="bz-act"><button class="btn ghost" id="bzr">Скинути</button><button class="btn" id="bzok">Відповісти</button></div>`;
+  app.innerHTML = `<div class="wrap bz-in"><div class="bz-top"><span class="cnt">Питання ${S.qi + 1} з ${N}</span><span class="tm" id="bzt"></span></div>
+    <div class="prg"><i style="width:${100 * S.qi / N}%"></i></div>
+    <div class="qtype">${TYPE[q.t]}${q.t === 'seq' ? ' · натискайте в правильному порядку' : ''}</div>
+    <div class="qtext">${md(q.q).replace(/\n/g, '<br>')}</div>${(q.img || []).map(k => pic(k, 'qi')).join('')}
+    <div class="tiles" id="tl">${tiles}</div>${act}</div>`;
+  window.scrollTo(0, 0);
+  const tl = document.getElementById('tl');
+  tl.querySelectorAll('.tile').forEach(b => b.onclick = e => { if (e.target.closest('.pic')) return; pick(q, +b.dataset.j); });
+  tl.querySelectorAll('.mb').forEach(b => b.onclick = () => { S.sel[+b.dataset.i] = +b.dataset.j; save(); paint(q); });
+  if (q.t !== 'single') {
+    document.getElementById('bzr').onclick = () => { S.sel = blank(q); save(); paint(q); };
+    document.getElementById('bzok').onclick = () => commit(false);
+  }
+  paint(q);
+  const tick = () => {
+    const left = Math.ceil((S.qdl - Date.now()) / 1000), el = document.getElementById('bzt');
+    if (el) { el.textContent = '⏱ ' + Math.max(0, left); el.classList.toggle('warn', left <= 5); }
+    if (left <= 0) commit(true);
+  };
+  tick(); clk = setInterval(tick, 250);
+}
+function pick(q, j) {
+  if (busy) return;
+  if (q.t === 'single') { S.sel = [j]; save(); paint(q); busy = true; return setTimeout(() => commit(false), 300); }
+  const k = S.sel.indexOf(j);
+  if (k >= 0) S.sel.splice(k, 1); else if (S.sel.length < (q.t === 'three' ? 3 : 4)) S.sel.push(j);
+  save(); paint(q);
+}
+function paint(q) {
+  if (q.t === 'match') {
+    document.querySelectorAll('#tl .mb').forEach(b => b.classList.toggle('on', S.sel[+b.dataset.i] === +b.dataset.j));
+    document.getElementById('bzok').disabled = S.sel.some(x => x === null);
+    return;
+  }
+  const o = S.ord[q.id];
+  document.querySelectorAll('#tl .tile').forEach(b => {
+    const j = +b.dataset.j, k = S.sel.indexOf(j), l = b.querySelector('.l, .ord');
+    b.classList.toggle('sel', k >= 0);
+    if (q.t === 'seq') { l.className = k >= 0 ? 'ord' : 'l'; l.textContent = k >= 0 ? k + 1 : lab(q, j, o.indexOf(j)); }
+  });
+  const ok = document.getElementById('bzok'); if (ok) ok.disabled = S.sel.length !== (q.t === 'three' ? 3 : 4);
+}
+/* відповідь (або що встигли позначити, коли час минув) → на сервер; далі пауза */
+function commit(timeout) {
+  stop();
+  const q = cur(); let a = S.sel || blank(q);
+  if (q.t === 'single') a = a.length ? a[0] : null;
+  else if (q.t === 'seq') { a = [...a]; while (a.length < 4) a.push(null); }
+  else if (q.t === 'three') a = [...a];
+  else a = [...a];
+  const empty = a === null || (Array.isArray(a) && a.every(x => x === null));
+  S.ans[q.id] = empty ? null : a; Q.push(q.id, S.ans[q.id]);
+  S.qi++; S.sel = null; S.qdl = null;
+  skipDone();
+  if (S.qi >= N) { save(); return finish(); }
+  S.pdl = Date.now() + INFO.pause * 1000; save();
+  pause(timeout);
+}
+function pause(timeout) {
+  stop();
+  app.innerHTML = `<div class="wrap bz-in"><div class="bz-top"><span class="cnt">Відповідь збережено · ${S.qi} з ${N}</span></div>
+    <div class="prg"><i style="width:${100 * S.qi / N}%"></i></div>
+    <div class="res pz">${timeout ? '<div>⏱ Час на питання минув — зараховано те, що ви встигли позначити.</div>' : ''}<div>Коротка перерва</div><div class="big" id="pzt">${INFO.pause}</div>
+      <div class="cap">Наступне питання відкриється само</div></div>
+    <button class="btn" id="pzgo">Далі →</button></div>`;
+  window.scrollTo(0, 0);
+  document.getElementById('pzgo').onclick = next;
+  const tick = () => { const left = Math.ceil((S.pdl - Date.now()) / 1000), el = document.getElementById('pzt');
+    if (el) el.textContent = Math.max(0, left); if (left <= 0) next(); };
+  tick(); clk = setInterval(tick, 250);
+}
+function next() { stop(); S.pdl = null; startQ(); show(); }
+
+/* ---------- кінець ---------- */
+async function finish() {
+  stop();
+  if (!S.sec) { S.sec = S.t0 ? Math.round((Date.now() - S.t0) / 1000) : null; save(); }
+  app.innerHTML = `<div class="wrap bz-in"><div class="res"><div>Тест завершено</div><div class="cap" id="fin">Надсилаємо відповіді…</div></div>
+    <button class="btn" id="again" hidden>Надіслати ще раз</button></div>`;
+  window.scrollTo(0, 0);
+  const again = document.getElementById('again');
+  again.onclick = () => finish();
+  try {
+    const r = await call({ op: 'finish', ...auth(), ans: S.ans, sec: S.sec, exits: S.exits || 0 });
+    store.set('queue', []); S = { done: r }; save(); result();
+  } catch (e) {
+    if (e.message === 'pin' || e.message === 'roster') return login('Увійдіть ще раз — ваші відповіді збережено на телефоні.');
+    document.getElementById('fin').textContent = 'Немає зв’язку із сервером. Відповіді збережено на телефоні — перевірте інтернет і натисніть кнопку.';
+    again.hidden = false;
+  }
+}
+function result() {
+  stop();
+  const r = S.done;
+  app.innerHTML = `<div class="wrap bz-in"><div class="home-head"><div class="kick">${esc(U.cls)} · ${esc(U.name)}</div><h1>${esc(INFO.title)}</h1></div>
+    <div class="res"><div>Ваш результат</div><div class="big">${r.pts} з ${r.max}</div><div class="cap">${r.pct} % балів</div>
+      <div class="gr okc">Оцінка: ${r.grade}</div></div>
+    <p class="cap" style="text-align:center">Результат записано. Спроба одна, тож пройти тест ще раз не можна.</p></div>`;
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && S && !S.done && S.qi != null && S.qi < N) { S.exits = (S.exits || 0) + 1; save(); }
+  if (!document.hidden && S && !S.done && S.qi != null) resume();
+});
+window.addEventListener('online', () => Q.flush());
+
+if (!API) app.innerHTML = '<div class="wrap"><p>Сторінка ще не підключена до сервера.</p></div>';
+else if (!U) login();
+else if (S && S.done) result();
+else if (!S || S.qi == null) login();
+else { Q.flush(); resume(); }
+
+</script>
+</body>
+</html>
